@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="<?php echo $css; ?>bootstrap.css">
         <link rel="stylesheet" href="<?php echo $css; ?>esportscups.css">
 
-        <title>Artigos eSC | e-Sports Cups</title>
+        <title>Rifas de eSports - Ajude o crescimento do cenário | e-Sports Cups</title>
     </head>
     <body>
         <?php 
@@ -24,25 +24,25 @@
                     SELECT rifa_cupom.*, jogador.nick, jogador.foto_perfil FROM rifa_cupom
                     INNER JOIN jogador ON jogador.codigo = rifa_cupom.cod_jogador
                     WHERE rifa_cupom.cod_rifa = ".$rifa2['codigo']."");
-                $totalCupons = mysqli_num_rows($pesquisaCupons) 
-            ?>		
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
+                $totalCupons = mysqli_num_rows($pesquisaCupons);
+                ?>		
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
                 <div class="visualizarRifa">
                     <br>

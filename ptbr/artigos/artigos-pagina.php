@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="<?php echo $css; ?>bootstrap.css">
     <link rel="stylesheet" href="<?php echo $css; ?>esportscups.css">
 
-    <title>Artigos eSC | e-Sports Cups</title>
+    <title><?php echo $artigo['nome']; if(isset($jogo)){ echo " - ".$jogo['nome']; }?> | e-Sports Cups</title>
   </head>
   <body>
     <?php include "../header.php"; ?>

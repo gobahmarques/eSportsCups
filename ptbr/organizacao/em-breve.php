@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="<?php echo $css; ?>bootstrap.css">
         <link rel="stylesheet" href="<?php echo $css; ?>esportscups.css">
 
-        <title>Artigos eSC | e-Sports Cups</title>
+        <title>Próximos Torneios - <?php echo $organizacao['nome']; ?> | e-Sports Cups</title>
     </head>
     <body>
         <?php 

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/esportscups.css">
     <link rel="stylesheet" href="ptbr/sobre/sobre.css">
 
-    <title>Nós somos a eSports Cups | eSC</title>
+    <title>Nós somos a e-Sports Cups | A sua plataforma de eSports</title>
   </head>
   <body>
    	<div class="col-md-12 faixa1">
