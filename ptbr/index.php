@@ -31,8 +31,8 @@
             <br>
             <div class="row">                
                 <div class="col-12 col-md-12 text-center">
-                    <h3>Junto com você para te levar mais longe</h3>
-                    Jogue campeonatos amadores e profissionais, aumente seu nível de jogo, abra caixas, participe de rifas e MUITO MAIS...
+                    <h3>Sua plataforma de eSports para alcançar o próximo nível</h3>
+                    Jogue e organize competições de Dota 2, Hearthstone, GWENT, League of Legends e Overwatch, abra caixas, junte eSCoins (e$) e muito mais...
                 </div>               
             </div>
             <br>
