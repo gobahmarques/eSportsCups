@@ -1,20 +1,23 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
 <footer>
     <div class="container">
         <div class="row">
             <img src="<?php echo $img; ?>logo.png"  class="logo"/>
             <div class="col text-right">
+                <a href="https://discord.gg/RTnrWab" target="_blank">
+                    <i class="fab fa-discord" style="font-size:26px"></i>
+                </a>
                 <a href="https://www.facebook.com/escups/" target="_blank">
-                    <i class="fa fa-facebook-f" style="font-size:26px"></i>
+                    <i class="fab fa-facebook-f" style="font-size:26px"></i>
                 </a>
                 <a href="https://twitter.com/cups_e" target="_blank">
-                    <i class="fa fa-twitter" style="font-size:26px"></i>
+                    <i class="fab fa-twitter" style="font-size:26px"></i>
                 </a>
                 <a href="https://www.twitch.tv/esportscups" target="_blank">
-                    <i class="fa fa-twitch" style="font-size:26px"></i>
+                    <i class="fab fa-twitch" style="font-size:26px"></i>
                 </a>
                 <a href="https://www.youtube.com/channel/UCmOVIphlEpXqg6L4Sa9EW_g" target="_blank">
-                    <i class="fa fa-youtube-play" style="font-size:26px"></i>
+                    <i class="fab fa-youtube" style="font-size:26px"></i>
                 </a>
             </div>
         </div>
