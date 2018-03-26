@@ -144,7 +144,7 @@
 </div>
 <header id="menuHeader">
     <nav class="navbar navbar-expand-lg navbar-dark bg-cinza">
-    <a class="navbar-brand" href="/ptbr/"><img src="<?php echo $img; ?>logo.png" class="logoHeader" /></a>
+    <a class="navbar-brand" href="/ptbr/"><img src="<?php echo $img; ?>logo-beta.png" class="logoHeader" /></a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
