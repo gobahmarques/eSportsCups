@@ -492,6 +492,30 @@ header .saldosHeader .saldo:hover {
     cursor: pointer;
     background: #626262;
 }
+
+/* FOOTER */
+
+footer {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 10px 0px;
+    margin-top: 150px;
+}
+footer .logo {
+    height: 50px;
+    filter: grayscale(1);
+}
+footer a {
+    color: #fff;
+    margin-left: 25px;
+    line-height: 50px;
+}
+footer a:hover {
+    color: #00a3b2;
+    cursor: pointer;
+}
+
 /* ARTIGOS */
 
 .artigos {

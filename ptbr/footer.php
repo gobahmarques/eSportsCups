@@ -1,7 +1,37 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <footer>
+    <div class="container">
+        <div class="row">
+            <img src="<?php echo $img; ?>logo.png"  class="logo"/>
+            <div class="col text-right">
+                <a href="https://twitter.com/cups_e" target="_blank">
+                    <i class="fa fa-facebook-f" style="font-size:26px"></i>
+                </a>
+                <a href="https://twitter.com/cups_e" target="_blank">
+                    <i class="fa fa-twitter" style="font-size:26px"></i>
+                </a>
+                <a href="https://twitter.com/cups_e" target="_blank">
+                    <i class="fa fa-twitch" style="font-size:26px"></i>
+                </a>
+                <a href="https://twitter.com/cups_e" target="_blank">
+                    <i class="fa fa-youtube-play" style="font-size:26px"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </footer>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-64433449-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-64433449-2');
+</script>
+
 <script src="<?php echo $js; ?>jquery.js"></script>
 <script src="<?php echo $js; ?>bootstrap.js"></script>
 <script src="<?php echo $js; ?>jquery.countdown.js" type="text/javascript"></script>

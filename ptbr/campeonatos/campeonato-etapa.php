@@ -55,6 +55,7 @@
 		?>
         </div>
 
+        <?php include "../footer.php"; ?>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="<?php echo $js; ?>jquery.js"></script>

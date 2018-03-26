@@ -20,6 +20,8 @@
             include "../header.php";
             include "perfil.php";
         ?>
+        
+        <?php include "../footer.php"; ?>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
