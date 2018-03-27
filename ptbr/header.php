@@ -133,11 +133,8 @@
         <h5 class="modal-title centralizar" id="exampleModalLabel">Modal title</h5>
       </div>
       <div class="modal-body centralizar">
-        ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -163,17 +160,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="ptbr/loja/">Loja e$</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Partidas
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="ptbr/jogar/dota2/">Dota 2</a>
-                    <a class="dropdown-item" href="ptbr/jogar/gwent/">GWENT</a>
-                    <a class="dropdown-item" href="ptbr/jogar/hearthstone/">Hearthstone</a>
-                    <a class="dropdown-item" href="ptbr/jogar/lol/">League of Legends</a>
-                    <a class="dropdown-item" href="ptbr/jogar/overwatch/">Overwatch</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="ptbr/jogar/dota2/">Partidas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="ptbr/rifas/">Rifas</a>
@@ -212,10 +200,6 @@
                             ?>
                                 <img src="img/icones/notificacao_not.png" class="fotoPerfil" onClick="abrirNotificacoes(<?php echo $usuario['codigo']; ?>);">
                             <?php
-                            }else{
-                            ?>
-                                <img src="img/icones/notificacao.png" class="fotoPerfil">
-                            <?php
                             }
                     
                             $pesquisaAmizadesPendentes = mysqli_query($conexao, "
@@ -226,10 +210,6 @@
                             if(mysqli_num_rows($pesquisaAmizadesPendentes) > 0){
                             ?>
                                 <img src="img/icones/amigos_not.png" class="fotoPerfil">
-                            <?php
-                            }else{
-                            ?>
-                                <img src="img/icones/amigos.png" class="fotoPerfil">
                             <?php
                             }
                         ?>
