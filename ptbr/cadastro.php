@@ -44,7 +44,7 @@
     </div>
 	
 	<br>
-	<input id="termos" type="checkbox" name="termos"> Li e Concordo com os <a class="login" href="termos-e-condicoes/" target="_blank">Termos & Condições</a> e <a class="login" href="privacidade/" target="_blank">Política de Privacidade.</a><br><br>	
+	<input id="termos" type="checkbox" name="termos"> Li e Concordo com os <a class="login" href="ptbr/termos/" target="_blank">Termos & Condições</a> e <a class="login" href="ptbr/privacidade/" target="_blank">Política de Privacidade.</a><br><br>	
 </form>
 
 <div class="col-xs-12 col-md-12">

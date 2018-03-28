@@ -5,6 +5,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^home/?$ index.php [NC,L]
 RewriteRule ^cadastro/enviar/?$ cadastro_enviar.php [NC,L]
+RewriteRule ^termos/?$ termos/termos.php [NC,L]
+RewriteRule ^privacidade/?$ termos/privacidade.php [NC,L]
 
 RewriteRule ^sobre/?$ sobre/sobre.php [NC,L]
 
