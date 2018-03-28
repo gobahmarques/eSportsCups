@@ -7,7 +7,7 @@
 	$inicioCamp = date("Y-m-d H:i:s", strtotime("+9days", strtotime($inicio)));
 	$fim = date("Y-m-d H:i:s", strtotime("+4hours 59minutes", strtotime($inicioCamp)));
 	$inicioInscricao = date("Y-m-d H:i:s", strtotime("-7days", strtotime($inicioCamp)));
-	$fimInscricao = date("Y-m-d H:i:s", strtotime("-30minutes", strtotime($inicioCamp)));
+	$fimInscricao = date("Y-m-d H:i:s", strtotime("-5minutes", strtotime($inicioCamp)));
 
 	$descricao = "<p>A eSCoin Cup &eacute; um torneio que visa premiar o usu&aacute;rio com eSCoins. Ajudando-o a acumular recursos muito mais r&aacute;pido.</p>";
 	$regulamento = "
@@ -73,7 +73,7 @@
 	$inicioCamp = date("Y-m-d H:i:s", strtotime("+10days", strtotime($inicioCamp)));
 	$fim = date("Y-m-d H:i:s", strtotime("+4hours 59minutes", strtotime($inicioCamp)));
 	$inicioInscricao = date("Y-m-d H:i:s", strtotime("-7days", strtotime($inicioCamp)));
-	$fimInscricao = date("Y-m-d H:i:s", strtotime("-30minutes", strtotime($inicioCamp)));
+	$fimInscricao = date("Y-m-d H:i:s", strtotime("-5minutes", strtotime($inicioCamp)));
 
 	$descricao = "<p>A eSCoin Cup &eacute; um torneio que visa premiar o usu&aacute;rio com eSCoins. Ajudando-o a acumular recursos muito mais r&aacute;pido.</p>";
 	$regulamento = "
@@ -161,7 +161,7 @@
 	$inicioCamp = date("Y-m-d H:i:s", strtotime("+11days", strtotime($inicioCamp)));
 	$fim = date("Y-m-d H:i:s", strtotime("+4hours 59minutes", strtotime($inicioCamp)));
 	$inicioInscricao = date("Y-m-d H:i:s", strtotime("-7days", strtotime($inicioCamp)));
-	$fimInscricao = date("Y-m-d H:i:s", strtotime("-30minutes", strtotime($inicioCamp)));
+	$fimInscricao = date("Y-m-d H:i:s", strtotime("-5minutes", strtotime($inicioCamp)));
 
 	$descricao = "<p>Torneio semanal de League of Legends organizado pela e-Sports Cups para premiar seus ganhadores com eSCoins.</p>";
 	$regulamento = addslashes("
@@ -223,7 +223,7 @@
 	$inicioCamp = date("Y-m-d H:i:s", strtotime("+13days", strtotime($inicio)));
 	$fim = date("Y-m-d H:i:s", strtotime("+4hours 59minutes", strtotime($inicioCamp)));
 	$inicioInscricao = date("Y-m-d H:i:s", strtotime("-7days", strtotime($inicioCamp)));
-	$fimInscricao = date("Y-m-d H:i:s", strtotime("-30minutes", strtotime($inicioCamp)));
+	$fimInscricao = date("Y-m-d H:i:s", strtotime("-5minutes", strtotime($inicioCamp)));
 
 	$descricao = "<p>A eSCoin Cup &eacute; um torneio que visa premiar o usu&aacute;rio com eSCoins. Ajudando-o a acumular recursos muito mais r&aacute;pido.</p><p><strong>Torneio não oficial CD Projekt Red </strong></p>";
 	$regulamento = "
@@ -275,7 +275,7 @@
 	$inicioCamp = date("Y-m-d H:i:s", strtotime("+12days", strtotime($inicio)));
 	$fim = date("Y-m-d H:i:s", strtotime("+4hours 59minutes", strtotime($inicioCamp)));
 	$inicioInscricao = date("Y-m-d H:i:s", strtotime("-7days", strtotime($inicioCamp)));
-	$fimInscricao = date("Y-m-d H:i:s", strtotime("-30minutes", strtotime($inicioCamp)));
+	$fimInscricao = date("Y-m-d H:i:s", strtotime("-5minutes", strtotime($inicioCamp)));
 
 	$descricao = "<p>A eSCoin Cup &eacute; um torneio que visa premiar o usu&aacute;rio com eSCoins. Ajudando-o a acumular recursos muito mais r&aacute;pido.</p>";
 	$regulamento = "
