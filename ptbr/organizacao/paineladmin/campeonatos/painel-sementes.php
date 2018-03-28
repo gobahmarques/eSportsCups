@@ -48,18 +48,7 @@
     </div>
 </div>
 
-
-<div class="barraCentral">
-	<h1>ADICIONAR JOGADORES A ESTA ETAPA</h1>
-
-	<!--<ul class="filtroSementes">
-		<li>ALEATORIAMENTE</li>
-		<li>HORA INSCRIÇÃO</li>	
-	</ul>-->
-</div>
-
 <script>
-    /*
 	function selecionarEtapa(etapa, campeonato, vagas){        
 		$.ajax({
 			type: "POST",
@@ -70,5 +59,4 @@
 			}
 		})
 	}	
-    */	
 </script>

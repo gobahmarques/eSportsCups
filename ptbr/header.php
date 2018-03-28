@@ -11,7 +11,7 @@
 					if(resultado == "0"){						
 						$(".modal-body").html("<h2>QUE BOM QUE VOCÊ ESTÁ AQUI!</h2>  RECEBA ESTA RECOMPENSA PELO SEU PRIMEIRO LOGIN DO DIA!<br> <div class='valor' style='margin: 3% 0%; font-size: 300%;'><img class='coin' src='<?php echo $img; ?>escoin.png' height='4%'> 100</div><br><a href='https://www.esportscups.com.br/ptbr/jogar/dota2/'><input type='button' value='CONTINUAR'></a> ");
 					}else if(resultado == "1"){
-						window.location.href = "https://www.esportscups.com.br/ptbr/jogar/dota2/";
+						window.location.href = "https://www.esportscups.com.br/ptbr/";
 					}else if(resultado == "2"){
 						$(".modal-body").html("E-mail ou senha incorretos.<br>Tente novamente.");
 						$(".modal-footer").html("<button type='button' value='Tentar Novamente' class='btn btn-primary' onClick='abrirLogin();'>Tentar Novamente</button>");
@@ -198,7 +198,7 @@
                             ");
                             if(mysqli_num_rows($pesquisaNotificacoes) > 0){
                             ?>
-                                <img src="img/icones/notificacao_not.png" class="fotoPerfil" onClick="abrirNotificacoes(<?php echo $usuario['codigo']; ?>);">
+                                <i class="fas fa-flag" style="font-size:22px" onClick="abrirNotificacoes(<?php echo $usuario['codigo']; ?>);"></i>
                             <?php
                             }
                     
@@ -209,7 +209,19 @@
                             ");
                             if(mysqli_num_rows($pesquisaAmizadesPendentes) > 0){
                             ?>
-                                <img src="img/icones/amigos_not.png" class="fotoPerfil">
+                                <i class="fas fa-users" style="font-size:22px"></i>
+                            <?php
+                            }
+                    
+                            $pesquisaPartidasPendentes = mysqli_query($conexao, "
+                                SELECT * FROM campeonato_etapa_semente
+                                INNER JOIN campeonato_partida_semente ON campeonato_partida_semente.cod_semente = campeonato_etapa_semente.codigo
+                                WHERE campeonato_etapa_semente.cod_jogador = ".$usuario['codigo']."
+                                AND campeonato_partida_semente.status = 0
+                            ");
+                            if(mysqli_num_rows($pesquisaPartidasPendentes) > 0){
+                            ?>
+                                <i class="fas fa-gamepad" style="font-size:22px"></i>
                             <?php
                             }
                         ?>

@@ -80,5 +80,181 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="<?php echo $js; ?>jquery.js"></script>
         <script src="<?php echo $js; ?>bootstrap.js"></script>
+        <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+        <script src="<?php echo $js; ?>partida.js"></script>
+        <script>
+            function realizarCheckin(partida, jogador){
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/realizar-checkin-partida.php",
+                    data: "partida="+partida+"&jogador="+jogador,
+                    success: function(resposta){
+                        location.reload();
+                    }
+                })
+            }
+            function validar(){
+                var counter = $('.limitado2:checked').length;
+                var limit = <?php echo $campeonato['qtd_ban']; ?>;
+                if(counter < limit){
+                    alert("É obrigatório selecionar "+limit+" banimentos!");
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+            function enviarPlacar(codSemente, codPartida){
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/partida-placar.php",
+                    data: $("#formPlacar").serialize()+"&partida="+codPartida+"&semente="+codSemente+"&funcao=enviar",
+                    success: function(resposta){
+                        location.reload();
+                        return false;
+                    }
+                })
+                return false;
+            }
+            function reenviarPlacar(codSemente, codPartida){
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/partida-placar.php",
+                    data: "partida="+codPartida+"&semente="+codSemente+"&funcao=reenviar",
+                    success: function(resposta){
+                        location.reload();
+                        return false;
+                    }
+                })
+                return false;
+            }
+            function receberWo(codPartida, codSemente){
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/partida-placar.php",
+                    data: "partida="+codPartida+"&semente="+codSemente+"&funcao=wo",
+                    success: function(resposta){
+                        alert(resposta);
+                        // location.reload();
+                    }
+                })
+            }
+            function carregarMsgEquipe(codEquipe, codJogador, codPartida){
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/funcoes-lobby.php",
+                    data: "funcao=13&codequipe="+codEquipe+"&jogador="+codJogador,
+                    success: function(resultado){
+                        $(".mensagens").html(resultado);
+                        $(".mensagens").animate({
+                            scrollTop: $(".mensagens").height()+20000000
+                        }, 500);
+                        return false;
+                    }
+                });	
+            }
+            function carregarMsgOponente(codPartida, codJogador){
+                $.ajax({
+                    type: "POST",
+                    url: "ptbr/campeonatos/partidas/scripts.php",
+                    data: "funcao=2&codpartida="+codPartida+"&jogador="+codJogador,
+                    success: function(resultado){
+                        $(".mensagens").html(resultado);
+                        $(".mensagens").animate({
+                            scrollTop: $(".mensagens").height()+20000000
+                        }, 500);
+                        return false;
+                    }
+                });	
+            }
+            function enviarMsgEquipe(codEquipe, codJogador, codPartida){
+                if($(".msgParaEquipe").val() != ""){
+                    $.ajax({
+                        type: "POST",
+                        url: "ptbr/campeonatos/partidas/scripts.php",
+                        data: $("#msgEquipe").serialize()+"&funcao=4&codpartida="+codPartida+"&codequipe="+codEquipe+"&jogador="+codJogador,
+                        success: function(resultado){
+                            $(".mensagem").val("");
+                            $(".mensagem").focus();
+                            carregarMsgEquipe(codEquipe, codJogador, codPartida);
+                            return false;
+                        }
+                    });	
+                    return false;
+                }
+                return false;
+            }
+            function enviarMsgOponente(codPartida, codJogador){
+                if($(".msgParaGeral").val() != ""){
+                    $.ajax({
+                        type: "POST",
+                        url: "ptbr/campeonatos/partidas/scripts.php",
+                        data: $("#msgGeral").serialize()+"&funcao=3&codpartida="+codPartida+"&jogador="+codJogador,
+                        success: function(resultado){
+                            $(".mensagem").val("");
+                            $(".mensagem").focus();
+                            carregarMsgOponente(codPartida, codJogador);
+                            return false;
+                        }
+                    });	
+                    return false;
+                }
+                return false;
+            }
+            function abaChat(aba){
+                switch(aba){
+                    case '0': // CHAT EQUIPE				
+                        $(".chatEquipe").addClass("ativo");
+                        $(".chatGeral").removeClass("ativo");
+                        $("#msgEquipe").css("display", "block");
+                        $("#msgGeral").css("display", "none");
+                        <?php
+                            if(mysqli_num_rows($pesquisaPosicao) != 0){
+                                if($vagaAtual['cod_equipe'] == NULL){
+                                ?>
+                                    abaChat('1');
+                                <?php
+                                }else{
+                                ?>
+                                    conectarChatEquipe(<?php echo $vagaAtual['cod_equipe']; ?>, <?php echo $usuario['codigo']; ?>,<?php echo $partida['codigo']; ?>);
+                                    desconectarChatOponente(<?php echo $partida['codigo']; ?>);
+                                    carregarMsgEquipe(<?php echo $vagaAtual['cod_equipe']; ?>,<?php echo $usuario['codigo']; ?>,<?php echo $partida['codigo']; ?>);
+                                <?php
+                                }
+                            }	
+                        ?>				
+                        break;
+                    case '1': // CHAT OPONENTE
+                        $(".chatGeral").addClass("ativo");
+                        $(".chatEquipe").removeClass("ativo");
+                        $(".chatSuporte").removeClass("ativo");
+                        $("#msgEquipe").css("display", "none");
+                        $("#msgGeral").css("display", "block");
+                        $("#msgSuporte").css("display", "none");
+                        <?php
+                            if(mysqli_num_rows($pesquisaPosicao) != 0){
+                            ?>
+                                conectarChatOponente(<?php echo $partida['codigo']; ?>, <?php echo $usuario['codigo']; ?>);
+                                desconectarChatEquipe(<?php echo $vagaAtual['cod_equipe']; ?>);
+                                carregarMsgOponente(<?php echo $partida['codigo']; ?>,<?php echo $usuario['codigo']; ?>);
+                            <?php
+                            }	
+                        ?>	
+                        break;		
+                }
+            }
+
+            $(document).on('click', '.limitado2', function(){
+                var limit = <?php echo $campeonato['qtd_ban']; ?>;
+                var counter = $('.limitado2:checked').length;
+                if(counter > limit) {
+                    this.checked = false;  
+                    alert('Só é possível realizar '+limit+' banimento!');
+                }
+            });
+            jQuery(function($){
+                conectarPartida(<?php echo $partida['codigo']; ?>);
+                abaChat('1');
+            });	
+        </script>
     </body>
 </html>

@@ -428,6 +428,55 @@ a:hover {
     color: #fff;
 }
 
+.menuChatPartida {
+    list-style: none;
+    width: 100%;
+    float: left;
+}
+.menuChatPartida li {
+    padding: 5px 10px;
+    border: solid 1px #ccc;
+    display: inline-block;
+}
+.menuChatPartida li.ativo {
+    background: #fff;
+    border-bottom: solid 1px #fff;
+    position: relative;
+    z-index: 2;
+}
+
+/* CHATS */
+
+.chatPartida {
+    background: #fff;
+    width: 100%;
+    float: left;
+    padding: 10px;
+    border: solid 1px #ccc;
+    margin-top: -17px;
+}
+.chatPartida .mensagens {
+    width: 100%;
+    border: solid 1px #ccc;
+    padding: 5px;
+}
+.chatPartida .mensagem {
+    width: 100%;
+    border: solid 1px #ccc;
+    padding: 5px;
+    font-size: 12px;
+}
+.chatPartida input[type=submit]{
+    padding: 5px 10px;
+    border: solid 1px #ccc;
+    background: #f2f2f2;
+    float: right;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
+    font-size: 12px;
+}
+
 /* HEADER */
 
 .menu-fixo {
@@ -464,7 +513,15 @@ header .caixaUsuario .caixaDois {
 }
 header .caixaUsuario .caixaTres {
     float: right;
-    line-height: 45px;
+    padding-top: 15px;
+    color: #ccc;
+}
+header .caixaUsuario .caixaTres i {
+    margin-left: 10px;
+}
+header .caixaUsuario .caixaTres i:hover {
+    color: #f60;
+    cursor: pointer;
 }
 header .caixaUsuario .caixaTres img {
     height: 25px;
@@ -1162,6 +1219,7 @@ footer a:hover {
     background: #f2f2f2;
     border-bottom: solid 3px #ccc;
     padding: 20px 0px;
+    float: left;
 }
 .painelPartida input[type=radio] {
     display: none;
@@ -1192,6 +1250,9 @@ footer a:hover {
 .painelPartida #option-three:checked + label, .menuAdmin #option-six:checked + label {
 	background: #680B0D;
 	color: #fff;
+}
+.painelPartida .alerta {
+    text-align: center;
 }
 /* CAMPEONATO -> PREMIADOS */
 

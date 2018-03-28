@@ -81,7 +81,7 @@
 					
 					mysqli_query($conexao, "UPDATE campeonato_partida_semente SET bans = '$listaHerois' WHERE cod_semente = ".$_POST['codSemente']." AND cod_partida = ".$_POST['codPartida']."");
 					
-					require "../js/vendor/autoload.php";
+					require "../../js/vendor/autoload.php";
 					$pusher = new Pusher("40415e4e25c159832d51", "b9c2207863070b1055a0", "399063", array('cluster' => 'us2'));
 					$pusher->trigger('partida'.$_POST['codPartida'], 'atualizar', array('mensagem' => 'tudo ok'));
 					

@@ -158,17 +158,7 @@
                     $("#funcao").val("alterar");
                     $("#codCampeonato").val(<?php echo $campeonato['codigo']; ?>);
                 }, 300)
-            }
-            function realizarCheckin(campeonato, jogador){
-                $.ajax({
-                    type: "POST",
-                    url: "scripts/realizar-checkin-campeonato.php",
-                    data: "campeonato="+campeonato+"&jogador="+jogador,
-                    success: function(resposta){
-                        location.reload();
-                    }
-                })
-            }
+            }            
             function mudarDraftGwent(){
                 $(".draft").load("ptbr/campeonatos/draft-gwent.php");
                 setTimeout(function(){

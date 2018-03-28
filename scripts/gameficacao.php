@@ -1,7 +1,7 @@
 <?php
 	if(!function_exists("adicionarXp")){
 		function adicionarXp($codJogador, $codJogo, $xp){
-			include "../../../conexao-banco.php";
+			include "../conexao-banco.php";
 			$level = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM gm_jogador_level WHERE cod_jogador = $codJogador AND cod_jogo = $codJogo"));
 			$xpAtual = $level['xp_atual'] + $xp;
 			$lvlAtual = $level['level'];

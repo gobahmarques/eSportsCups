@@ -1,6 +1,6 @@
 <?php
    function verificarPlacar($codSemente, $codPartida){
-      include "../conexao-banco.php";
+      include "../../../conexao-banco.php";
       $pesquisaPlacar = mysqli_query($conexao, "SELECT * FROM campeonato_partida_resultado WHERE cod_partida = $codPartida && cod_semente = $codSemente");
       if(mysqli_num_rows($pesquisaPlacar) == 0){ // JOGADOR AINDA NÃO LANÇOU PLACAR
          return 0;
@@ -24,11 +24,11 @@
 				$placarOponente = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_partida_resultado WHERE cod_partida = $partida AND cod_semente != $semente"));
 				
 				if($placarOponente['placar_um'] == $placarUm && $placarOponente['placar_dois'] == $placarDois){		
-					include "partidas.php";
+					include "../ptbr/campeonatos/partidas/scripts.php";
 					resultadoPartida($partida);
 				}
 				
-				require "../../js/vendor/autoload.php";
+				require "../js/vendor/autoload.php";
 				$pusher = new Pusher("40415e4e25c159832d51", "b9c2207863070b1055a0", "399063", array('cluster' => 'us2'));
 				$pusher->trigger('partida'.$partida, 'atualizar');
 				
@@ -37,7 +37,7 @@
 				$partida = $_POST['partida'];
 				$semente = $_POST['semente'];
 				mysqli_query($conexao, "DELETE FROM campeonato_partida_resultado WHERE cod_partida = $partida AND cod_semente = $semente");
-				require "../../js/vendor/autoload.php";
+				require "../js/vendor/autoload.php";
 				$pusher = new Pusher("40415e4e25c159832d51", "b9c2207863070b1055a0", "399063", array('cluster' => 'us2'));
 				$pusher->trigger('partida'.$_POST['partida'], 'atualizar');
 				break;
@@ -62,11 +62,11 @@
 				
 				
 				
-				include "partidas.php";
+				include "../ptbr/campeonatos/partidas/scripts.php";
 				resultadoPartida($partida);	
-				require "../../js/vendor/autoload.php";
-				$pusher = new Pusher("40415e4e25c159832d51", "b9c2207863070b1055a0", "399063", array('cluster' => 'us2'));
-				$pusher->trigger('partida'.$_POST['partida'], 'atualizar');
+				// require "../js/vendor/autoload.php";
+				// $pusher = new Pusher("40415e4e25c159832d51", "b9c2207863070b1055a0", "399063", array('cluster' => 'us2'));
+				// $pusher->trigger('partida'.$_POST['partida'], 'atualizar');
 				break;
 		}
 	}

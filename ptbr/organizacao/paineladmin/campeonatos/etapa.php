@@ -157,7 +157,7 @@
                 }		
             }
             function validar(){
-                var counter = $('.limitado:checked').length;
+                var counter = $('.limitado3:checked').length;
                 var limit = <?php echo $etapa['vagas']; ?>;
 
                 if(counter != limit){
@@ -168,9 +168,11 @@
                 }
                 return false;
             }
-            $(document).on('click', '.limitado', function(){
-                var limit = <?php echo $etapa['vagas']; ?>;
-                var counter = $('.limitado:checked').length;
+            $(document).on('click', '.limitado3', function(){
+               
+                var limit = <?php echo $etapa['vagas']; ?>;                
+                var counter = $('.limitado3:checked').length;
+                alert(counter);
                 if(counter > limit) {
                     this.checked = false;
                     alert('Só é permito selecionar '+limit+' jogadores!');

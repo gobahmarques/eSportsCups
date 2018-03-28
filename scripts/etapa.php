@@ -90,7 +90,7 @@
 							?>
 								<tr>
 									<td class="checkbox">
-										<input type="checkbox" name="inscricao[]" class="limitado" value="<?php echo $seed['cod_jogador']." 0"; ?>" id="" <?php if($contador <= $_POST['vagas']){ echo "checked='checked'"; } ?>>
+										<input type="checkbox" name="inscricao[]" class="limitado3" value="<?php echo $seed['cod_jogador']." 0"; ?>" >
 										<label for="checkbox"></label>
 									</td>
 									<td class="nome"><?php echo $inscricao['conta']; ?></td>

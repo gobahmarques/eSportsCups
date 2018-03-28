@@ -228,3 +228,16 @@
         <a href="ptbr/campeonato/<?php echo $campeonato['codigo']; ?>/premiados/"><li class="premiados">Premiados</li></a>
     </div>
 </ul>
+
+<script>
+    function realizarCheckin(campeonato, jogador){
+        $.ajax({
+            type: "POST",
+            url: "scripts/realizar-checkin-campeonato.php",
+            data: "campeonato="+campeonato+"&jogador="+jogador,
+            success: function(resposta){
+                location.reload();
+            }
+        })
+    }
+</script>

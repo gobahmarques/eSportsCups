@@ -175,8 +175,8 @@
 	}
 
 	function avancarElimSimples($etapa, $partida){
-		include "../../../conexao-banco.php";
-		include "../../../scripts/gameficacao.php";
+		include "../conexao-banco.php";
+		include "../scripts/gameficacao.php";
 		$xpWin = 25;
 		$xpLose = 10;
 		$maiorExp = 2;
@@ -553,7 +553,7 @@
 	}
 
 	function resultadoPartida($codPartida){
-		include "../../../conexao-banco.php";
+		include "../conexao-banco.php";
 		$partida = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_partida WHERE codigo = $codPartida"));
         
 		$etapa = mysqli_fetch_array(mysqli_query($conexao, "SELECT cod_etapa, tipo_etapa, vagas FROM campeonato_etapa WHERE cod_etapa = ".$partida['cod_etapa']." AND cod_campeonato = ".$partida['cod_campeonato'].""));
@@ -586,7 +586,7 @@
 				jogAusentes($_POST['codpartida']);
 				break;
 			case 2: // CARREGAR MENSAGENS GERAL DOS OPONENTES (CAPITÃES)
-				include "../conexao-banco.php";
+				include "../../../conexao-banco.php";
 				$partida = $_POST['codpartida'];
 				$jogador = $_POST['jogador'];
 
