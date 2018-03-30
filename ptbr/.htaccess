@@ -53,7 +53,7 @@ RewriteRule ^organizacao/([0-9]+)/painel/caixas/([0-9]+)/?$ organizacao-painel-c
 RewriteRule ^organizacao/([0-9]+)/painel/caixas/enviar/?$ organizacao-painel-caixas-enviar.php?codigo=$1 [NC,L]
 RewriteRule ^organizacao/([0-9]+)/painel/produtos/?$ organizacao-painel-produtos.php?codigo=$1 [NC,L]
 RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/?$ organizacao/paineladmin/campeonatos/painel.php?codigo=$1&torneio=$2 [NC,L]
-RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/editar/?$ organizacao-painel-campeonato-editar.php?codigo=$1&torneio=$2 [NC,L]
+RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/editar/?$ organizacao/paineladmin/campeonatos/editar.php?codigo=$1&torneio=$2 [NC,L]
 RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/etapas/?$ organizacao/paineladmin/campeonatos/partidas.php?codigo=$1&torneio=$2 [NC,L]
 RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/etapas/nova/?$ organizacao/paineladmin/campeonatos/nova-etapa.php?codigo=$1&torneio=$2 [NC,L]
 RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/etapa/([0-9]+)/?$ organizacao/paineladmin/campeonatos/etapa.php?codigo=$1&torneio=$2&etapa=$3 [NC,L]
