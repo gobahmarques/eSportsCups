@@ -197,6 +197,7 @@
         
         <script src="<?php echo $js; ?>jquery.js"></script>
         <script src="<?php echo $js; ?>bootstrap.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
         <script type="text/javascript">
 			function tratarJogo(nomeJogo){
 				if(codigoJogo == 369){
@@ -258,6 +259,10 @@
 				});
                 attSaldoReal();
                 attSaldoCoin();
+                CKEDITOR.replace( 'descricao' );
+                CKEDITOR.replace( 'regulamento' );
+                CKEDITOR.replace( 'premiacao' );
+                CKEDITOR.replace( 'cronograma' );
 			});
 		</script>
     </body>

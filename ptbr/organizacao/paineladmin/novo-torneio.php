@@ -213,7 +213,9 @@
                                 </div>
                                 
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">                                 <div class="row">
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">    
+                                <br>
+                                <div class="row">                                    
                                     <div class="form-group col-md-6">
                                         <label for="descricao">Descrição do Torneio</label>
                                         <textarea name="descricao" id="descricao" class="form-control" cols="30" rows="10" placeholder="DESCRIÇÃO" required></textarea>
@@ -318,6 +320,7 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="<?php echo $js; ?>jquery.js"></script>
         <script src="<?php echo $js; ?>bootstrap.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
         <script type="text/javascript">
 			function tratarJogo(nomeJogo){
 				if(codigoJogo == 369){
@@ -377,6 +380,10 @@
 				  e.target // newly activated tab
 				  e.relatedTarget // previous active tab
 				});
+                CKEDITOR.replace( 'descricao' );
+                CKEDITOR.replace( 'regulamento' );
+                CKEDITOR.replace( 'premiacao' );
+                CKEDITOR.replace( 'cronograma' );
 			});
 		</script>
     </body>
