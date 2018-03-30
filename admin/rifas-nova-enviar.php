@@ -7,10 +7,10 @@
 	if(isset($_POST['funcao'])){
 		switch($_POST['funcao']){
 			case "criar":
-				mysqli_query($conexao, "INSERT INTO rifa VALUES (NULL, '".$_POST['nome']."', ".$_POST['minCupons'].", ".$_POST['maxCupons'].", ".$_POST['precoCupom'].", ".$_POST['precoCupomCoin'].", '$dataSorteio', '".$_POST['nomeProduto']."', ".$_POST['precoProduto'].", '".$_POST['linkProduto']."', 'ok')");
+				mysqli_query($conexao, "INSERT INTO rifa VALUES (NULL, '".$_POST['nome']."', ".$_POST['minCupons'].", ".$_POST['maxCupons'].", ".$_POST['precoCupom'].", ".$_POST['precoCupomCoin'].", '$dataSorteio', '".$_POST['nomeProduto']."', ".$_POST['precoProduto'].", '".$_POST['linkProduto']."', 'ok', 0)");
 				$id = mysqli_insert_id($conexao);
 				
-				// header("Location: painel/rifas/");
+				header("Location: painel/rifas/");
 				break;
 			case "alterar":
 								

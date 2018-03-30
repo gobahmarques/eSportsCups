@@ -125,7 +125,7 @@
         <br>
         <div class="container">
         <?php
-            $rifas = mysqli_query($conexao, "SELECT * FROM rifa WHERE data_sorteio > '".date("Y-m-d H:i:s")."'");
+            $rifas = mysqli_query($conexao, "SELECT * FROM rifa WHERE data_sorteio > '".date("Y-m-d H:i:s")."' AND status = 1");
             if(mysqli_num_rows($rifas) > 0){
                 while($rifa = mysqli_fetch_array($rifas)){
                     $totalCupons = mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM rifa_cupom WHERE cod_rifa = ".$rifa['codigo'].""));
