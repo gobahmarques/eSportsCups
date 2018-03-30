@@ -157,7 +157,9 @@
                                 </div>
                                 
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">                                 <div class="row">
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">                              
+                                <br>
+                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="descricao">Descrição do Torneio</label>
                                         <textarea name="descricao" id="descricao" class="form-control" cols="30" rows="10" placeholder="DESCRIÇÃO" required><?php echo $campeonato['descricao']; ?></textarea>
