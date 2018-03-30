@@ -61,7 +61,7 @@
                                     <?php
                                         switch($torneio['cod_jogo']){
                                             case 369: // HEARTHSTONE
-                                                echo "<img src='http://www.esportscups.com.br/img/icones/hearthstone.png' alt='Hearthstone' title='Hearthstone'>";
+                                                echo "<img src='http://www.esportscups.com.br/img/icones/hs.png' alt='Hearthstone' title='Hearthstone'>";
                                                 break;
                                             case 123:
                                                 echo "<img src='http://www.esportscups.com.br/img/icones/gwent.png' alt='GWENT' title='GWENT'>";

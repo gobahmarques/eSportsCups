@@ -11,7 +11,7 @@
                     <?php
                         switch($campeonato['cod_jogo']){
                             case 369: // HEARTHSTONE
-                                echo "<img src='http://www.esportscups.com.br/img/icones/hearthstone.png' alt='Hearthstone' title='Hearthstone' class='iconeJogo'>";
+                                echo "<img src='http://www.esportscups.com.br/img/icones/hs.png' alt='Hearthstone' title='Hearthstone' class='iconeJogo'>";
                                 break;
                             case 123: // GWENT
                                 echo "<img src='http://www.esportscups.com.br/img/icones/gwent.png' alt='GWENT: The Witcher Card Game' title='GWENT: The Witcher Card Game' class='iconeJogo'>";
