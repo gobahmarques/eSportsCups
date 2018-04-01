@@ -174,9 +174,8 @@
 		}
 	}
 
-	function avancarElimSimples($etapa, $partida){
-		include "../conexao-banco.php";
-		include "../scripts/gameficacao.php";
+	function avancarElimSimples($etapa, $partida, $conexao){
+		include "../../../scripts/gameficacao.php";
 		$xpWin = 25;
 		$xpLose = 10;
 		$maiorExp = 2;
@@ -216,17 +215,17 @@
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 1 WHERE cod_semente = ".$sementeUm['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 2 WHERE cod_semente = ".$sementeDois['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			if($sementeUm['cod_equipe'] == NULL){
-				adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
-				adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
+				//adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+				//adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
 				mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$sementeDois['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
 			}else{
 				$lineupUm = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeUm['cod_equipe']."");
 				$lineupDois = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeDois['cod_equipe']."");
 				while($membro = mysqli_fetch_array($lineupUm)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
 				}
 				while($membro = mysqli_fetch_array($lineupDois)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
 					mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$sementeDois['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
 				}
 			}
@@ -236,18 +235,18 @@
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 1 WHERE cod_semente = ".$sementeDois['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 2 WHERE cod_semente = ".$sementeUm['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			if($sementeUm['cod_equipe'] == NULL){
-				adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
+				//adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
 				mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$sementeUm['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
-				adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+				//adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
 			}else{
 				$lineupUm = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeUm['cod_equipe']."");
 				$lineupDois = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeDois['cod_equipe']."");
 				while($membro = mysqli_fetch_array($lineupUm)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);					
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);					
 					mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$membro['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
 				}
 				while($membro = mysqli_fetch_array($lineupDois)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
 				}
 			}
 		}	
@@ -267,8 +266,7 @@
 		}else{ // VERIFICAR SE TEM QUE IR PARA DISPUTA DE TERCEIRO
 			if($etapa['desempate'] == 1){
 				$dataPartida = date("Y-m-d H:i:s", strtotime("+15 minutes", strtotime(date("Y-m-d H:i:s"))));
-				$colunaDestino--;
-				$linhaDestino = 2;
+				$linhaDestino = 1;
 				$partidaDestino = mysqli_fetch_array(mysqli_query($conexao, "SELECT codigo FROM campeonato_partida WHERE cod_etapa = ".$etapa['cod_etapa']." AND cod_campeonato = ".$partida['cod_campeonato']." AND linha = $linhaDestino AND coluna = $colunaDestino"));
 				mysqli_query($conexao, "UPDATE campeonato_partida SET datahora = '$dataPartida' WHERE codigo = ".$partidaDestino['codigo']." ");
 				if($partida['linha'] % 2 == 0){ // VAI SER O JOGADOR 2
@@ -325,8 +323,8 @@
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 2 WHERE cod_semente = ".$sementeDois['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			
 			if($sementeUm['cod_equipe'] == NULL){
-				adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
-				adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
+				//adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+				//adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
 				mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$sementeDois['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
 			}else{
 				$lineupUm = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeUm['cod_equipe']."");
@@ -345,18 +343,18 @@
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 1 WHERE cod_semente = ".$sementeDois['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 2 WHERE cod_semente = ".$sementeUm['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			if($sementeUm['cod_equipe'] == NULL){
-				adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
+				//adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
 				mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$sementeUm['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
-				adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+				//adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
 			}else{
 				$lineupUm = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeUm['cod_equipe']."");
 				$lineupDois = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeDois['cod_equipe']."");
 				while($membro = mysqli_fetch_array($lineupUm)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);					
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);					
 					mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$membro['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
 				}
 				while($membro = mysqli_fetch_array($lineupDois)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
 				}
 			}
 		}
@@ -489,17 +487,17 @@
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 1 WHERE cod_semente = ".$sementeUm['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 2 WHERE cod_semente = ".$sementeDois['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			if($sementeUm['cod_equipe'] == NULL){				
-				adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
-				adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
+				//adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+				//adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
 				mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$sementeDois['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
 			}else{
 				$lineupUm = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeUm['cod_equipe']."");
 				$lineupDois = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeDois['cod_equipe']."");
 				while($membro = mysqli_fetch_array($lineupUm)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
 				}
 				while($membro = mysqli_fetch_array($lineupDois)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
 					mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$sementeDois['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
 				}
 			}
@@ -522,18 +520,18 @@
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 1 WHERE cod_semente = ".$sementeDois['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			mysqli_query($conexao, "UPDATE campeonato_partida_semente SET status = 2 WHERE cod_semente = ".$sementeUm['cod_semente']." AND cod_partida = ".$partida['codigo']."");
 			if($sementeUm['cod_equipe'] == NULL){
-				adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
+				//adicionarXp($sementeUm['cod_jogador'],$campeonato['cod_jogo'], $xpLose);
 				mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$sementeUm['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
-				adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+				//adicionarXp($sementeDois['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
 			}else{
 				$lineupUm = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeUm['cod_equipe']."");
 				$lineupDois = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$partida['cod_campeonato']." AND cod_equipe = ".$sementeDois['cod_equipe']."");
 				while($membro = mysqli_fetch_array($lineupUm)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);					
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpLose);					
 					mysqli_query($conexao, "INSERT INTO organizacao_feedback VALUES(NULL, ".$membro['cod_jogador'].", ".$campeonato['cod_organizacao'].", ".$campeonato['codigo'].", NULL, NULL)");
 				}
 				while($membro = mysqli_fetch_array($lineupDois)){
-					adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
+					//adicionarXp($membro['cod_jogador'],$campeonato['cod_jogo'], $xpWin);
 				}
 			}
 			mysqli_query($conexao, "UPDATE campeonato_etapa_semente
@@ -552,8 +550,8 @@
 		}	
 	}
 
-	function resultadoPartida($codPartida){
-		include "../conexao-banco.php";
+	function resultadoPartida($codPartida, $conexao){
+        
 		$partida = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_partida WHERE codigo = $codPartida"));
         
 		$etapa = mysqli_fetch_array(mysqli_query($conexao, "SELECT cod_etapa, tipo_etapa, vagas FROM campeonato_etapa WHERE cod_etapa = ".$partida['cod_etapa']." AND cod_campeonato = ".$partida['cod_campeonato'].""));
@@ -562,7 +560,7 @@
 			switch($etapa['tipo_etapa']){
 				case 1: // ELIMINAÇÃO SIMPLES
                     echo "elim simples";
-					avancarElimSimples($etapa, $partida);		
+					avancarElimSimples($etapa, $partida, $conexao);		
 					break;
 				case 2: // GRUPO PONTOS CORRIDOS
 					resultadoPontosCorridos($etapa, $partida);

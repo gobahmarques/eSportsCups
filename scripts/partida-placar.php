@@ -25,7 +25,7 @@
 				
 				if($placarOponente['placar_um'] == $placarUm && $placarOponente['placar_dois'] == $placarDois){		
 					include "../ptbr/campeonatos/partidas/scripts.php";
-					resultadoPartida($partida);
+					resultadoPartida($partida, $conexao);
 				}
 				
 				require "../js/vendor/autoload.php";
@@ -63,7 +63,7 @@
 				
 				
 				include "../ptbr/campeonatos/partidas/scripts.php";
-				resultadoPartida($partida);	
+				resultadoPartida($partida, $conexao);	
 				// require "../js/vendor/autoload.php";
 				// $pusher = new Pusher("40415e4e25c159832d51", "b9c2207863070b1055a0", "399063", array('cluster' => 'us2'));
 				// $pusher->trigger('partida'.$_POST['partida'], 'atualizar');

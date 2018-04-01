@@ -133,8 +133,7 @@
                     url: "scripts/partida-placar.php",
                     data: "partida="+codPartida+"&semente="+codSemente+"&funcao=wo",
                     success: function(resposta){
-                        alert(resposta);
-                        // location.reload();
+                        location.reload();
                     }
                 })
             }

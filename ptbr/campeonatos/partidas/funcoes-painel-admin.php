@@ -28,7 +28,7 @@
                 }
             }
             require "scripts.php";
-		    resultadoPartida($_POST['partida']);
+		    resultadoPartida($_POST['partida'], $conexao);
             break;
     }
     

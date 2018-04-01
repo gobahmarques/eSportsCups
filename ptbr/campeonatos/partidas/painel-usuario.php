@@ -327,7 +327,7 @@
                                             ?>
                                             <div class="alerta centralizar">
                                             <?php
-                                            include "scripts/partida-placar.php";
+                                            include "../../../scripts/partida-placar.php";
                                             $placar = verificarPlacar($sementeDois['cod_semente'], $partida['codigo']);
                                             if($placar == 0){ // JOGADOR AINDA NÃO LANÇOU RESULTADO
                                             ?>
