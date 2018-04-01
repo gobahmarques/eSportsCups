@@ -5,13 +5,12 @@
 	$campeonato = mysqli_query($conexao, "SELECT * FROM campeonato WHERE nome LIKE '%eSCoin Cup%' AND inicio LIKE '%$data%'");
 	$campeonato = mysqli_fetch_array($campeonato);
 	
-		
-	// COMECAR TORNEIO
-
-	mysqli_query($conexao, "UPDATE campeonato SET status = 1 WHERE codigo = ".$campeonato['codigo']." ");
-	$msg = "<li>Foi dada a largada. O torneio <strong>".$campeonato['nome']."</strong> está oficialmente iniciado.</li>";
 	
-	if($campeonato['tipo_inscricao'] == 0){
+    echo $campeonato['codigo'];
+    mysqli_query($conexao, "UPDATE campeonato SET status = 1 WHERE codigo = ".$campeonato['codigo']." "); // COMECAR TORNEIO
+    $msg = "<li>Foi dada a largada. O torneio <strong>".$campeonato['nome']."</strong> está oficialmente iniciado.</li>";
+
+    if($campeonato['tipo_inscricao'] == 0){
 		$destinos = mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']."");
 	}else{
 		$destinos = mysqli_query($conexao, "SELECT * FROM campeonato_lineup WHERE cod_campeonato = ".$campeonato['codigo']." ");
@@ -20,8 +19,6 @@
 	while($destino = mysqli_fetch_array($destinos)){
 		mysqli_query($conexao, "INSERT INTO notificacao VALUES (NULL, '".$msg."', ".$destino['cod_jogador'].", 0)");
 	}
-
-	// APROVAR INSCRICOES
 
 	$vagas = mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND status = 1 "));
 
@@ -43,10 +40,10 @@
 
 		// DISTRIBUIR SEMENTES
 
-		include "../ptbr/scripts/gerar-jogos.php";
-		jogosElimSimples($numEtapa, $campeonato['codigo'], $vagas, 5, 0);
-		byesElimSimples($numEtapa, $campeonato['codigo']);
-		distribuirSementesElimSimples($numEtapa, $campeonato['codigo']);
+		include "../scripts/gerar-jogos.php";
+		jogosElimSimples($numEtapa, $campeonato['codigo'], $vagas, 5, 0, $conexao);
+		byesElimSimples($numEtapa, $campeonato['codigo'], $conexao);
+		distribuirSementesElimSimples($numEtapa, $campeonato['codigo'], $conexao);
 		
 		// DISTRIBUIR INSCRIÇÕES NAS SEMENTES
 

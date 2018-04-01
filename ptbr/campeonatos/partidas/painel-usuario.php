@@ -68,7 +68,7 @@
                             if(mysqli_num_rows($checkin) != 0){ // OPONENTE JÁ ESTÁ PRONTO
                                 if($campeonato['qtd_ban'] != 0){ // É OBRIGATORIO FAZER BAN
                                     if($sementeUm['bans'] == NULL){ // MOSTRAR HERÓIS PARA BAN
-                                        $amostras = explode(";", $draftDois['picks']);
+                                        $herois = explode(";", $draftDois['picks']);
                                         $aux = 0;							
                                         echo "<h2>Você deve realizar ".$campeonato['qtd_ban']." banimento</h2><br>";
                                         echo "<form action='ptbr/campeonatos/draft-enviar.php' method='post' onSubmit='return validar();'>";
@@ -76,15 +76,23 @@
                                         echo "<input type='text' name='codSemente' id='codSemente' value='".$sementeUm['cod_semente']."' hidden='hidden'>";
                                         echo "<input type='hidden' name='codPartida' id='codPartida' value='".$partida['codigo']."'>";
                                         echo "<input type='hidden' name='codCampeonato' id='codCampeonato' value='".$campeonato['codigo']."'>";
+                                        ?>
+                                        <div class="row centralizar">
+                                        <?php
                                         while($aux < $campeonato['qtd_pick']){
                                         ?>
-                                            <input type="checkbox" name="heroi[]" class="escolha limitado2" value="<?php echo $amostras[$aux]; ?>" id="<?php echo $amostras[$aux]; ?>" hidden="hidden">
-                                            <label for="<?php echo $amostras[$aux]; ?>" class="heroi">
-                                                <img src="<?php echo "http://www.esportscups.com.br/img/draft/".$jogo['abreviacao']."/".$amostras[$aux].".png" ?>" title="<?php echo $amostras[$aux]; ?>" alt= "<?php echo $amostras[$aux]; ?>" width="100">
-                                            </label>
+                                            <div class="col">
+                                                <input type="checkbox" name="heroi[]" class="escolha limitado2" value="<?php echo $herois[$aux]; ?>" id="<?php echo $herois[$aux]; ?>" hidden="hidden">
+                                                <label for="<?php echo $herois[$aux]; ?>" class="heroi">
+                                                    <img src="<?php echo "http://www.esportscups.com.br/img/draft/".$jogo['abreviacao']."/".$herois[$aux].".png" ?>" title="<?php echo $herois[$aux]; ?>" alt= "<?php echo $herois[$aux]; ?>" width="100">
+                                                </label>
+                                            </div>                                            
                                         <?php
                                             $aux++;
                                         }
+                                        ?>
+                                        </div>
+                                        <?php
                                         echo "<br><input type='submit' value='REALIZAR BAN' class='btn btn-dark'>";
                                         echo "</form>";									
                                     }else{
@@ -259,7 +267,7 @@
                                 ?>
                                     <div class="alerta">
                                         Assim que estiver pronto para jogar, aperte o botão para realizar seu check-in e sinalizar seu oponente. <br><br>
-                                        <input type="button" value="ESTOU PRONTO" class="botaoPqLaranja" onClick="realizarCheckin(<?php echo $partida['codigo'].",".$sementeDois['codigo']; ?>)"><br><br>
+                                        <input type="button" value="ESTOU PRONTO" class="btn btn-dark" onClick="realizarCheckin(<?php echo $partida['codigo'].",".$sementeDois['codigo']; ?>)"><br><br>
                                         Após realizar o check-in você declara que está pronto para jogar e o não comparecimento será considerado W.O.
                                     </div>
                                 <?php	
@@ -291,7 +299,7 @@
                             }
 
 
-                        }else{
+                        }else{ // JÁ REALIZOU O CHECK-IN
                             $checkin = mysqli_query($conexao, "SELECT * FROM campeonato_partida_checkin WHERE cod_jogador = ".$sementeUm['codigo']." AND cod_partida = ".$partida['codigo']."");
                             if(mysqli_num_rows($checkin) != 0){ // OPONENTE JÁ ESTÁ PRONTO
                                 if($campeonato['qtd_ban'] != 0){ // É OBRIGATORIO FAZER BAN
@@ -304,16 +312,24 @@
                                         echo "<input type='text' name='codSemente' id='codSemente' value='".$sementeDois['cod_semente']."' hidden='hidden'>";
                                         echo "<input type='hidden' name='codPartida' id='codPartida' value='".$partida['codigo']."'>";
                                         echo "<input type='hidden' name='codCampeonato' id='codCampeonato' value='".$campeonato['codigo']."'>";
+                                        ?>
+                                        <div class="row centralizar">
+                                        <?php
                                         while($aux < $campeonato['qtd_pick']){
                                         ?>
-                                            <input type="checkbox" name="heroi[]" class="escolha limitado2" value="<?php echo $herois[$aux]; ?>" id="<?php echo $herois[$aux]; ?>" hidden="hidden">
-                                            <label for="<?php echo $herois[$aux]; ?>" class="heroi">
-                                                <img src="<?php echo "http://www.esportscups.com.br/img/draft/".$jogo['abreviacao']."/".$herois[$aux].".png" ?>" title="<?php echo $herois[$aux]; ?>" alt= "<?php echo $herois[$aux]; ?>" width="100">
-                                            </label>
+                                            <div class="col">
+                                                <input type="checkbox" name="heroi[]" class="escolha limitado2" value="<?php echo $herois[$aux]; ?>" id="<?php echo $herois[$aux]; ?>" hidden="hidden">
+                                                <label for="<?php echo $herois[$aux]; ?>" class="heroi">
+                                                    <img src="<?php echo "http://www.esportscups.com.br/img/draft/".$jogo['abreviacao']."/".$herois[$aux].".png" ?>" title="<?php echo $herois[$aux]; ?>" alt= "<?php echo $herois[$aux]; ?>" width="100">
+                                                </label>
+                                            </div>                                            
                                         <?php
                                             $aux++;
                                         }
-                                        echo "<br><input type='submit' value='REALIZAR BAN' class='botaoPqLaranja'>";
+                                        ?>
+                                        </div>
+                                        <?php
+                                        echo "<br><input type='submit' value='REALIZAR BAN' class='btn btn-dark'>";
                                         echo "</form>";
                                     }else{
                                         if($sementeUm['bans'] == NULL){
@@ -334,20 +350,21 @@
                                             <form action="" method="post" onSubmit="return enviarPlacar(<?php echo $sementeDois['cod_semente'].", ".$partida['codigo']; ?>);" id="formPlacar">
                                                 <h2>Resultado Final</h2>
                                                 Informe o resultado final da série.<br><br>
-                                                <div class="esquerda">
-                                                    <div class="quantity">
-                                                        <input type="number" value="0" name="placarUm">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div>
+                                                            <input type="number" class="form-control" value="0" name="placarUm"><br>
+                                                            <strong><?php echo $inscUm['conta']; ?></strong>
+                                                        </div>
                                                     </div>
-                                                    <?php echo $inscUm['conta']; ?>
-                                                </div>
-                                                <div class="direita">
-                                                    <div class="quantity">
-                                                        <input type="number" value="0" name="placarDois">
+                                                    <div class="col">
+                                                        <div>
+                                                            <input type="number" class="form-control" value="0" name="placarDois"><br>
+                                                            <strong><?php echo $inscDois['conta']; ?></strong>
+                                                        </div>
                                                     </div>
-                                                    <?php echo $inscDois['conta']; ?>
-                                                </div>
-                                                <br><br><br>
-                                                <input type="submit" value="ENVIAR RESULTADO" class="botaoPqLaranja">						
+                                                </div><br>
+                                                <input type="submit" value="ENVIAR RESULTADO" class="btn btn-dark">							
                                             </form>
                                             <?php
                                              }else{ // JOGADOR JÁ LANÇOU RESULTADO (AGUARDANDO CONFIRMAÇÃO)
@@ -423,7 +440,7 @@
                                                 ?>
                                                 </div><br><br>
                                                 É obrigatório que os dois responsáveis pela partida informem o msmo placar para que o mesmo seja confirmado e validado. <br><br>
-                                                <input type="button" value="ENVIAR NOVO PLACAR" class="botaoPqLaranja" onClick="reenviarPlacar(<?php echo $sementeDois['cod_semente'].", ".$partida['codigo']; ?>)">							
+                                                <input type="button" value="ENVIAR NOVO PLACAR" class="btn btn-dark" onClick="reenviarPlacar(<?php echo $sementeDois['cod_semente'].", ".$partida['codigo']; ?>)">							
                                                 <?php
                                              }
                                             ?>

@@ -183,7 +183,7 @@
                             url: "scripts/status-campeonato.php",
                             data: "campeonato="+campeonato+"&status="+status,
                             success: function(resultado){                               
-                                window.location = "organizacao/<?php echo $organizacao['codigo']; ?>/painel/";
+                                window.location = "ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/";
                             }
                         });
                     }

@@ -24,9 +24,9 @@
 	}
 	
 	include "../../../../scripts/gerar-jogos.php";
-	jogosElimSimples($numEtapa, $codCampeonato, $vagas, $formatoPartidas, $disputaTerceiro);
-	byesElimSimples($numEtapa, $codCampeonato);
-	distribuirSementesElimSimples($numEtapa, $codCampeonato);
+	jogosElimSimples($numEtapa, $codCampeonato, $vagas, $formatoPartidas, $disputaTerceiro, $conexao);
+	byesElimSimples($numEtapa, $codCampeonato, $conexao);
+	distribuirSementesElimSimples($numEtapa, $codCampeonato, $conexao);
 
 	// header("Location: organizacao/".$campeonato['cod_organizacao']."/painel/campeonato/".$codCampeonato."/etapas/");
 ?>

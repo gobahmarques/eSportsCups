@@ -1,7 +1,5 @@
 <?php
-	function jogosElimSimples($etapa, $campeonato, $jogadores, $partida, $dispTerceiro){
-		include "../../../../enderecos.php";
-		include "../../../../conexao-banco.php";
+	function jogosElimSimples($etapa, $campeonato, $jogadores, $partida, $dispTerceiro, $conexao){
 		$maiorExp = 2;
 		while($maiorExp < $jogadores){
 			$maiorExp = $maiorExp * 2;
@@ -30,9 +28,7 @@
 		}
 	}
 
-	function byesElimSimples($etapa, $codCampeonato){
-		include "../../../../enderecos.php";
-		include "../../../../conexao-banco.php";
+	function byesElimSimples($etapa, $codCampeonato, $conexao){
 		$etapa = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_etapa WHERE cod_etapa = $etapa AND cod_campeonato = $codCampeonato "));
 		$maiorExp = 2;
 		while($maiorExp < $etapa['vagas']){
@@ -76,9 +72,7 @@
 		}
 	}
 
-	function distribuirSementesElimSimples($etapa, $codCampeonato){
-		include "../../../../enderecos.php";
-		include "../../../../conexao-banco.php";
+	function distribuirSementesElimSimples($etapa, $codCampeonato, $conexao){
 		
 		$sementes = mysqli_query($conexao, "SELECT * FROM campeonato_etapa_semente WHERE cod_etapa = $etapa AND cod_campeonato = $codCampeonato ORDER BY numero");
 		$aux = 0;
