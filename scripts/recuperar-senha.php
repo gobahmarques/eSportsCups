@@ -36,14 +36,13 @@
 			}
 		}
 	}else{
-	?>
-		<h1>RECUPERAÇÃO DE SENHA</h1>
+	?>		
 		INFORME O E-MAIL DE SEU LOGIN<Br>
 		<form method="post" id="cadastro" action="scripts/recuperar-senha.php">
-			<input type="text" placeholder="SEU E-MAIL AQUI" name="email" id="nemailome" autofocus style="width: 100%;"><br><br>
+			<input type="text" placeholder="SEU E-MAIL AQUI" name="email" id="nemailome" autofocus class="form-control"><br><br>
 			<div class="status" id="status">
 			</div>
-			<input type="submit" class="cadastro botaoPqLaranja" value="RECUPERAR SENHA">
+			<input type="submit" class="cadastro btn btn-dark" value="RECUPERAR SENHA">
 		</form>
 	<?php	
 	}

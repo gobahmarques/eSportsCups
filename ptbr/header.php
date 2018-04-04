@@ -76,7 +76,9 @@
 		return false;
 	}
 	function esqueciSenha(){
-		$("#modal").load("scripts/recuperar-senha.php");
+        $(".modal-title").html("<h1>RECUPERAÇÃO DE SENHA</h1>");
+		$(".modal-body").load("scripts/recuperar-senha.php");
+        $(".modal-footer").html("");
 		$("#modal").modal();
 	}
 	function abrirNotificacoes(codJogador){
