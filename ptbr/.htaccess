@@ -33,7 +33,7 @@ RewriteRule ^usuario/([0-9]+)/organizacao/?$ jogador_organizacao.php?perfil=$1 [
 
 # LOJA #
 RewriteRule ^loja/?$ loja/loja.php [NC,L]
-RewriteRule ^loja/check-out/([0-9]+)/([0-9]+)/?$ loja-checkout.php?produto=$1&endereco=$2 [NC,L]
+RewriteRule ^loja/check-out/([0-9]+)/([0-9]+)/?$ loja/loja-checkout.php?produto=$1&endereco=$2 [NC,L]
 
 # LOJA #
 RewriteRule ^caixas/?$ caixas/caixas.php [NC,L]

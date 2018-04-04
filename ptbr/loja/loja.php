@@ -17,6 +17,7 @@
     </head>
     <body>
         <?php include "../header.php"; ?>
+        <input type="hidden" id="codProduto">
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light menuLoja">
@@ -173,7 +174,7 @@
                 setTimeout(function(){ $("#codProduto").val(produto); }, 1500);
             }
             function irCheckout(){
-                $(location).attr("href","loja/check-out/"+$("#codProduto").val()+"/"+$(".listaEnderecos").val()+"/");
+                $(location).attr("href","ptbr/loja/check-out/"+$("#codProduto").val()+"/"+$(".listaEnderecos").val()+"/");
             }
         </script>
     </body>
