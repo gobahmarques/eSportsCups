@@ -365,7 +365,7 @@
 			if($partida['coluna'] > 2){				
 				$destinoPerdedor = $partida['coluna'] + ($partida['coluna'] - 2);
 				$linhaPerdedor = $partida['linha'];
-				$ladoPerdedor = 2;
+				$ladoPerdedor = 1;
 			}else{
 				if($partida['coluna'] == 1){
 					if($partida['linha'] % 2 != 0){

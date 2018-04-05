@@ -45,9 +45,7 @@
 		}
 	}
 
-	function byesElimDupla($etapa, $codCampeonato){
-		include "../../../../enderecos.php";
-		include "../../../../conexao-banco.php";
+	function byesElimDupla($etapa, $codCampeonato, $conexao){
 		$etapa = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_etapa WHERE cod_etapa = $etapa AND cod_campeonato = $codCampeonato "));
 		$maiorExp = 2;
 		while($maiorExp < $etapa['vagas']){
@@ -55,8 +53,10 @@
 		}
 		$byes = $maiorExp - $etapa['vagas'];
 		
+        echo $byes;
+        
 		while($byes != 0){
-			$partida = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_partida WHERE cod_campeonato = $codCampeonato AND cod_etapa = ".$etapa['cod_etapa']." AND coluna = 1 and sup_inf = 'U' ORDER BY rand() LIMIT 1"));
+			$partida = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_partida WHERE cod_campeonato = $codCampeonato AND cod_etapa = ".$etapa['cod_etapa']." AND coluna = 1 and sup_inf = 'U' AND status != 3 ORDER BY rand() LIMIT 1"));
 			mysqli_query($conexao, "UPDATE campeonato_partida SET status = 3 WHERE codigo = ".$partida['codigo']."");
 			$byes--;
 			
@@ -111,10 +111,7 @@
 		}
 	}
 
-	function distribuirSementesElimDupla($etapa, $codCampeonato){
-		include "../../../../enderecos.php";
-		include "../../../../conexao-banco.php";
-		
+	function distribuirSementesElimDupla($etapa, $codCampeonato, $conexao){		
 		$sementes = mysqli_query($conexao, "SELECT * FROM campeonato_etapa_semente WHERE cod_etapa = $etapa AND cod_campeonato = $codCampeonato ORDER BY numero");
 		$aux = 0;
 		while($semente = mysqli_fetch_array($sementes)){
@@ -186,9 +183,7 @@
 		}	
 	}
 
-	function jogosElimDupla($etapa, $campeonato, $jogadores, $partida, $inicio){
-		include "../../../../enderecos.php";
-		include "../../../../conexao-banco.php";
+	function jogosElimDupla($etapa, $campeonato, $jogadores, $partida, $inicio, $conexao){
 		$formato = "d/m/Y H:i:s";
 		$inicio = DateTime::createFromFormat($formato, $_POST['inicio']);
 		$inicio = $inicio->format("Y-m-d H:i:s");
@@ -212,7 +207,7 @@
 			if($l > $limiteLinha){
 				$l = 1;
 				$c++;
-				$limiteLinha = $limiteLinha / 2;
+				$limiteLinha /= 2;
 				$campos = "NULL, $etapa, NULL, NULL, NULL, '".$campeonato['codigo']."', $partida, 0, $l, $c, 0, 0, 'U'";
 			}else{
 				$campos = "NULL, $etapa, '$inicio', NULL, NULL, '".$campeonato['codigo']."', $partida, 0, $l, $c, 0, 0, 'U'";

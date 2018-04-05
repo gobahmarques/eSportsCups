@@ -931,7 +931,7 @@
 								INNER JOIN campeonato_etapa_semente ON campeonato_etapa_semente.codigo = campeonato_partida_semente.cod_semente
 								WHERE campeonato_partida_semente.cod_partida = ".$partida['codigo']." AND lado = 2 "));
 							?>
-								<a href="campeonato/<?php echo $partida['cod_campeonato']; ?>/partida/<?php echo $partida['codigo']; ?>/">
+								<a href="ptbr/campeonato/<?php echo $partida['cod_campeonato']; ?>/partida/<?php echo $partida['codigo']; ?>/">
 									<g>
 
 
@@ -1151,7 +1151,7 @@
 										INNER JOIN campeonato_etapa_semente ON campeonato_etapa_semente.codigo = campeonato_partida_semente.cod_semente
 										WHERE campeonato_partida_semente.cod_partida = ".$partida['codigo']." AND lado = 2 "));
 									?>
-										<a href="campeonato/<?php echo $partida['cod_campeonato']; ?>/partida/<?php echo $partida['codigo']; ?>/">
+										<a href="ptbr/campeonato/<?php echo $partida['cod_campeonato']; ?>/partida/<?php echo $partida['codigo']; ?>/">
 											<g>
 												
 

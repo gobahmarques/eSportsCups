@@ -42,7 +42,7 @@
                     <br>
                     <div class="row">
                         <div class="col-12 col-md-12">
-                            <h2>Descrição</h2>                        
+                            <h2>Regulamento</h2>                        
                             <?php echo $campeonato['regulamento']; ?>	
                         </div>	
                     </div>
