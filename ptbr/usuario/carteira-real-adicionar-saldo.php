@@ -71,7 +71,7 @@
                             </div>
                             <div class="row-fluid">
                                 <div class="plano">
-                                    <h3>Adicionar R$ 20</h3>
+                                    <h3>Adicionar R$ 25</h3>
                                     <div class="caixaBotao acoes">
                                         R$ 25,00
                                         <button type="button" class="btn-laranja btn" onClick="solicitarPagamento(25);">ADICIONAR SALDO</button>
