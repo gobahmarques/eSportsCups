@@ -20,6 +20,24 @@ RewriteRule ^jogar/pubg/?$ jogar/jogar.php?jogo=741 [NC,L]
 RewriteRule ^jogar/gwent/?$ jogar/jogar.php?jogo=123 [NC,L]
 RewriteRule ^jogar/clashroyale/?$ jogar/jogar.php?jogo=653 [NC,L]
 
+RewriteRule ^jogar/campeonatos/?$ jogar/campeonatos/campeonatos.php [NC,L]
+RewriteRule ^jogar/campeonatos/hearthstone/?$ jogar/campeonatos/campeonatos.php?jogo=369 [NC,L]
+RewriteRule ^jogar/campeonatos/dota2/?$ jogar/campeonatos/campeonatos.php?jogo=357 [NC,L]
+RewriteRule ^jogar/campeonatos/lol/?$ jogar/campeonatos/campeonatos.php?jogo=147 [NC,L]
+RewriteRule ^jogar/campeonatos/overwatch/?$ jogar/campeonatos/campeonatos.php?jogo=258 [NC,L]
+RewriteRule ^jogar/campeonatos/pubg/?$ jogar/campeonatos/campeonatos.php?jogo=741 [NC,L]
+RewriteRule ^jogar/campeonatos/gwent/?$ jogar/campeonatos/campeonatos.php?jogo=123 [NC,L]
+RewriteRule ^jogar/campeonatos/clashroyale/?$ jogar/campeonatos/campeonatos.php?jogo=653 [NC,L]
+
+RewriteRule ^jogar/lobbys/?$ jogar/lobbys/lobbys.php [NC,L]
+RewriteRule ^jogar/lobbys/hearthstone/?$ jogar/lobbys/lobbys.php?jogo=369 [NC,L]
+RewriteRule ^jogar/lobbys/dota2/?$ jogar/lobbys/lobbys.php?jogo=357 [NC,L]
+RewriteRule ^jogar/lobbys/lol/?$ jogar/lobbys/lobbys.php?jogo=147 [NC,L]
+RewriteRule ^jogar/lobbys/overwatch/?$ jogar/lobbys/lobbys.php?jogo=258 [NC,L]
+RewriteRule ^jogar/lobbys/pubg/?$ jogar/lobbys/lobbys.php?jogo=741 [NC,L]
+RewriteRule ^jogar/lobbys/gwent/?$ jogar/lobbys/lobbys.php?jogo=123 [NC,L]
+RewriteRule ^jogar/lobbys/clashroyale/?$ jogar/lobbys/lobbys.php?jogo=653 [NC,L]
+
 # USUARIO #
 
 RewriteRule ^usuario/([0-9]+)/?$ usuario/jogador.php?perfil=$1 [NC,L]

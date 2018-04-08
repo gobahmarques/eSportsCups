@@ -142,6 +142,10 @@
   </div>
 </div>
 <header id="menuHeader">
+    <ul class="menuPrincipalHeader">
+        <a href="ptbr/jogar/campeonatos/"><li class="campeonatos">Campeonatos</li></a>
+        <a href="ptbr/jogar/lobbys/"><li class="lobbys">Lobbys</li></a>
+    </ul>
     <nav class="navbar navbar-expand-lg navbar-dark bg-cinza">
     <a class="navbar-brand" href="/ptbr/"><img src="<?php echo $img; ?>logo-beta.png" class="logoHeader" /></a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -161,9 +165,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="ptbr/loja/">Loja e$</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ptbr/jogar/dota2/">Partidas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="ptbr/rifas/">Rifas</a>

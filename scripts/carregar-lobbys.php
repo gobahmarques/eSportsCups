@@ -85,8 +85,12 @@
                                     <?php
                                         switch($codJogo){
                                             case 369: // HEARTHSTONE
-                                                echo "<img src='https://www.esportscups.com.br/img/icones/hearthstone.png' alt='Hearthstone' title='Hearthstone'>";
+                                                echo "<img src='https://www.esportscups.com.br/img/icones/hs.png' alt='Hearthstone' title='Hearthstone'>";
                                                 echo "Hearthstone";
+                                                break;
+                                            case 123: // GWENT
+                                                echo "<img src='https://www.esportscups.com.br/img/icones/gwent.png' alt='GWENT' title='Hearthstone'>";
+                                                echo "GWENT: The Witcher Card Game";
                                                 break;
                                             case 147: // League of Legends
                                                 echo "<img src='https://www.esportscups.com.br/img/icones/lol.png' alt='League of Legends' title='League of Legends'>";

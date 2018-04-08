@@ -1,6 +1,7 @@
 <?php
     include "../../session.php";
     include "../../enderecos.php";
+    
     if(isset($_GET['caixa'])){
 		$codCaixa = $_GET['caixa'];
 	}else{
@@ -23,18 +24,15 @@
     <body>
         <?php include "../header.php"; ?>
         
-        <div id="sideBarJogos" class="sidenav text-white">
-            <li>Filtros de Busca</li>
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <li onClick="trocarAba(0);"><img src="img/logo.png" height="20px"> e-Sports Cups</li>
-            <li onClick="trocarAba(357);"><img src="img/icones/dota2.png" height="20px"> Dota 2</li>
-            <li onClick="trocarAba(123);"><img src="img/icones/gwent.png" height="20px" > GWENT</li>
-            <li onClick="trocarAba(369);"><img src="img/icones/hs.png" height="20px" > Hearthstone</li>
-            <li onClick="trocarAba(147);"><img src="img/icones/lol.png" height="20px" > League of Legends</li>
-            <li onClick="trocarAba(258);"><img src="img/icones/overwatch2.png" height="20px" > Overwatch</li>
-        </div>
-        <div onclick="openNav();" class="botaoMenuJogos">open</div>
-            
+        <ul class="menuJogar centralizar">
+            <li onClick="trocarAba(0);" class="esc"><img src="<?php echo $img; ?>logo.png"></li>
+            <li onClick="trocarAba(357);" class="357"><img src="<?php echo $img; ?>icones/dota2.png"></li>
+            <li onClick="trocarAba(123);" class="123"><img src="<?php echo $img; ?>icones/gwent.png"></li>
+            <li onClick="trocarAba(369);" class="369"><img src="<?php echo $img; ?>icones/hs.png"></li>
+            <li onClick="trocarAba(147);" class="147"><img src="<?php echo $img; ?>icones/lol.png"></li>
+            <li onClick="trocarAba(258);" class="258"><img src="<?php echo $img; ?>icones/overwatch2.png"></li>
+        </ul>
+        
         <div class="visualizarCaixa">
             <div class="container">
             </div>
@@ -77,30 +75,30 @@
         <script src="<?php echo $js; ?>bootstrap.js"></script>
         <script type="text/javascript">
             function trocarAba(aba){
-                $(".active").removeClass("active");
+                $(".menuJogar .ativo").removeClass("ativo");
                 switch(aba){
                     case 0:
-                        $(".esc").addClass("active");
+                        $(".esc").addClass("ativo");
                         $(".botaoMenuJogos").html("Filtro<br><img src='img/logo.png' height='20px'>");
                         break;
                     case 357: // DOTA 2
-                        $(".dota").addClass("active");
+                        $(".357").addClass("ativo");
                         $(".botaoMenuJogos").html("Filtro<br><img src='img/icones/dota2.png' height='20px'>");
                         break;
                     case 369: // HEARTHSTONE
-                        $(".hs").addClass("active");
+                        $(".369").addClass("ativo");
                         $(".botaoMenuJogos").html("Filtro<br><img src='img/icones/hs.png' height='20px'>");
                         break;
                     case 147: // LEAGUE OF LEGENDS
-                        $(".lol").addClass("active");
+                        $(".147").addClass("ativo");
                         $(".botaoMenuJogos").html("Filtro<br><img src='img/icones/lol.png' height='20px'>");
                         break;
                     case 258: // OVERWATCH
-                        $(".ow").addClass("active");
+                        $(".258").addClass("ativo");
                         $(".botaoMenuJogos").html("Filtro<br><img src='img/icones/overwatch.png' height='20px'>");
                         break;
                     case 123: // GWENT
-                        $(".gwent").addClass("active");
+                        $(".123").addClass("ativo");
                         $(".botaoMenuJogos").html("Filtro<br><img src='img/icones/gwent.png' height='20px'>");
                         break;
                 }
@@ -113,7 +111,6 @@
                     }
                 });
                 $(".visualizarCaixa").css("display", "none");
-                closeNav();
             }
 
             function carregarCaixa(caixa){
@@ -162,10 +159,11 @@
                 });	
             }
 
-            jQuery(function($){
-                trocarAba(0);
+            jQuery(function($){                
                 if(<?php echo $codCaixa; ?> != 0){ // POSSUI CAIXA
                     carregarCaixa(<?php echo $codCaixa; ?>);
+                }else{
+                    trocarAba(0);
                 }
                 /*
                 var aux = 0;

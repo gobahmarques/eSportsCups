@@ -359,15 +359,19 @@ a:hover {
 
 .menuJogar {
     background: #000;
-    margin-top: 20px;
     color: #fff;
     list-style: none;
-    margin-top: 70px;
+    position: relative;
+    z-index: 3;
 }
 .menuJogar li {
     display: inline-block;
     padding: 10px 15px;    
     margin: 0px 5px;
+}
+.menuJogar li img {
+    height: 30px;
+    filter: grayscale(1);
 }
 .menuJogar li.ativo {
     background: #fff;
@@ -375,11 +379,19 @@ a:hover {
     border: solid 5px #000;
     border-bottom: 0px;
     margin-top: -5px;
+    
+}
+.menuJogar li.ativo img {
+    filter: grayscale(0);
 }
 .menuJogar li:hover {
     cursor: pointer;
     color: #00a3b2;
 }
+.menuJogar li:hover img{
+    filter: grayscale(0);
+}
+
 
 .menuCups {
     list-style: none;
@@ -479,6 +491,21 @@ a:hover {
 
 /* HEADER */
 
+.menuPrincipalHeader {
+    list-style: none;    
+    margin-bottom: 0px;
+}
+.menuPrincipalHeader li {
+    display: inline-block;
+    color: #666;
+    padding: 5px 15px;
+    font-weight: bold;
+}
+.menuPrincipalHeader li.ativo, .menuPrincipalHeader li:hover {
+    background: #3c3c3c;
+    color: #fff;
+    cursor: pointer;
+}
 .menu-fixo {
     position: fixed;
     z-index: 1;
@@ -558,6 +585,7 @@ footer {
     color: #fff;
     padding: 10px 0px;
     margin-top: 150px;
+    float: left;
 }
 footer .logo {
     height: 50px;
@@ -1207,11 +1235,11 @@ footer a:hover {
     padding: 10px 15px;
     border: solid 2px #f60;
     background: none;
-    border-radius: 10px;
     font-weight: bold;
+    margin-top: 15px;
 }
 .infosCamp .statusCampeonato .botao input[type=button]:hover {
-    border: #00a3b2 solid 2px;
+    border: #000 solid 2px;
     cursor: pointer;
 }
 .painelPartida {

@@ -42,19 +42,19 @@
                     <div class="detalheTituloIndex"></div>                    
                 </div>
                 <div class="col-4 col-md-2 jogo">
-                    <a href="ptbr/jogar/dota2/"><img src="<?php echo $img; ?>index/dota2.png"></a>
+                    <a href="ptbr/jogar/campeonatos/dota2/"><img src="<?php echo $img; ?>index/dota2.png"></a>
                 </div>
                 <div class="col-4 col-md-2 jogo">
-                    <a href="ptbr/jogar/gwent/"><img src="<?php echo $img; ?>index/gwent.png" style="width: 100%;"></a>
+                    <a href="ptbr/jogar/campeonatos/gwent/"><img src="<?php echo $img; ?>index/gwent.png" style="width: 100%;"></a>
                 </div>
                 <div class="col-4 col-md-2 jogo">
-                    <a href="ptbr/jogar/hearthstone/"><img src="<?php echo $img; ?>index/hearthstone.png" style="width: 100%;"></a>
+                    <a href="ptbr/jogar/campeonatos/hearthstone/"><img src="<?php echo $img; ?>index/hearthstone.png" style="width: 100%;"></a>
                 </div>
                 <div class="col-4 col-md-2 jogo">
-                    <a href="ptbr/jogar/lol/"><img src="<?php echo $img; ?>index/lol.png" style="width: 100%;"></a>
+                    <a href="ptbr/jogar/campeonatos/lol/"><img src="<?php echo $img; ?>index/lol.png" style="width: 100%;"></a>
                 </div>
                 <div class="col-4 col-md-2 jogo">
-                    <a href="ptbr/jogar/overwatch/"><img src="<?php echo $img; ?>index/overwatch.png" style="width: 100%;"></a>
+                    <a href="ptbr/jogar/campeonatos/overwatch/"><img src="<?php echo $img; ?>index/overwatch.png" style="width: 100%;"></a>
                 </div>
                 <div class="col-4 col-md-2">
                     <img src="<?php echo $img; ?>index/clashroyale2.png" style="width: 100%;">
