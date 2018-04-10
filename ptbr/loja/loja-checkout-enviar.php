@@ -6,7 +6,7 @@
 	$valor = $_POST['valor'];
 	$data = date("Y-m-d");
 	$datahora = date("Y-m-d H:i:s");
-	$instrucao = $_POST['instrucao'];
+	
 
 	$verificarCupom = mysqli_query($conexao, "SELECT * FROM produto_cupom WHERE cod_produto = $produto AND cod_jogador = ".$usuario['codigo']." AND status = 0 ");
 	if(mysqli_num_rows($verificarCupom) != 0){
@@ -18,6 +18,6 @@
 	mysqli_query($conexao, "INSERT INTO pedido VALUES (NULL, ".$_SESSION['codigo'].", '$data', NULL, $endereco, $valor, $produto, NULL)");
 	$pedido = mysqli_insert_id($conexao);
 
-	if($_POST['instrucao'] != ""){
+	if(isset($_POST['instrucao'])){
 		mysqli_query($conexao, "UPDATE pedido SET instrucao = '".$_POST['instrucao']."' WHERE codigo = $pedido");
 	}

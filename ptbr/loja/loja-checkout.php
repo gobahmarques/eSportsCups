@@ -70,9 +70,7 @@
                             <div>
                             <?php
                                 if($produto['tipo_input'] != NULL){
-                                    echo "<input type='".$produto['tipo_input']."' placeholder='".$produto['instrucao']."' name='instrucoes' class='form-control' required><br>";
-                                }else{
-                                    echo "<input type='hidden' name='instrucoes' class='form-control' value=''><br>";
+                                    echo "<input type='".$produto['tipo_input']."' placeholder='".$produto['instrucao']."' name='instrucao' class='form-control instrucao' required><br>";
                                 }
                                 echo $endereco['cep']." - ".$endereco['endereco']." ".$endereco['complemento'].", ".$endereco['numero']."<br>";
                                 echo $endereco['cidade']." - ".$endereco['estado']." - ".$endereco['pais'];
@@ -98,7 +96,7 @@
                         ?>
                         </div>
                         <div class="col-12 col-md">
-                            <input type="button" value="CONCLUIR TROCA" onClick="efetuarTrocar();" class="btn btn-dark">	
+                            <button type="button" onClick="efetuarTroca();" class="btn btn-dark" id="botaoEfetuar">EFETUAR TROCA</button>	
                         </div>
                     </div>
                 </div>
@@ -114,19 +112,25 @@
         <script src="<?php echo $js; ?>jquery.js"></script>
         <script src="<?php echo $js; ?>bootstrap.js"></script>
         <script type="text/javascript">
-            function efetuarTrocar(){
-                $("#botaoEfetuar").html("<img src='<?php echo $img."loading.gif"; ?>'>");
-                jQuery.ajax({
-                    type: "POST",
-                    url: "ptbr/loja/loja-checkout-enviar.php",
-                    data: "produto=<?php echo $produto['codigo']; ?>&endereco=<?php echo $endereco['codigo']; ?>&valor=<?php echo $produto['valor']; ?>&instrucao="+$(".instrucao").val(),
-                    success: function(data){
-                        $(".modal-title").html("Troca Efetuada com sucesso!")
-                        $(".modal-body").html("<br><h1>TROCA EFETUADA</h1><div class='resumo'>Sua troca foi solicitada com sucesso. <br>Em até 30 dias você estará recebendo o produto em sua casa.<br><br> Obrigado por escolher a e-Sports Cups como sua organizadora de competições. <br> Ficamos felizes por estar presente em seus resultados.</div>");
-                        $(".modal").modal();
-                        window.location.href("ptbr/")
-                    }
-                });
+            function redirecionar(){
+                window.location.href = "ptbr/";
+            }
+            function efetuarTroca(){
+                $("#botaoEfetuar").html("<img src='<?php echo $img."icones/loading.gif"; ?>'>");
+                setTimeout(function(){
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "ptbr/loja/loja-checkout-enviar.php",
+                        data: "produto=<?php echo $produto['codigo']; ?>&endereco=<?php echo $endereco['codigo']; ?>&valor=<?php echo $produto['valor']; ?>&instrucao="+$(".instrucao").val(),
+                        success: function(data){
+                            $(".modal-title").html("Troca Efetuada com sucesso!")
+                            $(".modal-body").html("<br><h1>TROCA EFETUADA</h1><div class='resumo'>Sua troca foi solicitada com sucesso. <br>Em até 30 dias você estará recebendo o produto em sua casa.<br><br> Obrigado por escolher a e-Sports Cups como sua organizadora de competições. <br> Ficamos felizes por estar presente em seus resultados.</div>");
+                            $(".modal-footer").html("<input type='button' value='Entendi' class='btn btn-dark' onClick='redirecionar();'>")
+                            $(".modal").modal();
+                        }
+                    }); 
+                }, 2000);
+                               
             }   
         </script>
     </body>

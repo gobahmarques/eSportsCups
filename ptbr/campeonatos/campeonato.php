@@ -54,7 +54,16 @@
                     <div class="row">
                         <div class="col-12 col-md-12">
                             <h2>Etapas</h2>                        
-                            <?php echo $campeonato['descricao']; ?>	
+                            <?php
+                                $etapas = mysqli_query($conexao, "SELECT * FROM campeonato_etapa WHERE cod_campeonato = ".$campeonato['codigo']." ORDER BY cod_etapa");
+                                if(mysqli_num_rows($etapas) == 0){
+                                    echo "A serem definidas";
+                                }else{
+                                    while($etapa = mysqli_fetch_array($etapas)){
+                                        echo $etapa['cod_etapa'].". ".$etapa['nome']." | ";
+                                    }
+                                }
+                            ?>
                         </div>
                     </div>
                     <br>
@@ -62,6 +71,13 @@
                         <div class="col-12 col-md-12">
                             <h2>Fuso Horário</h2>                        
                             <?php echo $campeonato['fuso_horario']; ?>	
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <h2>Cronograma</h2>                        
+                            <?php echo $campeonato['cronograma']; ?>	
                         </div>
                     </div>
                     <br>

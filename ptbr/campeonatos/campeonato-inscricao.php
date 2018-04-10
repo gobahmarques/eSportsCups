@@ -98,7 +98,10 @@
                     }
                 }else if(valorReal > 0){
                     if(saldoReal < valorReal){ // NÃO POSSUI SALDO
-                        alert("Saldo em R$ insuficiente.");
+                        $(".modal-title").html("<h3>Saldo insuficiente</h3>");
+                        $(".modal-body").html("Para realizar esta inscrição, é necessário o saldo de R$ "+valorReal+" em sua carteira.<br>Para adicionar os fundos necessários, basta clicar no botão abaixo e seguir o procedimento apresentado.");
+                        $(".modal-footer").html("<a href='<?php echo "ptbr/usuario/".$usuario['codigo']."/carteira-real/adicionar-saldo/"; ?>'><input type='button' value='Adicionar Saldo' class='btn btn-dark'></a>");
+                        $(".modal").modal();
                         return false;
                     }else{ // POSSUI SALDO
                         var counter = $('.limitado:checked').length;

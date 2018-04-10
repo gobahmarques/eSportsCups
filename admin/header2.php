@@ -1,3 +1,16 @@
+<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title centralizar" id="exampleModalLabel">Modal title</h5>
+      </div>
+      <div class="modal-body centralizar">
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Main Header -->
   <header class="main-header">
 
@@ -200,7 +213,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-		  <li><a href="#"><i class="fa fa-link"></i> <span>Pedidos (em breve)</span></a></li>
+		  <li><a href="painel/pedidos/"><i class="fa fa-link"></i> <span>Pedidos (em breve)</span></a></li>
         <li><a href="painel/artigos/"><i class="fa fa-link"></i> <span>Artigos</span></a></li>
         <li><a href="painel/caixas/"><i class="fa fa-link"></i> <span>Caixas</span></a></li>
 		  <li><a href="painel/rifas/"><i class="fa fa-link"></i> <span>Rifas</span></a></li>
