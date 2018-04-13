@@ -9,7 +9,7 @@
 	if(isset($usuario['codigo'])){
 		$pesquisaFuncao = mysqli_query($conexao, "SELECT * FROM jogador_organizacao WHERE cod_organizacao = ".$organizacao['codigo']." AND cod_jogador = ".$usuario['codigo']." ");
 		$funcao = mysqli_fetch_array($pesquisaFuncao);	
-		if(!isset($funcao['status']) || $campeonato['status'] != 1){
+		if(!isset($funcao['status']) || $campeonato['status'] == 2){
 			header("Location: ../");	
 		}
 	}else{

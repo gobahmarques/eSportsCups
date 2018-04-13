@@ -85,6 +85,7 @@
         <script>
             jQuery(function($){
                 $(".premiados").addClass("ativo");
+                $(".menuPrincipalHeader .campeonatos").addClass("ativo");
             });
         </script>
     </body>

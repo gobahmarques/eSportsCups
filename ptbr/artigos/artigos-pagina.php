@@ -6,7 +6,7 @@
 	if($artigo['cod_jogo'] != NULL){
 		$jogo = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM jogos WHERE codigo = ".$artigo['cod_jogo']." "));	
 	}	
-	$autor = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM jogador WHERE codigo = ".$artigo['autor']." "));
+	$autor = @mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM jogador WHERE codigo = ".$artigo['autor']." "));
 
 	$ipLeitor = $_SERVER['REMOTE_ADDR'];
 	$pesquisaVisita = mysqli_query($conexao, "SELECT * FROM visitas WHERE ip = '$ipLeitor' AND pagina = 'ptbr/artigo/".$artigo['codigo']."/'");
@@ -28,6 +28,11 @@
     <link rel="stylesheet" href="<?php echo $css; ?>esportscups.css">
 
     <title><?php echo $artigo['nome']; if(isset($jogo)){ echo " - ".$jogo['nome']; }?> | e-Sports Cups</title>
+    <meta property="og:url"           content="https://www.esportscups.com.br/ptbr/artigo/<?php echo $artigo['codigo']; ?>/" />
+    <meta property="og:type"          content="article" />
+    <meta property="og:title"         content="<?php echo $artigo['nome']." | eSports Cups"; ?>" />
+    <meta property="og:description"   content="<?php echo $artigo['descricao']; ?>" />
+    <meta property="og:image"         content="https://www.esportscups.com.br/img/artigos/<?php echo $artigo['thumb']; ?>" />
   </head>
   <body>
     <?php include "../header.php"; ?>
@@ -58,6 +63,7 @@
         <div class="row">
             <div class="col-12 col-md-8">
                 <div class="row-fluid apresentacaoArtigo">
+                    <img src="http://www.esportscups.com.br/img/artigos/<?php echo $artigo['thumb']; ?>" alt="" width="100%"><br><br>
                     <?php echo $artigo['artigo']; ?>
                     
                     <div id="fb-root"></div>

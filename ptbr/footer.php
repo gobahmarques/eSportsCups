@@ -47,23 +47,14 @@
 
 
 <script>
-    function openNav() {
-        document.getElementById("sideBarJogos").style.width = "100%";
-    }
-
-    function closeNav() {
-        document.getElementById("sideBarJogos").style.width = "0";
+    function abrirPartidasPendentes(){
+        var hPartidasPendentes = $(".partidasPendentesUsuario").height() + 25;
+        $(".partidasPendentesUsuario").css("top", "0px");
+        $(".partidasPendentesUsuario").css("margin-bottom", "-"+hPartidasPendentes+"px");    
     }
     $(function(){ 
-        /*
-        var nav = $('#menuHeader');   
-        $(window).scroll(function () { 
-            if ($(this).scrollTop() > 150) { 
-                nav.addClass("menu-fixo"); 
-            } else { 
-                nav.removeClass("menu-fixo"); 
-            } 
-        });  
-        */
+        var hPartidasPendentes = $(".partidasPendentesUsuario").height() + 25;
+        $(".partidasPendentesUsuario").css("top", "-"+hPartidasPendentes+"px");
+        $(".partidasPendentesUsuario").css("margin-bottom", "-"+hPartidasPendentes+"px");
     });
 </script>

@@ -179,6 +179,7 @@
             });	
             jQuery(function($){
                 $(".inscricao").addClass("ativo");
+                $(".menuPrincipalHeader .campeonatos").addClass("ativo");
             });
         </script>
         

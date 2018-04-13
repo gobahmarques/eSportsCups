@@ -99,7 +99,7 @@ desired effect
 									<td><?php echo $produto['nome']; ?></td>
 									<td>
                                         <button type="button" class="btn" style="background: #00a3b2; color: #fff;" onclick="verPerdido(<?php echo $pedido['codigo']; ?>);"><i class="fas fa-eye"></i></button>
-                                        <button type="button" class="btn" style="background: #a9e34b;"><i class="fas fa-check"></i></button>
+                                        <button type="button" class="btn" style="background: #a9e34b;" onClick="finalizarPedido(<?php echo $pedido['codigo']; ?>);"><i class="fas fa-check"></i></button>
                                     </td>
 					  			</tr>
 					  		<?php
@@ -231,6 +231,19 @@ desired effect
             
             $(".modal-footer").html("Teste");
             $(".modal").modal();
+        }
+        function finalizarPedido(numPedido){
+            var r=confirm("Confirma que o pedido já está faturado?");
+            if(r == true){
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/pedidos.php",
+                    data: "funcao=1&numPedido="+numPedido,
+                    success: function(resultado){
+                        window.location.reload();
+                    }
+                });   
+            }
         }
     </script>
 

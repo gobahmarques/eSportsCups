@@ -15,8 +15,8 @@
 }
 
 * {
-	margin: 0px;
-	padding: 0px;
+    margin: 0px;
+    padding: 0px;
 	font-family: 'akrobatregular';
     border-radius: 0px;
 }
@@ -494,6 +494,9 @@ a:hover {
 .menuPrincipalHeader {
     list-style: none;    
     margin-bottom: 0px;
+    background: #fff;
+    position: relative;
+    z-index: 99;
 }
 .menuPrincipalHeader li {
     display: inline-block;
@@ -510,6 +513,23 @@ a:hover {
     position: fixed;
     z-index: 1;
 }
+
+.partidasPendentesUsuario {
+    padding: 10px 0px;
+    background: rgba(0,0,0,0.75);
+    width: 100%;
+    position: relative;
+    border-bottom: solid 3px #f60;
+}
+.partidasPendentesUsuario .partidaGrupo {
+    color: #fff;
+}
+.partidasPendentesUsuario .partidaGrupo:hover {
+    cursor: pointer;
+    border: solid 1px #333;
+    background: #666;
+}
+
 header {
     width: 100%;
     transition-property: all;
@@ -547,7 +567,7 @@ header .caixaUsuario .caixaTres i {
     margin-left: 10px;
 }
 header .caixaUsuario .caixaTres i:hover {
-    color: #f60;
+    color: #00a3b2;
     cursor: pointer;
 }
 header .caixaUsuario .caixaTres img {
@@ -568,13 +588,14 @@ header .saldosHeader {
 header .saldosHeader .saldo {
     display: inline-block;
     padding: 10px;
-    border: solid 1px #666;
+    border: solid 1px #555;
     margin: 5px;
     color: #fff;
+    background: #333;
 }
 header .saldosHeader .saldo:hover {
     cursor: pointer;
-    background: #626262;
+    background: #00a3b2;
 }
 
 /* FOOTER */
@@ -645,6 +666,9 @@ footer a:hover {
 }
 .apresentacaoArtigo {
     margin-top: 20px;
+}
+.apresentacaoArtigo ul {
+    margin-left: 30px;
 }
 .destaqueArtigo {
     height: 100px;
@@ -990,8 +1014,8 @@ footer a:hover {
     margin-top: -5px;
     border-top: solid 5px #f60;
 }
-.blocoTexto {
-    width: 100%;
+.textosCampeonato ul, .textosCampeonato ol{
+    margin-left: 30px;
 }
 .inscrito {
     font-weight: bold;

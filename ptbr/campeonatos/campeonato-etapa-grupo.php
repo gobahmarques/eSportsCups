@@ -60,6 +60,7 @@
         <script>
             jQuery(function($){
                 $(".tabelas").addClass("ativo");
+                $(".menuPrincipalHeader .campeonatos").addClass("ativo");
                 <?php
                     if($campeonato['precheckin'] != 0){
                         $dataFinal = date("Y-m-d H:i:s", strtotime("-".$campeonato['precheckin']."minutes", strtotime($campeonato['inicio'])));				

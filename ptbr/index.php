@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?php echo $css; ?>bootstrap.css">
     <link rel="stylesheet" href="<?php echo $css; ?>esportscups.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+    <link href="<?php echo $css; ?>simple-sidebar.css" rel="stylesheet">
 
     <title>Sua plataforma de eSports | e-Sports Cups</title>
   </head>
@@ -26,7 +27,7 @@
             ORDER BY inicio ASC
         ");
     ?>
-      
+    <div id="page-content-wrapper">
     <div class="container">
             <br>
             <div class="row">                
@@ -498,9 +499,15 @@
                     </div>
                 </div>
             </div>
-      </div>
+      </div>  
+    </div>
+    
       <?php include "footer.php"; ?>
       <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
 		jQuery(function($){				
 			$("#carousel2").carouFredSel();
 			// Using custom configuration

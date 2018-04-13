@@ -34,14 +34,14 @@
             <div class="row">
                 <div class="col-12 col-md-7">
                     <div class="row">
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12 textosCampeonato">
                             <h2>Descrição</h2>                        
                             <?php echo $campeonato['descricao']; ?>	
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12 textosCampeonato">
                             <h2>Regulamento</h2>                        
                             <?php echo $campeonato['regulamento']; ?>	
                         </div>	
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="row">
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12 textosCampeonato">
                             <h2>Etapas</h2>                        
                             <?php
                                 $etapas = mysqli_query($conexao, "SELECT * FROM campeonato_etapa WHERE cod_campeonato = ".$campeonato['codigo']." ORDER BY cod_etapa");
@@ -68,21 +68,21 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12 textosCampeonato">
                             <h2>Fuso Horário</h2>                        
                             <?php echo $campeonato['fuso_horario']; ?>	
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12 textosCampeonato">
                             <h2>Cronograma</h2>                        
                             <?php echo $campeonato['cronograma']; ?>	
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12 textosCampeonato">
                             <h2>Premiação</h2>                        
                             <?php echo $campeonato['premiacao']; ?>	
                         </div>
@@ -99,6 +99,7 @@
         <script>
             jQuery(function($){
                 $(".informacoes").addClass("ativo");
+                $(".menuPrincipalHeader .campeonatos").addClass("ativo");
             });
         </script>
     </body>

@@ -116,6 +116,21 @@
 <?php
 	if(!isset($lobby['codigo'])){
 		if(isset($usuario['codigo'])){
+            $pesquisaNotificacoes = mysqli_query($conexao, "
+                SELECT * FROM notificacao WHERE cod_jogador = ".$usuario['codigo']." AND status = 0
+            ");
+            $pesquisaAmizadesPendentes = mysqli_query($conexao, "
+                SELECT * FROM jogador_amizades
+                WHERE cod_jogador2 = ".$usuario['codigo']."
+                AND status = 0
+            ");
+            $pesquisaPartidasPendentes = mysqli_query($conexao, "
+                SELECT * FROM campeonato_etapa_semente
+                INNER JOIN campeonato_partida_semente ON campeonato_partida_semente.cod_semente = campeonato_etapa_semente.codigo
+                INNER JOIN campeonato_partida ON campeonato_partida.codigo = campeonato_partida_semente.cod_partida
+                WHERE campeonato_etapa_semente.cod_jogador = ".$usuario['codigo']."
+                AND campeonato_partida.status != 2
+            ");
 			$pesquisaLobby = mysqli_query($conexao, "
 					SELECT * FROM lobby_equipe_semente
 					INNER JOIN lobby_equipe ON lobby_equipe.codigo = lobby_equipe_semente.cod_equipe
@@ -124,7 +139,7 @@
 				");
 			if($lobby = mysqli_fetch_array($pesquisaLobby)){
 				header("Location: https://www.esportscups.com.br/ptbr/lobby/".$lobby['cod_lobby']."/");
-			}			
+			}		
 		}	
 	}	
 ?>
@@ -141,121 +156,153 @@
     </div>
   </div>
 </div>
+
+
 <header id="menuHeader">
     <ul class="menuPrincipalHeader">
-        <a href="ptbr/jogar/campeonatos/"><li class="campeonatos">Campeonatos</li></a>
-        <a href="ptbr/jogar/lobbys/"><li class="lobbys">Lobbys</li></a>
+        <div class="container">
+            <a href="ptbr/jogar/campeonatos/"><li class="campeonatos">Campeonatos</li></a>
+            <a href="ptbr/jogar/lobbys/"><li class="lobbys">Lobbys</li></a>
+        </div>        
     </ul>
     <nav class="navbar navbar-expand-lg navbar-dark bg-cinza">
-    <a class="navbar-brand" href="/ptbr/"><img src="<?php echo $img; ?>logo-beta.png" class="logoHeader" /></a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <div class="container">
+            <a class="navbar-brand" href="/ptbr/"><img src="<?php echo $img; ?>logo-beta.png" class="logoHeader" /></a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="navbar-collapse collapse mainMenu" id="navbarColor01" style="">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="ptbr/sobre/">Sobre Nós <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ptbr/artigos/">Artigos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ptbr/caixas/">Caixas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ptbr/loja/">Loja e$</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ptbr/rifas/">Rifas</a>
-            </li>
-        </ul>
-        <?php
-            if(isset($usuario['codigo'])){
-            ?>
-                <div class="col centralizar saldosHeader">
-                    <a href="ptbr/usuario/<?php echo $usuario['codigo']; ?>/carteira-escoin/">
-                        <div class="saldo">
-                            e$ <?php echo number_format($usuario['pontos'], 0, '', '.'); ?>
+            <div class="navbar-collapse collapse mainMenu" id="navbarColor01" style="">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="ptbr/sobre/">Sobre Nós <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ptbr/artigos/">Artigos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ptbr/caixas/">Caixas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ptbr/loja/">Loja e$</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ptbr/rifas/">Rifas</a>
+                    </li>
+                </ul>
+                <?php
+                    if(isset($usuario['codigo'])){
+                    ?>
+                        <div class="col centralizar saldosHeader">
+                            <a href="ptbr/usuario/<?php echo $usuario['codigo']; ?>/carteira-escoin/">
+                                <div class="saldo">
+                                    e$ <?php echo number_format($usuario['pontos'], 0, '', '.'); ?>
+                                </div>
+                            </a>
+                            <a href="ptbr/usuario/<?php echo $usuario['codigo']; ?>/carteira-real/">
+                                <div class="saldo">
+                                    R$ <?php echo number_format($usuario['saldo'], 2, ',', '.'); ?>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <a href="ptbr/usuario/<?php echo $usuario['codigo']; ?>/carteira-real/">
-                        <div class="saldo">
-                            R$ <?php echo number_format($usuario['saldo'], 2, ',', '.'); ?>
-                        </div>
-                    </a>
-                </div>
-            <?php
-            }
-        ?>
-        
-        <form class="form-inline">
-            <?php
-                if(isset($usuario['codigo'])){
+                    <?php
+                    }
                 ?>
-                    <div class="caixaUsuario">
-                        <div class="caixaTres">
-                        <?php
-                            $pesquisaNotificacoes = mysqli_query($conexao, "
-                                SELECT * FROM notificacao WHERE cod_jogador = ".$usuario['codigo']." AND status = 0
-                            ");
-                            if(mysqli_num_rows($pesquisaNotificacoes) > 0){
-                            ?>
-                                <i class="fas fa-flag" style="font-size:22px" onClick="abrirNotificacoes(<?php echo $usuario['codigo']; ?>);"></i>
-                            <?php
-                            }
-                    
-                            $pesquisaAmizadesPendentes = mysqli_query($conexao, "
-                                SELECT * FROM jogador_amizades
-                                WHERE cod_jogador2 = ".$usuario['codigo']."
-                                AND status = 0
-                            ");
-                            if(mysqli_num_rows($pesquisaAmizadesPendentes) > 0){
-                            ?>
-                                <i class="fas fa-users" style="font-size:22px"></i>
-                            <?php
-                            }
-                    
-                            $pesquisaPartidasPendentes = mysqli_query($conexao, "
-                                SELECT * FROM campeonato_etapa_semente
-                                INNER JOIN campeonato_partida_semente ON campeonato_partida_semente.cod_semente = campeonato_etapa_semente.codigo
-                                WHERE campeonato_etapa_semente.cod_jogador = ".$usuario['codigo']."
-                                AND campeonato_partida_semente.status = 0
-                            ");
-                            if(mysqli_num_rows($pesquisaPartidasPendentes) > 0){
-                            ?>
-                                <i class="fas fa-gamepad" style="font-size:22px"></i>
-                            <?php
-                            }
+
+                <form class="form-inline">
+                    <?php
+                        if(isset($usuario['codigo'])){
                         ?>
-                        </div>
-                        <div class="caixaUm">
-                            <?php echo $usuario['nome']." '".$usuario['nick']."' ".$usuario['sobrenome']; ?><br>
-                            <div class="link">
-                                <a href="ptbr/logout.php">Sair</a>
+                            <div class="caixaUsuario">
+                                <div class="caixaTres">
+                                <?php                                    
+                                    if(mysqli_num_rows($pesquisaNotificacoes) > 0){
+                                    ?>
+                                        <i class="fas fa-flag" style="font-size:22px" onClick="abrirNotificacoes(<?php echo $usuario['codigo']; ?>);"></i>
+                                    <?php
+                                    }
+
+                                    
+                                    if(mysqli_num_rows($pesquisaAmizadesPendentes) > 0){
+                                    ?>
+                                        <i class="fas fa-users" style="font-size:22px"></i>
+                                    <?php
+                                    }
+
+                                    
+                                    if(mysqli_num_rows($pesquisaPartidasPendentes) > 0){
+                                    ?>
+                                        <i onClick="abrirPartidasPendentes();" class="fas fa-gamepad" style="font-size:22px"></i>
+                                    <?php
+                                    }
+                                ?>
+                                </div>
+                                <div class="caixaUm">
+                                    <?php echo $usuario['nome']." '".$usuario['nick']."' ".$usuario['sobrenome']; ?><br>
+                                    <div class="link">
+                                        <a href="ptbr/logout.php">Sair</a>
+                                    </div>
+                                    <div class="link">
+                                        <a href="ptbr/usuario/<?php echo $usuario['codigo']; ?>/">Minha Conta</a>
+                                    </div>
+                                </div>
+                                <div class="caixaDois">
+                                    <img src="img/<?php echo $usuario['foto_perfil']; ?>" class="fotoPerfil">
+                                </div>  
+
                             </div>
-                            <div class="link">
-                                <a href="ptbr/usuario/<?php echo $usuario['codigo']; ?>/">Minha Conta</a>
-                            </div>
-                        </div>
-                        <div class="caixaDois">
-                            <img src="img/<?php echo $usuario['foto_perfil']; ?>" class="fotoPerfil">
-                        </div>  
-                        
-                    </div>
-                <?php
-                }else{
-                ?>
-                    <input type="button" class="btn btn-azul" value="Cadastro" onClick="cadastro();" />
-                    <input type="button" class="btn btn-laranja" value="Entrar" onClick="abrirLogin();" />   
-                <?php
-                }
-            ?>            
-        </form>
-    </div>
+                        <?php
+                        }else{
+                        ?>
+                            <input type="button" class="btn btn-azul" value="Cadastro" onClick="cadastro();" />
+                            <input type="button" class="btn btn-laranja" value="Entrar" onClick="abrirLogin();" />   
+                        <?php
+                        }
+                    ?>            
+                </form>
+            </div>
+        </div>
+        
     </nav>
 </header>
-
+<?php
+    if(isset($pesquisaPartidasPendentes) && mysqli_num_rows($pesquisaPartidasPendentes) > 0){
+    ?>
+        <div class="partidasPendentesUsuario">
+            <div class="container">
+                <div class="row justify-content-center">
+                <?php
+                    while($partidaPendente = mysqli_fetch_array($pesquisaPartidasPendentes)){
+                    ?>
+                        <div class="col-6 col-md-3">
+                            <a href="ptbr/campeonato/<?php echo $partidaPendente['cod_campeonato']; ?>/partida/<?php echo $partidaPendente['codigo']; ?>/">
+                                <div class="partidaGrupo">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            Jogador 01
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            0
+                                        </div>
+                                        <div class="col-8">
+                                            Jogador 02
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            0
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>                            
+                        </div>
+                    <?php
+                    }
+                ?>
+                </div>
+            </div>   
+        </div>
+    <?php
+    }
+?>
 
 
 

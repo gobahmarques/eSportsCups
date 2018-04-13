@@ -36,13 +36,21 @@
         <?php
     }
 
+    function confirmarPagamento($numPedido, $conexao){
+        $pedido = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM pedido WHERE codigo = $numPedido"));
+        mysqli_query($conexao, "UPDATE pedido SET data_entrega = '".date("Y-m-d")."' WHERE codigo = ".$pedido['codigo']."");
+    }
+
     if(isset($_POST['funcao'])){
         include "../conexao-banco.php";
         // 0 -> CARREGAR PEDIDO
-        
+        // 1 -> Confirmar Pagamento
         switch($_POST['funcao']){
             case 0:
                 carregarPedido($_POST['numPedido'], $conexao);
+                break;
+            case 1:
+                confirmarPagamento($_POST['numPedido'], $conexao);
                 break;
         }    
     }    

@@ -142,6 +142,7 @@
         <script>
             jQuery(function($){
                 $(".participantes").addClass("ativo");
+                $(".menuPrincipalHeader .campeonatos").addClass("ativo");
             });
         </script>
         
