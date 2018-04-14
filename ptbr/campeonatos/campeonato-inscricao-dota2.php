@@ -92,28 +92,34 @@
 				");
 				if(mysqli_num_rows($verificarInscricao) == 0){ // NÃO FEZ INSCRIÇÃO AINDA
 				?>
-					<div class="passo">
-						<h2>Selecione sua Equipe</h2>
-						<?php
-						if(mysqli_num_rows($equipes) == 0){ // NÃO É CAPITÃO DE NENHUMA EQUIPE
-							echo "Para realizar sua inscrição no campeonato, você precisa ser Capitão de alguma equipe de <br><strong>".$jogo['nome']."</strong><br>com no mínimo ".$campeonato['jogador_por_time']." integrantes";
-						}else{ // É CAPITÃO DE ALGUMA EQUIPE
-						?>
-							<br>
-							<select name="codEquipe" id="codEquipe" onChange="trocarEquipe(<?php echo $campeonato['jogador_por_time']; ?>);">
-								<option value="" hidden> - SELECIONE SUA EQUIPE - </option>
-								<?php
-									while($equipe = mysqli_fetch_array($equipes)){
-										echo "<option value='".$equipe['codigo']."'>".$equipe['tag']." - ".$equipe['nome']."</option>";
-									}
-								?>
-							</select><br><br>
-						<?php
-						}
-						?>
-					</div>
-					<div class="passo passo2">
-					</div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="passo">
+                                <h2>Selecione sua Equipe</h2>
+                                <?php
+                                if(mysqli_num_rows($equipes) == 0){ // NÃO É CAPITÃO DE NENHUMA EQUIPE
+                                    echo "Para realizar sua inscrição no campeonato, você precisa ser Capitão de alguma equipe de <br><strong>".$jogo['nome']."</strong><br>com no mínimo ".$campeonato['jogador_por_time']." integrantes";
+                                }else{ // É CAPITÃO DE ALGUMA EQUIPE
+                                ?>
+                                    <br>
+                                    <select name="codEquipe" id="codEquipe" onChange="trocarEquipe(<?php echo $campeonato['jogador_por_time']; ?>);" class="form-control">
+                                        <option value="" hidden> - SELECIONE SUA EQUIPE - </option>
+                                        <?php
+                                            while($equipe = mysqli_fetch_array($equipes)){
+                                                echo "<option value='".$equipe['codigo']."'>".$equipe['tag']." - ".$equipe['nome']."</option>";
+                                            }
+                                        ?>
+                                    </select><br><br>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="passo passo2">
+					       </div>
+                        </div>
+                    </div>				
 				<?php	
 				}else{ // JÁ FEZ INSCRIÇÃO
 					$equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$inscricao['cod_equipe'].""));
@@ -123,49 +129,57 @@
 						WHERE campeonato_lineup.cod_equipe = ".$equipe['codigo']." AND campeonato_lineup.cod_campeonato = ".$campeonato['codigo']."
 					");
 					?>
-					<div class="passo centralizar">
-						<h2>Equipe Inscrita</h2>
-						<img src="<?php echo $equipe['logo']; ?>" alt="" class="logo"><br><br>
-						<?php echo "<h1>".$equipe['nome']."</h1>"; ?>
-					</div>
-					<div class="passo passo3">
-						<h2>Formação</h2>
-						<?php
-							while($integrante = mysqli_fetch_array($lineup)){
-							?>
-								<div class="jogador">						
-									<img src="<?php echo "http://www.esportscups.com.br/img/".$integrante['foto_perfil']; ?>" >
-									<?php echo $integrante['nome']." '<strong>".$integrante['nick']."</strong>' ".$integrante['sobrenome']; ?>
-								</div>
-							<?php
-							}
-						?>
-					</div>
-					<div class="passo">
-						<h2>Status Inscrição</h2>
-						<?php
-							if($inscricao['status'] == 0){ // EM ANALISE
-								echo "<img src='http://www.esportscups.com.br/img/icones/pendente.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
-								if($campeonato['precheckin'] > 0){
-									echo "Está tudo OK com sua inscrição até o momento. Para confirmá-la basta realizar o <strong>PRÉ CHECK-IN</strong> que inicia ".$campeonato['precheckin']." minutos antes do início da competição. Bons jogos.";
-								}else{								
-									echo "Sua inscrição está sendo analisada pela organização do torneio e em breve você terá uma resposta.";	
-								}	
-							}elseif($inscricao['status'] == 1){ // APROVADA
-								echo "<img src='http://www.esportscups.com.br/img/icones/aprovada.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
-								echo "Sua inscrição está <strong>CONFIRMADA.</strong><br>Nos vemos dia ".date("d/m/Y - H:i", strtotime($campeonato['inicio']));
-							}else{ // RECUSADA
-								echo "<img src='http://www.esportscups.com.br/img/icones/recusada.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
-								echo "Sua inscrição foi recusada pela organização. <br> Para esclarecimentos, entre em contato direto através do e-mail: <strong>".$organizacao['email']."</strong>";
-							}
-						?>
-					</div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="passoInscricao">
+                                <h3>Equipe Inscrita</h3>
+                                <img src="<?php echo $equipe['logo']; ?>" alt="" class="logo"><br><br>
+                                <?php echo "<h1>".$equipe['nome']."</h1>"; ?>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="passoInscricao passo3">
+                                <h3>Formação</h3>
+                                <?php
+                                    while($integrante = mysqli_fetch_array($lineup)){
+                                    ?>
+                                        <div class="jogador">						
+                                            <img src="<?php echo "http://www.esportscups.com.br/img/".$integrante['foto_perfil']; ?>" height="30px" width="30px" >
+                                            <?php echo $integrante['nome']." '<strong>".$integrante['nick']."</strong>' ".$integrante['sobrenome']; ?>
+                                        </div>
+                                    <?php
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="passoInscricao">
+                                <h2>Status Inscrição</h2>
+                                <?php
+                                    if($inscricao['status'] == 0){ // EM ANALISE
+                                        echo "<img src='http://www.esportscups.com.br/img/icones/pendente.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
+                                        if($campeonato['precheckin'] > 0){
+                                            echo "Está tudo OK com sua inscrição até o momento. Para confirmá-la basta realizar o <strong>PRÉ CHECK-IN</strong> que inicia ".$campeonato['precheckin']." minutos antes do início da competição. Bons jogos.";
+                                        }else{								
+                                            echo "Sua inscrição está sendo analisada pela organização do torneio e em breve você terá uma resposta.";	
+                                        }	
+                                    }elseif($inscricao['status'] == 1){ // APROVADA
+                                        echo "<img src='http://www.esportscups.com.br/img/icones/aprovada.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
+                                        echo "Sua inscrição está <strong>CONFIRMADA.</strong><br>Nos vemos dia ".date("d/m/Y - H:i", strtotime($campeonato['inicio']));
+                                    }else{ // RECUSADA
+                                        echo "<img src='http://www.esportscups.com.br/img/icones/recusada.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
+                                        echo "Sua inscrição foi recusada pela organização. <br> Para esclarecimentos, entre em contato direto através do e-mail: <strong>".$organizacao['email']."</strong>";
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
 					<?php
 				}
 			}
 		}else{
 			if(mysqli_num_rows($verificarInscricao) != 0){ // JÁ REALIZOU INSCRIÇÃO
-				if($campeonato['jogador_por_time'] == 1){
+				if($campeonato['jogador_por_time'] == 1){ // INSCRIÇÃO SOLO
 				?>
 					<div class="passo">
 						<h2>Sua Conta</h2>
@@ -196,7 +210,7 @@
 						?>
 					</div>
 				<?php	
-				}else{
+				}else{ // INSCRIÇÃO EQUIPE
 					$equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$inscricao['cod_equipe'].""));
 					$lineup = mysqli_query($conexao, "
 						SELECT * FROM campeonato_lineup
@@ -204,43 +218,54 @@
 						WHERE campeonato_lineup.cod_equipe = ".$equipe['codigo']." AND campeonato_lineup.cod_campeonato = ".$campeonato['codigo']."
 					");
 					?>
-					<div class="passo centralizar">
-						<h2>Equipe Inscrita</h2>
-						<img src="<?php echo $equipe['logo']; ?>" alt="" class="logo"><br><br>
-						<?php echo "<h1>".$equipe['nome']."</h1>"; ?>
-					</div>
-					<div class="passo passo3">
-						<h2>Formação</h2>
-						<?php
-							while($integrante = mysqli_fetch_array($lineup)){
-							?>
-								<div class="jogador">						
-									<img src="<?php echo "http://www.esportscups.com.br/img/".$integrante['foto_perfil']; ?>" >
-									<?php echo $integrante['nome']." '<strong>".$integrante['nick']."</strong>' ".$integrante['sobrenome']; ?>
-								</div>
-							<?php
-							}
-						?>
-					</div>
-					<div class="passo">
-						<h2>Status Inscrição</h2>
-						<?php
-							if($inscricao['status'] == 0){ // EM ANALISE
-								echo "<img src='http://www.esportscups.com.br/img/icones/pendente.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
-								if($campeonato['precheckin'] > 0){
-									echo "Está tudo OK com sua inscrição até o momento. Para confirmá-la basta realizar o <strong>PRÉ CHECK-IN</strong> que inicia ".$campeonato['precheckin']." minutos antes do início da competição. Bons jogos.";
-								}else{								
-									echo "Sua inscrição está sendo analisada pela organização do torneio e em breve você terá uma resposta.";	
-								}	
-							}elseif($inscricao['status'] == 1){ // APROVADA
-								echo "<img src='http://www.esportscups.com.br/img/icones/aprovada.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
-								echo "Sua inscrição está <strong>CONFIRMADA.</strong><br>Nos vemos dia ".date("d/m/Y - H:i", strtotime($campeonato['inicio']));
-							}else{ // RECUSADA
-								echo "<img src='http://www.esportscups.com.br/img/icones/recusada.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
-								echo "Sua inscrição foi recusada pela organização. <br> Para esclarecimentos, entre em contato direto através do e-mail: <strong>".$organizacao['email']."</strong>";
-							}
-						?>
-					</div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="passo centralizar">
+                                <h2>Equipe Inscrita</h2>
+                                <img src="<?php echo $equipe['logo']; ?>" alt="" class="logo"><br><br>
+                                <?php echo "<h1>".$equipe['nome']."</h1>"; ?>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="passo passo3">
+                                <h2>Formação</h2>
+                                <?php
+                                    while($integrante = mysqli_fetch_array($lineup)){
+                                    ?>
+                                        <div class="jogador">						
+                                            <img src="<?php echo "http://www.esportscups.com.br/img/".$integrante['foto_perfil']; ?>" height="30px;" >
+                                            <?php echo $integrante['nome']." '<strong>".$integrante['nick']."</strong>' ".$integrante['sobrenome']; ?>
+                                        </div>
+                                    <?php
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="passo">
+                                <h2>Status Inscrição</h2>
+                                <?php
+                                    if($inscricao['status'] == 0){ // EM ANALISE
+                                        echo "<img src='http://www.esportscups.com.br/img/icones/pendente.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
+                                        if($campeonato['precheckin'] > 0){
+                                            echo "Está tudo OK com sua inscrição até o momento. Para confirmá-la basta realizar o <strong>PRÉ CHECK-IN</strong> que inicia ".$campeonato['precheckin']." minutos antes do início da competição. Bons jogos.";
+                                        }else{								
+                                            echo "Sua inscrição está sendo analisada pela organização do torneio e em breve você terá uma resposta.";	
+                                        }	
+                                    }elseif($inscricao['status'] == 1){ // APROVADA
+                                        echo "<img src='http://www.esportscups.com.br/img/icones/aprovada.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
+                                        echo "Sua inscrição está <strong>CONFIRMADA.</strong><br>Nos vemos dia ".date("d/m/Y - H:i", strtotime($campeonato['inicio']));
+                                    }else{ // RECUSADA
+                                        echo "<img src='http://www.esportscups.com.br/img/icones/recusada.png' alt='Inscrição em Análise' title='Inscrição em Análise'><br><br>";
+                                        echo "Sua inscrição foi recusada pela organização. <br> Para esclarecimentos, entre em contato direto através do e-mail: <strong>".$organizacao['email']."</strong>";
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+					
+					
+					
 				<?php	
 				}
 				

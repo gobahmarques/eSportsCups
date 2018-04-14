@@ -30,7 +30,7 @@
             <br>
             <?php
                 if($equipe['logo'] != NULL){
-                    echo "<img class='logoEquipe' src='http://www.esportscups.com.br/img/".$equipe['logo']."' title='".$equipe['nome']."' alt='".$equipe['nome']."'><br><br>";
+                    echo "<img class='logoEquipe' src='img/".$equipe['logo']."' title='".$equipe['nome']."' alt='".$equipe['nome']."'><br><br>";
                 }else{
                     echo "<h1>".$equipe['nome']."</h1>";
                 }

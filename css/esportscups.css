@@ -1647,6 +1647,7 @@ footer a:hover {
 }
 .integrantes li img.fotoIntegrante {
 	height: 140px;
+    width: 140px;
 	margin-bottom: 10px;
 	border: solid 5px #727272;
 }

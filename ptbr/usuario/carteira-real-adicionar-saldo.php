@@ -40,7 +40,7 @@
             </ul>
             <div class="row-fluid">
                 <div class="resumoCarteira">
-                    <h1><?php echo mysqli_num_rows($pesqEndereco); ?>Adicionar saldo à sua Carteira eSC</h1>
+                    <h1>Adicionar saldo à sua Carteira eSC</h1>
                     O saldo de sua Carteira eSC poderá ser utilizado na compra de chaves para caixas e inscrições em campeonatos pagos (por enquanto). <br><br>
                     Você ainda terá a oportunidade de revisar o seu pedido antes que ele seja finalizado. <br><br>
                     <div class="row">

@@ -107,9 +107,19 @@
                     <?php
                     }
                     if($campeonato['precheckin'] == 0){
-                        echo "<h2 class='titulo'>Aguardando Confirmação</h2>";
+                    ?>
+                        <div class="col-12 col-md-12">
+                            <h2 class="tituloIndex">Aguardando <strong>Confirmação</strong></h2>
+                            <div class="detalheTituloIndex"></div>
+                        </div>
+                    <?php
                     }else{
-                        echo "<h2 class='titulo'>Check-in Pendente</h2>";
+                    ?>
+                        <div class="col-12 col-md-12">
+                            <h2 class="tituloIndex">Check-in <strong>Pendente</strong></h2>
+                            <div class="detalheTituloIndex"></div>
+                        </div>
+                    <?php
                     }
                     $pesquisaInscricoes = mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND status = 0 AND cod_equipe is not null");
                     while($inscricao = mysqli_fetch_array($pesquisaInscricoes)){ // LOOP PARA MOSTRAR TODAS AS INSCRIÇÕES
@@ -118,7 +128,7 @@
                         <div class="col-6 col-md-3">
                             <div class="row-fluid inscrito no-gutters">
                                 <div class="col-4 col-md-4 float-left">
-                                    <img src="http://www.esportscups.com.br/img/<?php echo $equipe['logo'];  ?>" alt="">
+                                    <a href="ptbr/campeonato/<?php echo $campeonato['codigo']; ?>/lineup/<?php echo $inscricao['cod_equipe']; ?>/"><img src="http://www.esportscups.com.br/img/<?php echo $equipe['logo'];  ?>" alt=""></a>
                                 </div>
                                 <div class="col-8 col-md-8 float-left">
                                     <?php echo $equipe['nome']; ?><br>

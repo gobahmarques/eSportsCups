@@ -155,6 +155,35 @@
 
 
             }
+            function validar2(){
+                var counter = $('.limitado2:checked').length;
+                switch("<?php echo $jogo['abreviacao']; ?>"){
+                    case "Hearthstone":
+                        if(counter < 1){
+                            alert("É obrigatório selecionar 1 herói para banir!");
+                            return false;
+                        }else{
+                            return true;
+                        }
+                        break;
+                    default:
+                        return true;
+                }
+            }
+            function validar3(){
+                var limit = <?php echo $campeonato['jogador_por_time']; ?>;
+                var counter = $('.limitado3:checked').length;
+                if(counter < limit) {
+                    this.checked = false;
+                    alert('É necessário selecionar '+limit+' jogadores para competir');
+                    return false;
+                }
+                if(validar() == true){
+                    return true;    
+                }else{
+                    return false;
+                }                
+            }
             function mudarDraftHs(){
                 $(".draft").load("ptbr/campeonatos/draft-hearthstone.php");
                 setTimeout(function(){
@@ -169,6 +198,18 @@
                     $("#codCampeonato").val(<?php echo $campeonato['codigo']; ?>);
                 }, 300)
             }
+            function trocarEquipe(vagas){
+                var codEquipe = $("#codEquipe").val();
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/carregar-membros-inscricao.php",
+                    data: "equipe="+codEquipe+"&vagas="+vagas+"&campeonato=<?php echo $campeonato['codigo']; ?>",
+                    success: function(resposta){
+                        $(".passo2").html(resposta);
+                        $(".passo2").css("display", "block");
+                    }
+                })
+            }
             $(document).on('click', '.limitado', function(){		
                 var limit = <?php echo $campeonato['qtd_pick']; ?>;
                 var counter = $('.limitado:checked').length;
@@ -177,6 +218,22 @@
                     alert('Só é permito selecionar '+limit+'!');
                 }
             });	
+            $(document).on('click', '.limitado2', function(){
+                var limit = 1;
+                var counter = $('.limitado2:checked').length;
+                if(counter > limit) {
+                    this.checked = false;
+                    alert('Só é permito selecionar 1 herói para banir!');
+                }
+            });
+            $(document).on('click', '.limitado3', function(){
+                var limit = <?php echo $campeonato['jogador_por_time']; ?>;
+                var counter = $('.limitado3:checked').length;
+                if(counter > limit) {
+                    this.checked = false;
+                    alert('Só é possível selecionar '+limit+' jogadores');
+                }
+            });
             jQuery(function($){
                 $(".inscricao").addClass("ativo");
                 $(".menuPrincipalHeader .campeonatos").addClass("ativo");

@@ -6,7 +6,7 @@
 		$nomeEquipe = mysqli_query($conexao, "SELECT nome FROM equipe WHERE codigo = $equipe");
 		$jogador = $_POST['jogador'];
 		$campeonato = $_POST['codCampeonato'];
-		$nomeCamp = mysqli_fetch_array(mysqli_query($conexao, "SELECT nome FROM campeonato WHERE codigo = $campeonato"));
+		$nomeCamp = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato WHERE codigo = $campeonato"));
 		$aux = 0;
 		$msg = "Você foi convocado para jogar o torneio <strong>".$nomeCamp['nome']."</strong> junto com a equipe <strong>".$infosEquipe['nome']."</strong>.";
 		while($aux < $_POST['vagas']){
@@ -16,6 +16,13 @@
 		}
 		mysqli_query($conexao, "UPDATE campeonato_lineup SET capitao = 1 WHERE cod_campeonato = $campeonato AND cod_jogador = ".$usuario['codigo']."");
 		mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$campeonato.", ".$usuario['codigo'].", $equipe, '".date("Y-m-d H:i:s")."', NULL, 0, NULL)");
+        if($nomeCamp['valor_escoin'] > 0){
+            mysqli_query($conexao, "UPDATE jogador SET pontos = pontos - ".$nomeCamp['valor_coin']." WHERE codigo = ".$usuario['codigo']." ");
+            mysqli_query($conexao, "INSERT INTO log_coin VALUES (NULL, ".$usuario['codigo'].", ".$nomeCamp['valor_coin'].", 'Inscrição no torneio ".$nomeCamp['nome']."', 0, '".date("Y-m-d H:i:s")."')");
+        }else if($nomeCamp['valor_real'] > 0){
+            mysqli_query($conexao, "UPDATE jogador SET saldo = saldo - ".$nomeCamp['valor_real']." WHERE codigo = ".$usuario['codigo']." ");
+            mysqli_query($conexao, "INSERT INTO log_real VALUES (NULL, ".$usuario['codigo'].", ".$nomeCamp['valor_real'].", 'Inscrição no torneio ".$nomeCamp['nome']."', 0, '".date("Y-m-d H:i:s")."')");
+        }
 		header("Location: ../campeonato/$campeonato/inscricao/");
 	}else{
 		include "../conexao-banco.php";
@@ -38,14 +45,14 @@
 					while($membro = mysqli_fetch_array($membros)){
 					?>
 						<div class="jogador">						
-							<img src="<?php echo "../img/".$membro['foto_perfil']; ?>" >
+							<img src="<?php echo "../img/".$membro['foto_perfil']; ?>" height="30px" >
 							<?php echo $membro['nome']." '<strong>".$membro['nick']."</strong>' ".$membro['sobrenome']; ?>
 							<input type="checkbox" name="jogador[]" class="limitado3" value="<?php echo $membro['codigo']; ?>">
 						</div>
 					<?php
 					}
 				?>
-					<br><br><input type="submit" value="REALIZAR INSCRIÇÃO" class="botaoPqLaranja">		
+					<br><br><input type="submit" value="REALIZAR INSCRIÇÃO" class="btn btn-dark">		
 				</form>
 			<?php
 		}

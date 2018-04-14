@@ -60,7 +60,7 @@
                         <div class="col-12 col-md-3">
                             
                                 <div class="amigo">
-                                    <a href="ptbr/time/<?php echo $equipe['codigo']; ?>/"><img src="http://www.esportscups.com.br/img/<?php echo $equipe['logo']; ?>" alt=""></a>
+                                    <a href="ptbr/time/<?php echo $equipe['codigo']; ?>/"><img src="img/<?php echo $equipe['logo']; ?>" alt=""></a>
                                     <?php echo "<hmysq4>".$equipe['nome']."</h4>"; ?>
                                     <?php echo $equipe['nomeJogo']; ?>
                                 </div>

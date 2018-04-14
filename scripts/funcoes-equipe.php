@@ -110,17 +110,17 @@
 						// Evita nomes com acentos, espaços e caracteres não alfanuméricos
 						$novoNome = 'logo.'.$extensao;
 						// Concatena a pasta com o nome
-						$destino = '../../img/equipes/'.$_POST['equipe']."/".$novoNome;
-						if(file_exists("../../img/equipes/".$_POST['equipe']."/")){
+						$destino = '../img/equipes/'.$_POST['equipe']."/".$novoNome;
+						if(file_exists("../img/equipes/".$_POST['equipe']."/")){
 							@move_uploaded_file ($arquivo_tmp, $destino);
 						}else{
-							mkdir("../../img/equipes/".$_POST['equipe']."/");
+							mkdir("../img/equipes/".$_POST['equipe']."/");
 							@move_uploaded_file($arquivo_tmp, $destino);
 						}
 						mysqli_query($conexao, "UPDATE equipe SET logo = '../img/equipes/".$_POST['equipe']."/$novoNome' WHERE codigo = ".$_POST['equipe']."");
 					}
 				}
-				header("Location: ../ptbr/time/".$_POST['equipe']."/");
+				// header("Location: ../ptbr/time/".$_POST['equipe']."/");
 				break;
 		}
 	}
