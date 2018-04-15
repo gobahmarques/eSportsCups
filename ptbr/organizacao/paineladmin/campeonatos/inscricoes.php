@@ -121,13 +121,13 @@
                                             <?php
                                                 switch($inscricao['status']){
                                                     case 0:
-                                                        echo "<img src='http://www.esportscups.com.br/img/loading.gif' alt='Pendente' title='Pendente'>";
+                                                        echo "<img src='img/icones/loading.gif' alt='Pendente' title='Pendente'>";
                                                         break;
                                                     case 1:
-                                                        echo "<img src='http://www.esportscups.com.br/img/icones/aprovar.png' alt='Aprovado' title='Aprovado'>";
+                                                        echo "<img src='img/icones/aprovar.png' alt='Aprovado' title='Aprovado'>";
                                                         break;
                                                     case 2:
-                                                        echo "<img src='http://www.esportscups.com.br/img/icones/recusar.png' alt='Recusado' title='Recusado'>";
+                                                        echo "<img src='img/icones/recusar.png' alt='Recusado' title='Recusado'>";
                                                         break;
                                                 }
                                             ?>
@@ -152,14 +152,8 @@
                                                     <a href="<?php echo "ptbr/organizacao/".$organizacao['codigo']."/painel/campeonato/".$campeonato['codigo']."/inscricoes/".$inscricao['cod_jogador']."/1/"; ?>"><img src="http://www.esportscups.com.br/img/icones/aprovar.png" alt="Aprovar" title="Aprovar"></a>
                                                     <a href="<?php echo "ptbr/organizacao/".$organizacao['codigo']."/painel/campeonato/".$campeonato['codigo']."/inscricoes/".$inscricao['cod_jogador']."/2/"; ?>"><img src="http://www.esportscups.com.br/img/icones/recusar.png" alt="Recusar" title="Recusar"></a>
                                                 <?php
-                                                }elseif($inscricao['status'] == 1){ // ACEITA
+                                                }elseif($inscricao['status'] == 2){ // RECUSADA                                                
                                                 ?>
-                                                    <a href="<?php echo "ptbr/organizacao/".$organizacao['codigo']."/painel/campeonato/".$campeonato['codigo']."/inscricoes/".$inscricao['cod_jogador']."/2/"; ?>"><img src="http://www.esportscups.com.br/img/icones/recusar.png" alt="Recusar" title="Recusar"></a>
-                                                    <a href="<?php echo "ptbr/organizacao/".$organizacao['codigo']."/painel/campeonato/".$campeonato['codigo']."/inscricoes/".$inscricao['cod_jogador']."/3/"; ?>"><img src="http://www.esportscups.com.br/img/icones/excluir.png" alt="Excluir" title="Excluir"></a>
-                                                <?php	
-                                                }else{ // RECUSADA
-                                                ?>
-                                                    <a href="<?php echo "ptbr/organizacao/".$organizacao['codigo']."/painel/campeonato/".$campeonato['codigo']."/inscricoes/".$inscricao['cod_jogador']."/1/"; ?>"><img src="http://www.esportscups.com.br/img/icones/aprovar.png" alt="Aprovar" title="Aprovar"></a>
                                                     <a href="<?php echo "ptbr/organizacao/".$organizacao['codigo']."/painel/campeonato/".$campeonato['codigo']."/inscricoes/".$inscricao['cod_jogador']."/3/"; ?>"><img src="http://www.esportscups.com.br/img/icones/excluir.png" alt="Excluir" title="Excluir"></a>
                                                 <?php	
                                                 }

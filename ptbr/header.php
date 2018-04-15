@@ -113,35 +113,36 @@
         $(".modal").modal();
 	}   
 </script>
-<?php
-	if(!isset($lobby['codigo'])){
-		if(isset($usuario['codigo'])){
-            $pesquisaNotificacoes = mysqli_query($conexao, "
-                SELECT * FROM notificacao WHERE cod_jogador = ".$usuario['codigo']." AND status = 0
-            ");
-            $pesquisaAmizadesPendentes = mysqli_query($conexao, "
-                SELECT * FROM jogador_amizades
-                WHERE cod_jogador2 = ".$usuario['codigo']."
-                AND status = 0
-            ");
-            $pesquisaPartidasPendentes = mysqli_query($conexao, "
-                SELECT * FROM campeonato_etapa_semente
-                INNER JOIN campeonato_partida_semente ON campeonato_partida_semente.cod_semente = campeonato_etapa_semente.codigo
-                INNER JOIN campeonato_partida ON campeonato_partida.codigo = campeonato_partida_semente.cod_partida
-                WHERE campeonato_etapa_semente.cod_jogador = ".$usuario['codigo']."
-                AND campeonato_partida.status != 2
-            ");
-			$pesquisaLobby = mysqli_query($conexao, "
-					SELECT * FROM lobby_equipe_semente
-					INNER JOIN lobby_equipe ON lobby_equipe.codigo = lobby_equipe_semente.cod_equipe
-					WHERE lobby_equipe_semente.cod_jogador = ".$usuario['codigo']."
-					AND lobby_equipe.posicao = 0
-				");
-			if($lobby = mysqli_fetch_array($pesquisaLobby)){
-				header("Location: https://www.esportscups.com.br/ptbr/lobby/".$lobby['cod_lobby']."/");
-			}		
-		}	
-	}	
+<?php    	
+    if(isset($usuario['codigo'])){
+        $pesquisaNotificacoes = mysqli_query($conexao, "
+            SELECT * FROM notificacao WHERE cod_jogador = ".$usuario['codigo']." AND status = 0
+        ");
+        $pesquisaAmizadesPendentes = mysqli_query($conexao, "
+            SELECT * FROM jogador_amizades
+            WHERE cod_jogador2 = ".$usuario['codigo']."
+            AND status = 0
+        ");
+        $pesquisaPartidasPendentes = mysqli_query($conexao, "
+            SELECT * FROM campeonato_etapa_semente
+            INNER JOIN campeonato_partida_semente ON campeonato_partida_semente.cod_semente = campeonato_etapa_semente.codigo
+            INNER JOIN campeonato_partida ON campeonato_partida.codigo = campeonato_partida_semente.cod_partida
+            WHERE campeonato_etapa_semente.cod_jogador = ".$usuario['codigo']."
+            AND campeonato_partida.status != 2
+        ");		
+        $pesquisaLobbyPendente = mysqli_query($conexao, "
+            SELECT * FROM lobby_equipe_semente
+            INNER JOIN lobby_equipe ON lobby_equipe.codigo = lobby_equipe_semente.cod_equipe
+            WHERE lobby_equipe_semente.cod_jogador = ".$usuario['codigo']."
+            AND lobby_equipe.posicao = 0
+        ");
+        if($lobbyPendente = mysqli_fetch_array($pesquisaLobbyPendente)){
+        ?>
+
+        <?php
+            // header("Location: lobby/".$lobbyPendente['cod_lobby']."/");
+        }
+    }
 ?>
 <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog" role="document">

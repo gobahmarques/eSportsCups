@@ -152,12 +152,12 @@
                         <div class="texto">				
                             <?php
                                 if($lobby['status'] == 0){
-                                    echo "<img src='https://www.esportscups.com.br/img/loading.gif' title='Aguardando Jogadores' alt='Aguardando...' /><br><p>Aguardando Jogadores...</p>";
+                                    echo "<img src='img/icones/loading.gif' title='Aguardando Jogadores' alt='Aguardando...' /><br><p>Aguardando Jogadores...</p>";
                                 }elseif($lobby['status'] == 1){
-                                    echo "<img src='https://www.esportscups.com.br/img/loading.gif' title='Em Andamento...' alt='Em Andamento...' /><br>
+                                    echo "<img src='img/icones/loading.gif' title='Em Andamento...' alt='Em Andamento...' /><br>
                                     <p>Em Andamento</p>";
                                 }elseif($lobby['status'] == 2){
-                                    echo "<img src='https://www.esportscups.com.br/img/icones/aprovar.png' title='Lobby Finalizado' alt='Lobby Finalizado' /><br>
+                                    echo "<img src='img/icones/aprovar.png' title='Lobby Finalizado' alt='Lobby Finalizado' /><br>
                                     <h2>Concluído</h2>";
                                 }
                             ?>
@@ -349,7 +349,6 @@
                     url: "scripts/funcoes-lobby.php",
                     data: "funcao=4&semente="+semente+"&codlobby="+codLobby,
                     success: function(resultado){
-                        alert(resultado);
                         location.reload();
                     }
                 });
@@ -556,6 +555,8 @@
                 $("#screenshot").change(function(){
                     $("#labelss").html($("#screenshot").val());
                 });
+                $(".menuPrincipalHeader li").removeClass("ativo");
+                $(".menuPrincipalHeader .lobbys").addClass("ativo");
             });	
         </script>
     </body>

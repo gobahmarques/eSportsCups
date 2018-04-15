@@ -33,6 +33,12 @@
                 mysqli_query($conexao, "INSERT INTO log_real VALUES (NULL, $jogador, ".$campeonato['valor_real'].", 'Devolução de inscrição campeonato: <strong>".$campeonato['nome']."</strong>', 1, '$datahora')");
             }
             break;
+        case 3:
+            $inscricao = mysqli_fetch_array(mysqli_query($conexao, " SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = $jogador"));
+            if($inscricao['cod_equipe'] != NULL){
+                mysqli_query($conexao, "DELETE FROM campeonato_lineup WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_equipe = ".$inscricao['cod_equipe']." ");
+            }
+            mysqli_query($conexao, "DELETE FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = $jogador ");
     }
     mysqli_query($conexao, "INSERT INTO notificacao VALUES (NULL, '$notificacao', NULL, $jogador, 0)");
 
