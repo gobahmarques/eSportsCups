@@ -138,7 +138,7 @@
         ");
         if($lobbyPendente = mysqli_fetch_array($pesquisaLobbyPendente)){
         ?>
-
+        
         <?php
             // header("Location: lobby/".$lobbyPendente['cod_lobby']."/");
         }
@@ -272,24 +272,49 @@
         <div class="partidasPendentesUsuario">
             <div class="container">
                 <div class="row justify-content-center">
+                    <div class="col-12 col-md-12 text-center text-white">
+                        <h4>Partidas Pendentes</h4>
+                    </div>
                 <?php
                     while($partidaPendente = mysqli_fetch_array($pesquisaPartidasPendentes)){
+                        $sementeUm = mysqli_fetch_array(mysqli_query($conexao, "
+                            SELECT * FROM campeonato_partida_semente
+                            INNER JOIN campeonato_etapa_semente ON campeonato_etapa_semente.codigo = campeonato_partida_semente.cod_semente
+                            INNER JOIN jogador ON campeonato_etapa_semente.cod_jogador = jogador.codigo
+                            WHERE cod_partida = ".$partidaPendente['codigo']." AND lado = 1
+                        "));
+                        $sementeDois = mysqli_fetch_array(mysqli_query($conexao, "
+                            SELECT * FROM campeonato_partida_semente
+                            INNER JOIN campeonato_etapa_semente ON campeonato_etapa_semente.codigo = campeonato_partida_semente.cod_semente
+                            INNER JOIN jogador ON campeonato_etapa_semente.cod_jogador = jogador.codigo
+                            WHERE cod_partida = ".$partidaPendente['codigo']." AND lado = 2
+                        "));
                     ?>
                         <div class="col-6 col-md-3">
                             <a href="ptbr/campeonato/<?php echo $partidaPendente['cod_campeonato']; ?>/partida/<?php echo $partidaPendente['codigo']; ?>/">
                                 <div class="partidaGrupo">
                                     <div class="row">
                                         <div class="col-8">
-                                            Jogador 01
+                                        <?php
+                                            if($sementeUm['cod_jogador'] != NULL){
+                                                $inscUm = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$partidaPendente['cod_campeonato']." AND cod_jogador = ".$sementeUm['codigo']." "));	
+                                                echo $inscUm['conta'];
+                                            }
+                                        ?>
                                         </div>
                                         <div class="col-4 text-right">
-                                            0
+                                            <?php echo $partidaPendente['placar_um']; ?>
                                         </div>
                                         <div class="col-8">
-                                            Jogador 02
+                                        <?php
+                                            if($sementeUm['cod_jogador'] != NULL){
+                                                $inscDois = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$partidaPendente['cod_campeonato']." AND cod_jogador = ".$sementeDois['codigo']." "));	
+                                                echo $inscDois['conta'];
+                                            }
+                                        ?>
                                         </div>
                                         <div class="col-4 text-right">
-                                            0
+                                            <?php echo $partidaPendente['placar_dois']; ?>
                                         </div>
                                     </div>
                                 </div>
