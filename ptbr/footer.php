@@ -49,8 +49,7 @@
 <script>
     function abrirPartidasPendentes(){
         var hPartidasPendentes = $(".partidasPendentesUsuario").height() + 25;
-        $(".partidasPendentesUsuario").css("top", "0px");
-        $(".partidasPendentesUsuario").css("margin-bottom", "-"+hPartidasPendentes+"px");    
+        $(".partidasPendentesUsuario").css("padding-top", ""+(hPartidasPendentes+20)+"");     
     }
     $(function(){ 
         var hPartidasPendentes = $(".partidasPendentesUsuario").height() + 25;
