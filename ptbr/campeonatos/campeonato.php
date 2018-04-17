@@ -19,7 +19,13 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <meta property="og:url"           content="https://www.esportscups.com.br/ptbr/campeonato/<?php echo $campeonato['codigo']; ?>/" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="<?php echo $campeonato['nome']." | eSports Cups"; ?>" />
+        <meta property="og:description"   content="<?php echo $campeonato['descricao']; ?>" />
+        <meta property="og:image"         content="https://www.esportscups.com.br/img/<?php echo $campeonato['thumb']; ?>" />
+        <meta property="og:image:width" content="800">
+        <meta property="og:image:height" content="800">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php echo $css; ?>bootstrap.css">
         <link rel="stylesheet" href="<?php echo $css; ?>esportscups.css">
