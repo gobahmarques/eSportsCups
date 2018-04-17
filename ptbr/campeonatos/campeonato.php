@@ -23,9 +23,9 @@
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="<?php echo $campeonato['nome']." | eSports Cups"; ?>" />
         <meta property="og:description"   content="<?php echo $campeonato['descricao']; ?>" />
-        <meta property="og:image"         content="https://www.esportscups.com.br/img/<?php echo $campeonato['thumb']; ?>" />
-        <meta property="og:image:width" content="800">
-        <meta property="og:image:height" content="800">
+        <meta property="og:image"         content="https://www.esportscups.com.br/img/campeonatos/<?php echo $campeonato['codigo']; ?>/logo.png" />
+        <meta property="og:image:width" content="50">
+        <meta property="og:image:height" content="50">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php echo $css; ?>bootstrap.css">
         <link rel="stylesheet" href="<?php echo $css; ?>esportscups.css">
