@@ -24,12 +24,18 @@
                 mysqli_query($conexao, "UPDATE jogador SET pontos = pontos - ".$nomeCamp['valor_coin']." WHERE codigo = ".$usuario['codigo']." ");
                 mysqli_query($conexao, "INSERT INTO log_coin VALUES (NULL, ".$usuario['codigo'].", ".$nomeCamp['valor_coin'].", 'Inscrição no torneio ".$nomeCamp['nome']."', 0, '".date("Y-m-d H:i:s")."')");  
                 mysqli_query($conexao, "UPDATE campeonato_inscricao SET log_coin = ".mysqli_insert_id($conexao).", status = 1 WHERE cod_campeonato = ".$nomeCamp['codigo']." AND cod_jogador = ".$usuario['codigo']." ");
+                
+                mysqli_query($conexao, "UPDATE organizacao SET saldo_coin = saldo_coin + ".$nomeCamp['valor_escoin']." WHERE codigo = ".$nomeCamp['cod_organizacao']." ");
+                mysqli_query($conexao, "INSERT INTO log_coin_organizacao VALUES (NULL, ".$nomeCamp['cod_organizacao'].", ".$usuario['codigo'].", ".$nomeCamp['valor_escoin'].", 'Inscrição Torneio ".$nomeCamp['nome']."', 1, '".date("Y-m-d H:i:s")."')");
             }            
         }else if($nomeCamp['valor_real'] > 0){
             if($usuario['saldo'] >= $nomeCamp['valor_real']){
                 mysqli_query($conexao, "UPDATE jogador SET saldo = saldo - ".$nomeCamp['valor_real']." WHERE codigo = ".$usuario['codigo']." ");
                 mysqli_query($conexao, "INSERT INTO log_real VALUES (NULL, ".$usuario['codigo'].", ".$nomeCamp['valor_real'].", 'Inscrição no torneio ".$nomeCamp['nome']."', 0, '".date("Y-m-d H:i:s")."')");
                 mysqli_query($conexao, "UPDATE campeonato_inscricao SET log_real = ".mysqli_insert_id($conexao).", status = 1 WHERE cod_campeonato = ".$nomeCamp['codigo']." AND cod_jogador = ".$usuario['codigo']." ");
+                
+                mysqli_query($conexao, "UPDATE organizacao SET saldo_real = saldo_real + ".$nomeCamp['valor_real']." WHERE codigo = ".$nomeCamp['cod_organizacao']." ");
+                mysqli_query($conexao, "INSERT INTO log_real_organizacao VALUES (NULL, ".$nomeCamp['cod_organizacao'].", ".$usuario['codigo'].", ".$nomeCamp['valor_real'].", 'Inscrição Torneio ".$nomeCamp['nome']."', 1, '".date("Y-m-d H:i:s")."')");
             }
         }
 		header("Location: ../ptbr/campeonato/$campeonato/inscricao/");

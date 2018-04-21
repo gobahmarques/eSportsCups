@@ -160,7 +160,7 @@
                     <div class="col-12 col-md-4">
                         <div class="passoInscricao">
                             <h3>Equipe Inscrita</h3>
-                            <img src="<?php echo $equipe['logo']; ?>" alt="" class="logo"><br><br>
+                            <img src="<?php echo $equipe['logo']; ?>" alt="" class="logo" width="80%"><br>
                             <?php echo "<h1>".$equipe['nome']."</h1>"; ?>
                         </div>
                     </div>

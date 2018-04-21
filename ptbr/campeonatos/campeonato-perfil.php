@@ -163,6 +163,7 @@
                                         <div class="clock" id="clock"></div>
                                     <?php		
                                     }else{
+                                        
                                         $inscricao = mysqli_fetch_array($verificarInscricao);
                                         if($datahora < $wo){									
                                             if($inscricao['status'] == 0){

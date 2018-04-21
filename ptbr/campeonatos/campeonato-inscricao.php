@@ -65,6 +65,16 @@
                     }
                 });
             }
+            function desistirVaga(codCampeonato){
+                jQuery.ajax({
+                    type: "POST",
+                    url: "ptbr/campeonatos/scripts.php",
+                    data: "campeonato="+codCampeonato+"&funcao=desistirVaga",
+                    success: function(data){
+                        window.location.reload();
+                    }
+                });
+            }
             function validar(){
                 <?php
                     if(isset($usuario['codigo'])){

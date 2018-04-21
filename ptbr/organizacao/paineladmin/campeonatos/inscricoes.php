@@ -156,6 +156,10 @@
                                                 ?>
                                                     <a href="<?php echo "ptbr/organizacao/".$organizacao['codigo']."/painel/campeonato/".$campeonato['codigo']."/inscricoes/".$inscricao['cod_jogador']."/3/"; ?>"><img src="http://www.esportscups.com.br/img/icones/excluir.png" alt="Excluir" title="Excluir"></a>
                                                 <?php	
+                                                }else{
+                                                ?>
+                                                    <a href="<?php echo "ptbr/organizacao/".$organizacao['codigo']."/painel/campeonato/".$campeonato['codigo']."/inscricoes/".$inscricao['cod_jogador']."/3/"; ?>"><img src="http://www.esportscups.com.br/img/icones/excluir.png" alt="Excluir" title="Excluir"></a>
+                                                <?php	    
                                                 }
                                             ?>
                                             </td>
