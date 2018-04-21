@@ -34,7 +34,7 @@
         <?php include "../../../header.php"; ?>
         
         <br>
-        <div class="container">
+        <div class="container painelSementes">
             <div class="row">
                 <div class="col-12 col-md-3">
                     <?php
@@ -97,9 +97,9 @@
                 })
             }
             function painelSementes(codcampeonato, codetapa){
-                $(".container").load("ptbr/organizacao/paineladmin/campeonatos/painel-sementes.php?campeonato="+codcampeonato+"&etapa="+codetapa);
+                $(".painelSementes").load("ptbr/organizacao/paineladmin/campeonatos/painel-sementes.php?campeonato="+codcampeonato+"&etapa="+codetapa);
                 setTimeout(function(){
-                    selecionarEtapa(0,codcampeonato, codetapa);
+                    // selecionarEtapa(0,codcampeonato, codetapa);
                 }, 200);                
             }
             function distJogadores(funcao){

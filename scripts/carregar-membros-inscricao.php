@@ -9,21 +9,30 @@
 		$nomeCamp = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato WHERE codigo = $campeonato"));
 		$aux = 0;
 		$msg = "Você foi convocado para jogar o torneio <strong>".$nomeCamp['nome']."</strong> junto com a equipe <strong>".$infosEquipe['nome']."</strong>.";
+        
+        mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$campeonato.", ".$usuario['codigo'].", $equipe, '".date("Y-m-d H:i:s")."', 0, NULL, NULL, NULL)");
 		while($aux < $_POST['vagas']){
 			mysqli_query($conexao, "INSERT INTO campeonato_lineup VALUES ($campeonato, $equipe, $jogador[$aux], 0)");
 			mysqli_query($conexao, "INSERT INTO notificacao VALUES (NULL, '$msg', $jogador[$aux], 0)");
 			$aux++;
 		}
 		mysqli_query($conexao, "UPDATE campeonato_lineup SET capitao = 1 WHERE cod_campeonato = $campeonato AND cod_jogador = ".$usuario['codigo']."");
-		mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$campeonato.", ".$usuario['codigo'].", $equipe, '".date("Y-m-d H:i:s")."', NULL, 0, NULL)");
+		
+        
         if($nomeCamp['valor_escoin'] > 0){
-            mysqli_query($conexao, "UPDATE jogador SET pontos = pontos - ".$nomeCamp['valor_coin']." WHERE codigo = ".$usuario['codigo']." ");
-            mysqli_query($conexao, "INSERT INTO log_coin VALUES (NULL, ".$usuario['codigo'].", ".$nomeCamp['valor_coin'].", 'Inscrição no torneio ".$nomeCamp['nome']."', 0, '".date("Y-m-d H:i:s")."')");
+            if($usuario['pontos'] >= $nomeCamp['valor_escoin']){
+                mysqli_query($conexao, "UPDATE jogador SET pontos = pontos - ".$nomeCamp['valor_coin']." WHERE codigo = ".$usuario['codigo']." ");
+                mysqli_query($conexao, "INSERT INTO log_coin VALUES (NULL, ".$usuario['codigo'].", ".$nomeCamp['valor_coin'].", 'Inscrição no torneio ".$nomeCamp['nome']."', 0, '".date("Y-m-d H:i:s")."')");  
+                mysqli_query($conexao, "UPDATE campeonato_inscricao SET log_coin = ".mysqli_insert_id($conexao).", status = 1 WHERE cod_campeonato = ".$nomeCamp['codigo']." AND cod_jogador = ".$usuario['codigo']." ");
+            }            
         }else if($nomeCamp['valor_real'] > 0){
-            mysqli_query($conexao, "UPDATE jogador SET saldo = saldo - ".$nomeCamp['valor_real']." WHERE codigo = ".$usuario['codigo']." ");
-            mysqli_query($conexao, "INSERT INTO log_real VALUES (NULL, ".$usuario['codigo'].", ".$nomeCamp['valor_real'].", 'Inscrição no torneio ".$nomeCamp['nome']."', 0, '".date("Y-m-d H:i:s")."')");
+            if($usuario['saldo'] >= $nomeCamp['valor_real']){
+                mysqli_query($conexao, "UPDATE jogador SET saldo = saldo - ".$nomeCamp['valor_real']." WHERE codigo = ".$usuario['codigo']." ");
+                mysqli_query($conexao, "INSERT INTO log_real VALUES (NULL, ".$usuario['codigo'].", ".$nomeCamp['valor_real'].", 'Inscrição no torneio ".$nomeCamp['nome']."', 0, '".date("Y-m-d H:i:s")."')");
+                mysqli_query($conexao, "UPDATE campeonato_inscricao SET log_real = ".mysqli_insert_id($conexao).", status = 1 WHERE cod_campeonato = ".$nomeCamp['codigo']." AND cod_jogador = ".$usuario['codigo']." ");
+            }
         }
-		header("Location: ../campeonato/$campeonato/inscricao/");
+		header("Location: ../ptbr/campeonato/$campeonato/inscricao/");
 	}else{
 		include "../conexao-banco.php";
 		$membros = mysqli_query($conexao, "SELECT * FROM jogador_equipe

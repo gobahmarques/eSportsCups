@@ -89,7 +89,7 @@
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="<?php echo $js; ?>jquery.js"></script>
-        <script src="<?php echo $js; ?>bootstrap.js"></script>
+        <script src="<?php echo $js; ?>bootstrap.js"></script>        
         <script>
             function carregarLobbys(){
                 $(".<?php echo $codJogo; ?>").addClass("ativo");

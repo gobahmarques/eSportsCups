@@ -55,6 +55,16 @@
         <script src="<?php echo $js; ?>jquery.js"></script>
         <script src="<?php echo $js; ?>bootstrap.js"></script>
         <script>
+            function garantirVagaPaga(codCampeonato){
+                jQuery.ajax({
+                    type: "POST",
+                    url: "ptbr/campeonatos/scripts.php",
+                    data: "campeonato="+codCampeonato+"&funcao=confirmarVagaPaga",
+                    success: function(data){
+                        window.location.reload();
+                    }
+                });
+            }
             function validar(){
                 <?php
                     if(isset($usuario['codigo'])){
@@ -66,8 +76,6 @@
                     <?php
                     }
                 ?>
-                
-
                 if(valorCoin > 0){ 
                     if(saldoCoin < valorCoin){ // NÃO POSSUI SALDO
                         alert("Saldo em e$ insuficiente.");
@@ -109,7 +117,10 @@
                         switch("<?php echo $jogo['abreviacao']; ?>"){
                             case "Hearthstone":
                                 if(counter < limit){
-                                    alert('É obrigatório selecionar '+limit+' heróis!');
+									$(".modal-title").html("<h3>Informações Incompletas</h3>");
+									$(".modal-body").html("Para realizar esta inscrição, é necessário selecionar "+limit+" heróis!");
+									$(".modal-footer").html("<button type='button' class='btn btn-dark' data-dismiss='modal'>Ok, entendi!</button>");
+									$(".modal").modal();
                                     return false;
                                 }else{
                                     return true;
@@ -151,9 +162,6 @@
                             return true;
                     }	
                 }
-
-
-
             }
             function validar2(){
                 var counter = $('.limitado2:checked').length;
@@ -175,14 +183,13 @@
                 var counter = $('.limitado3:checked').length;
                 if(counter < limit) {
                     this.checked = false;
-                    alert('É necessário selecionar '+limit+' jogadores para competir');
+                    $(".modal-title").html("<h3>Informações Incompletas</h3>");
+					$(".modal-body").html("Para realizar esta inscrição, é necessário selecionar "+limit+" jogadores!");
+					$(".modal-footer").html("<button type='button' class='btn btn-dark' data-dismiss='modal'>Ok, entendi!</button>");
+					$(".modal").modal();
                     return false;
                 }
-                if(validar() == true){
-                    return true;    
-                }else{
-                    return false;
-                }                
+                return true;
             }
             function mudarDraftHs(){
                 $(".draft").load("ptbr/campeonatos/draft-hearthstone.php");

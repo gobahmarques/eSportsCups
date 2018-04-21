@@ -37,34 +37,36 @@
                 while($etapa = mysqli_fetch_array($etapas)){
                 ?>
                     <div class="col-6 col-md-3 centralizar thumbEtapa float-left">
-                        <div class="row-fluid">
-                            <a href="ptbr/campeonato/<?php echo $campeonato['codigo']; ?>/etapa/<?php echo $etapa['cod_etapa']; ?>/">
-                                <div class="col-12 col-md-12">
-                                <?php
-                                    switch($etapa['tipo_etapa']){
-                                        case 1: // ELIMINAÇÃO SIMPLES
-                                            ?>
-                                                <img src="img/icones/eliminacao-simples.png">
-                                            <?php
-                                            break;
-                                        case 2: // GRUPOS PONTOS CORRIDOS
-                                            ?>
-                                                <img src="img/icones/grupo-pontos-corridos.png">
-                                            <?php
-                                            break;
-                                        case 3: // ELIMINAÇÃO DUPLA
-                                            ?>
-                                                <img src="img/icones/eliminacao-dupla.png">
-                                            <?php
-                                            break;
-                                    }
-                                ?>
-                                </div>
-                                <div class="col-12 col-md-12 centralizar">                                
-                                        <h3><?php echo $etapa['cod_etapa'].". ".$etapa['nome']; ?></h3> 
-                                </div>
-                            </a> 
-                        </div>
+						<div>
+							<div class="row-fluid">
+								<a href="ptbr/campeonato/<?php echo $campeonato['codigo']; ?>/etapa/<?php echo $etapa['cod_etapa']; ?>/">
+									<div class="col-12 col-md-12">
+									<?php
+										switch($etapa['tipo_etapa']){
+											case 1: // ELIMINAÇÃO SIMPLES
+												?>
+													<img src="img/icones/eliminacao-simples.png">
+												<?php
+												break;
+											case 2: // GRUPOS PONTOS CORRIDOS
+												?>
+													<img src="img/icones/grupo-pontos-corridos.png">
+												<?php
+												break;
+											case 3: // ELIMINAÇÃO DUPLA
+												?>
+													<img src="img/icones/eliminacao-dupla.png">
+												<?php
+												break;
+										}
+									?>
+									</div>
+									<div class="col-12 col-md-12 centralizar">                                
+											<h3><?php echo $etapa['cod_etapa'].". ".$etapa['nome']; ?></h3> 
+									</div>
+								</a> 
+							</div>
+						</div>
                     </div>
                 <?php
                     echo "";
