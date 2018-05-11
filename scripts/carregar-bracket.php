@@ -57,7 +57,7 @@
 						$xPartida = 2;
 						$yPartida = 50;
 						$avancoYinicial = $yPartida;
-						$avancoY = 75;
+						$avancoY = 85;
 						while($coluna <= $maxRounds){
 							$partidas = mysqli_query($conexao, "SELECT * FROM campeonato_partida WHERE cod_etapa = ".$etapa['cod_etapa']." AND cod_campeonato = ".$campeonato['codigo']." AND coluna = $coluna ORDER BY codigo ASC LIMIT $maxJogos");
 							if($coluna == 1){
@@ -206,8 +206,8 @@
 													}
 												?>
 												<g>
-													<rect width="50" height="20" fill="#fff" stroke="#ccc" stroke-width="2" x="<?php echo $xPartida+100; ?>" y="<?php echo $yPartida+40; ?>"></rect>
-													<text x="<?php echo $xPartida+117; ?>" y="<?php echo $yPartida+55; ?>" font-size="14" font-weight="bold" fill="#666"><?php echo $partida['coluna']."-".$partida['linha'] ?></text>
+													<rect width="185" height="20" fill="#ccc" stroke="#ccc" stroke-width="2" x="<?php echo $xPartida; ?>" y="<?php echo $yPartida+50; ?>"></rect>
+													<text x="<?php echo $xPartida+70; ?>" y="<?php echo $yPartida+64; ?>" font-size="12" font-weight="bold" fill="#666"><?php echo $partida['coluna']."-".$partida['linha']." [MD ".$partida['tipo']."]" ?></text>
 												</g>
 												<rect width="165" height="50" fill="transparent" y="<?php echo $yPartida; ?>" x="<?php echo $xPartida; ?>"></rect>
 											</g>
@@ -219,11 +219,11 @@
 												<?php
 												if(($partida['linha'] % 2) == 0){ // É PARTIDA PAR
 												?>
-													<polyline points="<?php echo $xPartida+195; ?>,<?php echo $yPartida+25; ?> <?php echo $xPartida+195; ?>,<?php echo $yPartida+25-$avancoYpoly; ?> <?php echo $xPartida+205; ?>,<?php echo $yPartida+25-$avancoYpoly; ?>" fill="white" stroke="#ccc" stroke-width="2"></polyline>
+													<polyline points="<?php echo $xPartida+195; ?>,<?php echo $yPartida+25; ?> <?php echo $xPartida+195; ?>,<?php echo $yPartida+20-$avancoYpoly; ?> <?php echo $xPartida+205; ?>,<?php echo $yPartida+20-$avancoYpoly; ?>" fill="white" stroke="#ccc" stroke-width="2"></polyline>
 												<?php
 												}else{ // É PARTIDA IMPAR
 												?>
-													<polyline points="<?php echo $xPartida+195; ?>,<?php echo $yPartida+25; ?> <?php echo $xPartida+195; ?>,<?php echo $yPartida+25+$avancoYpoly; ?> <?php echo $xPartida+205; ?>,<?php echo $yPartida+25+$avancoYpoly; ?>" fill="white" stroke="#ccc" stroke-width="2"></polyline>
+													<polyline points="<?php echo $xPartida+195; ?>,<?php echo $yPartida+25; ?> <?php echo $xPartida+195; ?>,<?php echo $yPartida+30+$avancoYpoly; ?> <?php echo $xPartida+205; ?>,<?php echo $yPartida+30+$avancoYpoly; ?>" fill="white" stroke="#ccc" stroke-width="2"></polyline>
 												<?php	
 												}	
 											}
@@ -232,7 +232,7 @@
 								}								
 								$yPartida += $avancoY;
 							}
-							$avancoYpoly = $avancoYpoly + 37.5*pow(2, ($coluna-1));
+							$avancoYpoly = $avancoYpoly + 42.5*pow(2, ($coluna-1));
 							$xPartida += 205;
 							$yPartida = $avancoY + 12;
 							$avancoY = ($avancoY * 2);
@@ -486,12 +486,11 @@
                                             $totalPartidasConcluidas = mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM campeonato_partida_semente WHERE cod_semente = ".$seed['codigo']." AND status != 0"));
                                             if($seed['cod_jogador'] != NULL){ // SEMENTE PREENCHIDA							
                                                 if($seed['cod_equipe'] != NULL){ // PARTIDA ENTRE EQUIPES
-                                                    $equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$seed['cod_equipe'].""));								
+                                                    $equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$seed['cod_equipe'].""));				
                                                 ?>
                                                     <tr>
                                                         <td class="nome"><?php echo $equipe['nome']; ?></td>
-
-                                                        <td><?php echo $totalPartidas."/".$totalPartidasConcluidas; ?></td>
+                                                        <td><?php echo $totalPartidasConcluidas."/".$totalPartidas; ?></td>
                                                         <td><?php echo $seed['vitorias']; ?></td>
                                                         <td><?php echo $seed['derrotas']; ?></td>
                                                         <td><?php echo $seed['partidas_pro']; ?></td>
@@ -595,7 +594,7 @@
                                                             echo "#semente ".$semente['numero'];
                                                         }
                                                     }else{ // BUSCAR EQUIPE
-                                                        $equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$seed['cod_equipe'].""));
+                                                        $equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$semente['cod_equipe'].""));
                                                         echo $equipe['nome'];
                                                     }	
                                                 ?>
@@ -650,7 +649,7 @@
                                                     echo "#semente ".$semente['numero'];
                                                 }
                                             }else{ // BUSCAR EQUIPE
-                                                $equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$seed['cod_equipe'].""));
+                                                $equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT nome FROM equipe WHERE codigo = ".$semente['cod_equipe'].""));
                                                 echo $equipe['nome'];
                                             }	
                                         ?>
@@ -871,7 +870,7 @@
 																	</text>
 																<?php
 															}else{ // BUSCAR E MOSTRAR EQUIPE
-																$equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$ladoUm['cod_equipe']." "));	
+																$equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$ladoDois['cod_equipe']." "));	
 																?>
 																	<text y="<?php echo $yPartida+45; ?>" x="<?php echo $xPartida+5; ?>" data-position="top">
 																	<?php

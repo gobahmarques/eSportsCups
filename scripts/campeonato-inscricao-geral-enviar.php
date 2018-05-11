@@ -11,14 +11,14 @@
 				if($usuario['pontos'] >= $campeonato['valor_escoin']){
 					mysqli_query($conexao, "UPDATE jogador SET pontos = pontos - ".$campeonato['valor_escoin']." WHERE codigo = ".$usuario['codigo']."");
 					mysqli_query($conexao, "INSERT INTO log_coin VALUES (NULL, ".$usuario['codigo'].", ".$campeonato['valor_escoin'].", 'Inscrição campeonato: <strong>".$campeonato['nome']."</strong>', 0, '$data')");
-					mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$_POST['codcampeonato'].", ".$usuario['codigo'].", NULL, '$data', NULL, 0, '".$_POST['conta']."')");
+					mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$_POST['codcampeonato'].", ".$usuario['codigo'].", NULL, '$data', 0, '".$_POST['conta']."', NULL, ".mysqli_insert_id($conexao).")");
 				}
 			}else{
-				mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$_POST['codcampeonato'].", ".$usuario['codigo'].", NULL, '$data', NULL, 0, '".$_POST['conta']."')");
+				mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$_POST['codcampeonato'].", ".$usuario['codigo'].", NULL, '$data', 0, '".$_POST['conta']."', NULL, NULL)");
 			}			
 		}
 	}
-	// header("Location: ../campeonato/$codCampeonato/inscricao/")
+	header("Location: ../ptbr/campeonato/$codCampeonato/inscricao/")
 ?>
 
 

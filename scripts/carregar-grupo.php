@@ -31,7 +31,7 @@
                             ?>
                                 <tr>
                                     <td class="nome"><?php echo $equipe['nome']; ?></td>								
-                                    <td><?php echo $totalPartidas."/".$totalPartidasConcluidas; ?></td>
+                                    <td><?php echo $totalPartidasConcluidas."/".$totalPartidas; ?></td>
                                     <td><?php echo $seed['vitorias']; ?></td>
                                     <td><?php echo $seed['derrotas']; ?></td>
                                     <td><?php echo $seed['partidas_pro']; ?></td>
@@ -88,8 +88,10 @@
         </div>
 		
 		<div class="col-12 col-md-12 grupoPartidasGrupo">
-            <div class="row-fluid">
-                <h2>Partidas Pendentes</h2>
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <h2>Partidas Pendentes</h2>
+                </div>                
                 <?php
                 $partidasPendentes = mysqli_query($conexao, "SELECT * FROM campeonato_partida WHERE cod_grupo = ".$grupo['codigo']." AND status = 1");
                 if(mysqli_num_rows($partidasPendentes) != 0){
@@ -104,61 +106,82 @@
                             INNER JOIN campeonato_etapa_semente ON campeonato_etapa_semente.codigo = campeonato_partida_semente.cod_semente
                             WHERE campeonato_partida_semente.cod_partida = ".$partida['codigo']." AND lado = 2
                         "));
+                        if($sementeUm['cod_jogador'] != NULL && $sementeDois['cod_jogador'] != NULL){
                         ?>
-                            <div class="col-6 col-md-3 float-left partidaGrupo">
-                                <div class="row-fluid">
-                                    <a href="<?php echo "ptbr/campeonato/".$campeonato['codigo']."/partida/".$partida['codigo']."/"; ?>">
-                                    <?php
-                                        if($sementeUm['cod_equipe'] == NULL){ // PARTIDA ENTRE JOGADORES
-                                            if($sementeUm['cod_jogador'] != NULL){
-                                                $inscUm = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$sementeUm['cod_jogador']." "));
-                                                ?>
-                                                    <div class="col-10 col-md-10 float-left">
-                                                        <?php echo $inscUm['conta']; ?>           
-                                                    </div>
-                                                    <div class="col-2 col-md-2 float-left">
-                                                        0
-                                                    </div>
-                                                <?php
-                                            }else{
-                                                ?>
-                                                    <div class="col-10 col-md-10 float-left">
-                                                        TBD          
-                                                    </div>
-                                                    <div class="col-2 col-md-2 float-left">
-                                                        0
-                                                    </div>
-                                                <?php
-                                            }
+                            <div class="col-6 col-md-3">
+                                <a href="<?php echo "ptbr/campeonato/".$campeonato['codigo']."/partida/".$partida['codigo']."/"; ?>">
+                                    <div class="partidaGrupo">
+                                        <div class="row">
 
-                                            if($sementeDois['cod_jogador'] != NULL){
-                                                $inscDois = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$sementeDois['cod_jogador']." "));
-                                                ?>
-                                                    <div class="col-10 col-md-10 float-left">
-                                                        <?php echo $inscDois['conta']; ?>           
-                                                    </div>
-                                                    <div class="col-2 col-md-2 float-left">
-                                                        0
-                                                    </div>
-                                                <?php
-                                            }else{
-                                                ?>
-                                                    <div class="col-10 col-md-10 float-left">
-                                                        TBD          
-                                                    </div>
-                                                    <div class="col-2 col-md-2 float-left">
-                                                        0
-                                                    </div>
-                                                <?php
-                                            }				
-                                        }else{ // PARTIDA ENTRE EQUIPES
+                                            <?php
+                                                if($sementeUm['cod_equipe'] == NULL){ // PARTIDA ENTRE JOGADORES
+                                                    if($sementeUm['cod_jogador'] != NULL){
+                                                        $inscUm = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$sementeUm['cod_jogador']." "));
+                                                        ?>
+                                                            <div class="col-12 col-md-12">
+                                                                <?php echo $inscUm['conta']; ?>           
+                                                            </div>
+                                                        <?php
+                                                    }else{
+                                                        ?>
+                                                            <div class="col-12 col-md-12">
+                                                                À definir         
+                                                            </div>
+                                                        <?php
+                                                    }
 
-                                        }
-                                    ?>
-                                    </a>
+                                                    if($sementeDois['cod_jogador'] != NULL){
+                                                        $inscDois = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$sementeDois['cod_jogador']." "));
+                                                        ?>
+                                                            <div class="col-12 col-md-12">
+                                                                <?php echo $inscDois['conta']; ?>           
+                                                            </div>
+                                                        <?php
+                                                    }else{
+                                                        ?>
+                                                            <div class="col-12 col-md-12">
+                                                                À definir         
+                                                            </div>
+                                                        <?php
+                                                    }				
+                                                }else{ // PARTIDA ENTRE EQUIPES
+                                                    if($sementeUm['cod_equipe'] != NULL){
+                                                        $inscUm = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$sementeUm['cod_equipe'].""));
+                                                        ?>
+                                                            <div class="col-12 col-md-12">
+                                                                <?php echo $inscUm['nome']; ?>           
+                                                            </div>
+                                                        <?php
+                                                    }else{
+                                                        ?>
+                                                            <div class="col-12 col-md-12">
+                                                                À definir        
+                                                            </div>
+                                                        <?php
+                                                    }
+
+                                                    if($sementeDois['cod_equipe'] != NULL){
+                                                        $inscDois = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$sementeDois['cod_equipe'].""));
+                                                        ?>
+                                                            <div class="col-12 col-md-12">
+                                                                <?php echo $inscDois['nome']; ?>           
+                                                            </div>
+                                                        <?php
+                                                    }else{
+                                                        ?>
+                                                            <div class="col-12 col-md-12">
+                                                                À definir          
+                                                            </div>
+                                                        <?php
+                                                    }	
+                                                }
+                                            ?>                                        
+                                        </div>
+                                    </div>
+                                </a>   
                             </div>
-                        </div>
-                        <?php
+                        <?php   
+                        }                        
                     }	
                 }				
             ?>
@@ -190,23 +213,25 @@
                                 $inscUm = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$sementeUm['cod_jogador']." "));
                                 $inscDois = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$sementeDois['cod_jogador']." "));
                                 ?>
-                                    <div class="col-6 col-md-3 float-left partidaGrupo">
-                                        <div class="row-fluid">
-                                            <a href="<?php echo "ptbr/campeonato/".$campeonato['codigo']."/partida/".$partida['codigo']."/"; ?>">
-                                                <div class="col-10 col-md-10 float-left">
-                                                    <?php echo $inscUm['conta']; ?>           
-                                                </div>
-                                                <div class="col-2 col-md-2 float-left">
-                                                    <?php echo $partida['placar_um']; ?>
-                                                </div>
-                                                <div class="col-10 col-md-10 float-left">
-                                                    <?php echo $inscDois['conta']; ?>           
-                                                </div>
-                                                <div class="col-2 col-md-2 float-left">
-                                                    <?php echo $partida['placar_dois']; ?>
-                                                </div>
-                                            </a>
-                                        </div>	
+                                    <div class="col-6 col-md-3 float-left">
+                                        <div class="partidaGrupo">
+                                            <div class="row">
+                                                <a href="<?php echo "ptbr/campeonato/".$campeonato['codigo']."/partida/".$partida['codigo']."/"; ?>">
+                                                    <div class="col-10 col-md-10">
+                                                        <?php echo $inscUm['conta']; ?>           
+                                                    </div>
+                                                    <div class="col-2 col-md-2">
+                                                        <?php echo $partida['placar_um']; ?>
+                                                    </div>
+                                                    <div class="col-10 col-md-10">
+                                                        <?php echo $inscDois['conta']; ?>           
+                                                    </div>
+                                                    <div class="col-2 col-md-2">
+                                                        <?php echo $partida['placar_dois']; ?>
+                                                    </div>
+                                                </a>
+                                            </div>	
+                                        </div>                                        
                                     </div>
                                 <?php
                             }else{ // PARTIDA ENTRE EQUIPES

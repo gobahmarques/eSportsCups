@@ -1,7 +1,7 @@
 <?php
     include "../../enderecos.php";
     include "../../session.php";
-    require '../../steam/steamauth/steamauth.php';    
+    include "../../steam/steamauth/steamauth.php";    
 ?>
 <!doctype html>
 <html>

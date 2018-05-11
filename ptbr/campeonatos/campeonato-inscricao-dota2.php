@@ -6,45 +6,36 @@
         if(mysqli_num_rows($verificarInscricao) == 0){ // NÃO FEZ INSCRIÇÃO AINDA
             if($campeonato['status'] == 0 && $datahora < $campeonato['fim_inscricao'] && $datahora > $campeonato['inicio_inscricao']){
                 if($campeonato['jogador_por_time'] == 1){ // TORNEIO SOLO
-                    if($usuario['steam'] != NULL){ // Já vinculou sua Steam
-                    ?>
-                        <form action="scripts/campeonato-inscricao-geral-enviar.php" method="post">
-                            <input type="hidden" name="conta" required value="<?php echo $usuario['steam']; ?>">
-                            <input type="hidden" name="codcampeonato" value="<?php echo $campeonato['codigo']; ?>">
-                            <div class="row">
-                                <div class="col-12 col-md-4">
-                                    <div class="passoInscricao">
-                                        <h3>Sua conta Steam</h3>
-                                        <div class="row">
-                                            <div class="img col-3 col-md-3">
-                                                <img src="http://www.esportscups.com.br/img/icones/steam.png" alt="">	
-                                            </div>
-                                            <div class="conta col-9 col-md-9">
-                                                <?php echo $usuario['steam']; ?>	
-                                            </div>
+                ?>
+                    <form action="scripts/campeonato-inscricao-geral-enviar.php" method="post">
+                        <!-- <input type="hidden" name="conta" required value="<?php echo $usuario['steam']; ?>"> -->
+                        <input type="hidden" name="codcampeonato" value="<?php echo $campeonato['codigo']; ?>">
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <div class="passoInscricao">
+                                    <h3>Sua conta Steam</h3><br>
+                                    <div class="row">
+                                        <div class="img col-3 col-md-3">
+                                            <img src="http://www.esportscups.com.br/img/icones/steam.png" alt="">	
                                         </div>
-                                        <input type="button" class="btn btn-dark" value="TROCAR CONTA" onClick="window.location.replace('ptbr/usuario/<?php echo $usuario['codigo']; ?>/permissoes/');"><br><br>
-                                        * Não será possível alterar a conta ou time após realizar a inscrição.
-                                    </div>                            
-                                </div> 
-                                <div class="col-12 col-md-4">
-                                    <div class="passoInscricao draft">
-                                        <h3>Entrar na disputa?</h3>
-                                        <input type="submit" value="Sim, entrar agora!" class="btn btn-dark">
-                                    </div>                            
-                                </div> 
-                            </div>
-                        </form>
-                    <?php
-                    }else{ // AINDA NÃO VINCULOU A STEAM	
-                    ?>
-                        <div class="passo">
-                            <h2>Vinculação de conta Steam</h2>
-                            É necessário vincular sua conta Steam com nossa plataforma para poder competir nos torneios de Dota 2. <br><br>
-                            <a href="steam/steamauth/steamauth.php"><input type="button" value="VINCULAR STEAM" class="btn btn-dark"></a>
+                                        <div class="conta col-9 col-md-9">
+                                            <input type="text" name="conta" class="form-control" placeholder="Qual o seu nick na Steam?">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <!-- <input type="button" class="btn btn-dark" value="TROCAR CONTA" onClick="window.location.replace('ptbr/usuario/<?php echo $usuario['codigo']; ?>/permissoes/');">-->
+                                    * Não será possível alterar a conta ou time após realizar a inscrição.
+                                </div>                            
+                            </div> 
+                            <div class="col-12 col-md-4">
+                                <div class="passoInscricao draft">
+                                    <h3>Entrar na disputa?</h3>
+                                    <input type="submit" value="Sim, entrar agora!" class="btn btn-dark">
+                                </div>                            
+                            </div> 
                         </div>
-                    <?php
-                    }        
+                    </form>
+                <?php       
                 }else{ // TORNEIO EM EQUIPE
                     $equipes = mysqli_query($conexao, "SELECT * FROM jogador_equipe
                     INNER JOIN equipe ON equipe.codigo = jogador_equipe.cod_equipe

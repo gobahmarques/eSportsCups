@@ -129,6 +129,48 @@
 				}
 				
 				break;
+            case "carregarJogadoresSemSemente":
+                include "../conexao-banco.php";
+                $jogadores = mysqli_query($conexao, "
+                    SELECT * FROM campeonato_inscricao
+                    WHERE cod_campeonato = ".$_POST['campeonato']."
+                    AND status = 1
+                ");
+                ?>
+                    <form method="post" action="ptbr/organizacao/paineladmin/campeonatos/painel-sementes-enviar.php">
+                        <input type="hidden" value="" name="codSemente" class="codSemente">
+                        <input type="hidden" value="preencherSemente" name="funcao">
+                        <input type="hidden" value="<?php echo $_POST['etapa']; ?>" name="codEtapa">
+                        <input type="hidden" value="<?php echo $_POST['campeonato']; ?>" name="codCampeonato">
+                        
+                        <div class="row">
+                            <div class="col-8 col-md-8">
+                                <select class="form-control" name="codInscricao">
+                                <?php
+                                    while($jogador = mysqli_fetch_array($jogadores)){
+                                    ?>
+                                        <option value="<?php echo $jogador['cod_jogador']; ?>">
+                                        <?php
+                                            if($jogador['cod_equipe'] == NULL){
+                                                echo $jogador['conta'];
+                                            }else{
+                                                $equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT nome FROM equipe WHERE codigo = ".$jogador['cod_equipe']." "));
+                                                echo $equipe['nome'];
+                                            }
+                                        ?>
+                                        </option>
+                                    <?php
+                                    }
+                                ?>
+                                </select>                            
+                            </div>
+                            <div class="col-4 col-md-4">
+                                <input type="submit" value="PREENCHER" class="btn btn-dark" />
+                            </div>
+                        </div>
+                    </form>
+                <?php
+                break;
 		}
 	}
 

@@ -1,11 +1,14 @@
 <?php
-	require "conexao-banco.php";
-	
+	require "conexao-banco.php";   
 	if(!isset($_SESSION)){
 		@ob_start();
-		session_start();		
+		session_start();
 	}
-
+    if(!isset($_COOKIE['modalNewsletter'])){        
+        $exibirModal = true;
+    }else{
+        $exibirModal = false;
+    }
 	if(isset($_COOKIE['auth'])){
 		$autorizacao = mysqli_query($conexao, "SELECT * FROM login_autenticacao WHERE id = '".$_COOKIE['auth']."' ");		
 		if(mysqli_num_rows($autorizacao) != 0){
@@ -23,11 +26,9 @@
 			setcookie("auth");
 		}
 	}
-	
 	if(isset($_SESSION['codigo'])){
 		$usuario = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM jogador WHERE codigo = ".$_SESSION['codigo'].""));
 		$datahora = date("Y-m-d H:i:s");
 		mysqli_query($conexao, "UPDATE login SET datahora = '".date("Y-m-d H:i:s")."' WHERE cod_jogador = ".$usuario['codigo']." ");
 	}
-	
 ?>

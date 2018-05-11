@@ -53,7 +53,7 @@
                             if($campeonato['precheckin'] > 0){
                             ?>
                                 <button type="button" class="btn btn-azul btn-lg" role="button" disabled>
-                                    <strong>PRÉ CHECK-IN</strong><br>
+                                    <strong>CHECK-IN</strong><br>
                                     <?php echo date("d/m - H:i", strtotime("-".$campeonato['precheckin']."minutes", strtotime($campeonato['inicio']))); ?>
                                 </button>
                             <?php	
@@ -71,7 +71,7 @@
             <div class="col-12 col-md-4">
                 <div class="boxInscricao">
                     <div class="row centralizar">
-                        <div class="col-6 col-md-6" style="padding: 15px 10px;">
+                        <div class="col-8 col-md-8" style="padding: 15px 10px;">
                         <?php
                             if($datahora > $campeonato['inicio_inscricao']){ // Inscrição já foi iniciada
                                 if($datahora < $campeonato['fim_inscricao'] && $campeonato['status'] == 0){ // Inscrições abertas ainda
@@ -112,20 +112,20 @@
                                     <?php	
                                     }else{
                                     ?>
-                                        <h4>Começa em</h4>
+                                        <h4>O torneio começa</h4>
                                         <?php echo date("d/m/Y - H:i", strtotime($campeonato['inicio'])); ?>
                                     <?php	
                                     }					
                                 }
                             }else{ // Inscrições em breve...
                             ?>
-                                <h4>Inscrições Em Breve</h4>
-                                abrem <?php echo date("d/m/Y - H:i", strtotime($campeonato['inicio_inscricao'])); ?>
+                                <h4>Inscrições Em Breve...</h4>
+                                ...abrem <?php echo date("d/m/Y - H:i", strtotime($campeonato['inicio_inscricao'])); ?>
                             <?php
                             }
                         ?>
                         </div>
-                        <div class="col-6 col-md-6">
+                        <div class="col-4 col-md-4">
                             <div class="atual">
                             <?php
                                 $inscricoesPendentes = mysqli_num_rows(mysqli_query($conexao, "SELECT cod_jogador FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND status = 0 "));
@@ -147,7 +147,8 @@
                             ?>
                             </div>
                         </div>
-                        <div class="col-12 col-md-12">                           
+                        <div class="col-12 col-md-12"> 
+                        <br>
                         <?php
                             if(isset($usuario['codigo'])){
                                 $verificarInscricao = mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$usuario['codigo']."");
@@ -168,7 +169,7 @@
                                         if($datahora < $wo){									
                                             if($inscricao['status'] == 0){
                                             ?>
-                                                <input type="button" value="REALIZAR PRÉ CHECK-IN" onClick="realizarCheckin(<?php echo $campeonato['codigo'].",".$usuario['codigo']; ?>);">
+                                                <input type="button" value="REALIZAR CHECK-IN" onClick="realizarCheckin(<?php echo $campeonato['codigo'].",".$usuario['codigo']; ?>);">
                                             <?php	
                                             }else{
                                             ?>

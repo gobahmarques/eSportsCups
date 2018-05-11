@@ -78,13 +78,13 @@
 		$qtdBan = $_POST['qtdBans'];
 	}
 
-	mysqli_query($conexao, "INSERT INTO campeonato VALUES (NULL, ".$organizacao['codigo'].", ".$usuario['codigo'].", $jogo, '$nome', $vagas, $qtdJogador, $inscricao, $inscricaoReal, '$inicioInscricao', '$fimInscricao', '$inicioTorneio', '$fimTorneio', '$regiao', '$descricao', '$regulamento', '$premiacao', '$cronograma', NULL, $tipoInscricao, '$fusoHorario', '$link', '$pais', '$local', $etapaPresencial, 0, 0, $qtdPick, $qtdBan, '$plataforma', $precheckin)");
+	mysqli_query($conexao, "INSERT INTO campeonato VALUES (NULL, ".$organizacao['codigo'].", ".$usuario['codigo'].", $jogo, '$nome', $vagas, $qtdJogador, $inscricao, $inscricaoReal, '$inicioInscricao', '$fimInscricao', '$inicioTorneio', '$fimTorneio', '$regiao', '$descricao', '$regulamento', '$premiacao', '$cronograma', NULL, $tipoInscricao, '$fusoHorario', '$link', '$pais', '$local', $etapaPresencial, 0, 0, $qtdPick, $qtdBan, '$plataforma', $precheckin, NULL)");
 
 	$id = mysqli_insert_id($conexao);
 
-	if(isset($_FILES['thumb']) && $_FILES['thumb']['error'] == 0){
-		$arquivo_tmp = $_FILES['thumb']['tmp_name'];
-		$nome = $_FILES['thumb']['name'];
+	if(isset($_FILES['logo']) && $_FILES['logo']['error'] == 0){
+		$arquivo_tmp = $_FILES['logo']['tmp_name'];
+		$nome = $_FILES['logo']['name'];
 		// Pega a extensão
 		$extensao = pathinfo ( $nome, PATHINFO_EXTENSION );
 		// Converte a extensão para minúsculo
@@ -114,15 +114,15 @@
 
 	while($contador < 16){
 		if($_POST['coin'.$contador] > 0 && $_POST['real'.$contador] > 0){ // TEM PREMIAÇÃO EM COIN E EM REAL
-			mysqli_query($conexao, "INSERT INTO campeonato_premiacao VALUES ($id, ($contador + 1), ".$_POST['coin'.$contador].", ".$_POST['real'.$contador]." )");
+			mysqli_query($conexao, "INSERT INTO campeonato_premiacao VALUES ($id, ($contador + 1), ".$_POST['coin'.$contador].", ".$_POST['real'.$contador].", NULL)");
 			$totalCoin += $_POST['coin'.$contador];
 			$totalReal += $_POST['real'.$contador];
 		}else{
 			if($_POST['coin'.$contador] > 0){
-				mysqli_query($conexao, "INSERT INTO campeonato_premiacao VALUES ($id, ($contador + 1), ".$_POST['coin'.$contador].", 0)");
+				mysqli_query($conexao, "INSERT INTO campeonato_premiacao VALUES ($id, ($contador + 1), ".$_POST['coin'.$contador].", 0, NULL)");
 				$totalCoin += $_POST['coin'.$contador];
 			}elseif($_POST['real'.$contador] > 0){
-				mysqli_query($conexao, "INSERT INTO campeonato_premiacao VALUES ($id, ($contador + 1), 0, ".$_POST['real'.$contador]." )");
+				mysqli_query($conexao, "INSERT INTO campeonato_premiacao VALUES ($id, ($contador + 1), 0, ".$_POST['real'.$contador].", NULL )");
 				$totalReal += $_POST['real'.$contador];
 			}
 		}

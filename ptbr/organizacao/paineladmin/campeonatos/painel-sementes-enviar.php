@@ -1,5 +1,42 @@
 ﻿<?php
 	include "../../../../conexao-banco.php";
+
+    switch($_POST['funcao']){
+        case "preencherSemente":
+            echo $_POST['codCampeonato']."<br>";
+            echo $_POST['codInscricao']."<br>";
+            echo $_POST['codSemente']."<br>";
+            
+            $inscricao = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$_POST['codCampeonato']." AND cod_jogador = ".$_POST['codInscricao'].""));
+            
+            echo $inscricao['cod_jogador']."<br>";
+            echo $inscricao['cod_equipe']."<br>";
+            
+            mysqli_query($conexao, "UPDATE campeonato_etapa_semente
+                SET cod_jogador = ".$inscricao['cod_jogador']."
+                WHERE codigo = ".$_POST['codSemente']."
+            ");
+            if($inscricao['cod_equipe'] != NULL){
+                mysqli_query($conexao, "UPDATE campeonato_etapa_semente
+                    SET cod_equipe = ".$inscricao['cod_equipe']."
+                    WHERE codigo = ".$_POST['codSemente']."
+                ");
+            }
+            // header("Location: ../../../organizacao/".$campeonato['cod_organizacao']."/painel/campeonato/".$campeonato['codigo']."/etapa/".$etapa['cod_etapa']."/");
+            break;
+    }
+
+    
+
+
+
+
+
+
+
+
+
+    /*
 	$jogadores = $_POST['inscricao'];
 	$etapa = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_etapa WHERE cod_etapa = ".$_POST['etapa']." AND cod_campeonato = ".$_POST['campeonato']." "));
 	$campeonato = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato WHERE codigo = ".$_POST['campeonato']." "));
@@ -19,4 +56,5 @@
 	}
 
 	header("Location: ../../../organizacao/".$campeonato['cod_organizacao']."/painel/campeonato/".$campeonato['codigo']."/etapa/".$etapa['cod_etapa']."/");
+    */
 ?>

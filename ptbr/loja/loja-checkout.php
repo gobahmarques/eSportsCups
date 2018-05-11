@@ -70,7 +70,9 @@
                             <div>
                             <?php
                                 if($produto['tipo_input'] != NULL){
-                                    echo "<input type='".$produto['tipo_input']."' placeholder='".$produto['instrucao']."' name='instrucao' class='form-control instrucao' required><br>";
+                                ?>
+                                    <input type="<?php echo $produto['tipo_input']; ?>" placeholder="<?php echo $produto['instrucao']; ?>" name="instrucao" class="form-control instrucao" required><br>
+                                <?php
                                 }
                                 echo $endereco['cep']." - ".$endereco['endereco']." ".$endereco['complemento'].", ".$endereco['numero']."<br>";
                                 echo $endereco['cidade']." - ".$endereco['estado']." - ".$endereco['pais'];
@@ -85,8 +87,10 @@
                             if(mysqli_num_rows($cupom) != 0){
                                 $cupom = mysqli_fetch_array($cupom);
                                 echo "VALOR DA TROCA: <strong>GRÁTIS </strong>(CUPOM)";
+                                $valorTroca = 0;
                             }else{
                                 $saldoFinal = $usuario['pontos'] - $produto['valor'];
+                                $valorTroca = $produto['valor'];
                                 ?>
                                     VALOR DA TROCA: <?php echo number_format($produto['valor'], 0, '', '.'); ?><br>
                                     SALDO ATUAL: <?php echo number_format($usuario['pontos'], 0, '', '.'); ?><br><br>
@@ -117,19 +121,31 @@
             }
             function efetuarTroca(){
                 $("#botaoEfetuar").html("<img src='<?php echo $img."icones/loading.gif"; ?>'>");
-                setTimeout(function(){
-                    jQuery.ajax({
-                        type: "POST",
-                        url: "ptbr/loja/loja-checkout-enviar.php",
-                        data: "produto=<?php echo $produto['codigo']; ?>&endereco=<?php echo $endereco['codigo']; ?>&valor=<?php echo $produto['valor']; ?>&instrucao="+$(".instrucao").val(),
-                        success: function(data){
-                            $(".modal-title").html("Troca Efetuada com sucesso!")
-                            $(".modal-body").html("<br><h1>TROCA EFETUADA</h1><div class='resumo'>Sua troca foi solicitada com sucesso. <br>Em até 30 dias você estará recebendo o produto em sua casa.<br><br> Obrigado por escolher a e-Sports Cups como sua organizadora de competições. <br> Ficamos felizes por estar presente em seus resultados.</div>");
-                            $(".modal-footer").html("<input type='button' value='Entendi' class='btn btn-dark' onClick='redirecionar();'>")
-                            $(".modal").modal();
-                        }
-                    }); 
-                }, 2000);
+                if($(".instrucao").length > 0){ // HÁ INSTRUÇÃO DE PAGAMENTO
+                    if($(".instrucao").val() != ""){ // SEGUIU A INSTRUÇÃO DE PAGAMENTO
+                        setTimeout(function(){
+                            jQuery.ajax({
+                                type: "POST",
+                                url: "ptbr/loja/loja-checkout-enviar.php",
+                                data: "produto=<?php echo $produto['codigo']; ?>&endereco=<?php echo $endereco['codigo']; ?>&valor=<?php echo $produto['valor']; ?>&instrucao="+$(".instrucao").val(),
+                                success: function(data){
+                                    $(".modal-title").html("Troca Efetuada com sucesso!")
+                                    $(".modal-body").html("<br><h1>TROCA EFETUADA</h1><div class='resumo'>Sua troca foi solicitada com sucesso. <br>Em até 30 dias você estará recebendo o produto em sua casa.<br><br> Obrigado por escolher a e-Sports Cups como sua organizadora de competições. <br> Ficamos felizes por estar presente em seus resultados.</div>");
+                                    $(".modal-footer").html("<input type='button' value='Entendi' class='btn btn-dark' onClick='redirecionar();'>")
+                                    $(".modal").modal();
+                                }
+                            }); 
+                        }, 2000);    
+                    }else{ // NAO INFORMOU INSTRUÇÃO PEDIDA
+                        alert("Preencha o campo solicitado.");
+                        $(".instrucao").css("border", "solid 1px #f60");
+                        $(".instrucao").focus();
+                        $("#botaoEfetuar").html("EFETUAR TROCA");
+                    }
+                }else{ // NÃO HÁ INSTRUÇÃO DE PAGAMENTO
+
+                }
+                
                                
             }   
         </script>

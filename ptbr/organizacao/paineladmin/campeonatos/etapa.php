@@ -81,11 +81,26 @@
         </div>
 
         <?php include "../../../footer.php"; ?>
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="<?php echo $js; ?>jquery.js"></script>
         <script src="<?php echo $js; ?>bootstrap.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script>
+            function abrirPreencherSemente(etapa, campeonato, codSemente, numero){  
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/etapa.php",
+                    data: "funcao=carregarJogadoresSemSemente&etapa="+etapa+"&campeonato="+campeonato,
+                    success: function(resposta){
+                        $(".modal-body").html(resposta);  
+                    }
+                })
+                $(".modal-title").html("Preencher semente #"+numero);
+                setTimeout(function(){
+                    $(".codSemente").val(codSemente);                    
+                }, 1000);
+                $(".modal").modal();
+            }
             function selecionarEtapa(etapa, campeonato, vagas){
                 $.ajax({
                     type: "POST",

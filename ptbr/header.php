@@ -297,8 +297,18 @@
                                         <div class="col-8">
                                         <?php
                                             if($sementeUm['cod_jogador'] != NULL){
-                                                $inscUm = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$partidaPendente['cod_campeonato']." AND cod_jogador = ".$sementeUm['codigo']." "));	
-                                                echo $inscUm['conta'];
+                                                $inscricao = mysqli_fetch_array(mysqli_query($conexao, "
+                                                    SELECT campeonato_inscricao.*, equipe.nome AS nomeEquipe FROM campeonato_inscricao 
+                                                    INNER JOIN equipe ON equipe.codigo = campeonato_inscricao.cod_equipe 
+                                                    WHERE campeonato_inscricao.cod_campeonato = ".$partidaPendente['cod_campeonato']." AND campeonato_inscricao.cod_jogador = ".$sementeUm['codigo']." 
+                                                "));
+                                                if($sementeUm['cod_equipe'] == NULL){                                                    	
+                                                    echo $inscricao['conta'];
+                                                }else{
+                                                    echo $inscricao['nomeEquipe'];
+                                                }
+                                            }else{
+                                                echo "À definir";
                                             }
                                         ?>
                                         </div>
@@ -307,9 +317,19 @@
                                         </div>
                                         <div class="col-8">
                                         <?php
-                                            if($sementeUm['cod_jogador'] != NULL){
-                                                $inscDois = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_campeonato = ".$partidaPendente['cod_campeonato']." AND cod_jogador = ".$sementeDois['codigo']." "));	
-                                                echo $inscDois['conta'];
+                                            if($sementeDois['cod_jogador'] != NULL){
+                                                $inscricao = mysqli_fetch_array(mysqli_query($conexao, "
+                                                    SELECT campeonato_inscricao.*, equipe.nome AS nomeEquipe FROM campeonato_inscricao 
+                                                    INNER JOIN equipe ON equipe.codigo = campeonato_inscricao.cod_equipe 
+                                                    WHERE campeonato_inscricao.cod_campeonato = ".$partidaPendente['cod_campeonato']." AND campeonato_inscricao.cod_jogador = ".$sementeDois['codigo']." 
+                                                "));
+                                                if($sementeDois['cod_equipe'] == NULL){                                                    	
+                                                    echo $inscricao['conta'];
+                                                }else{
+                                                    echo $inscricao['nomeEquipe'];
+                                                }
+                                            }else{
+                                                echo "À definir";
                                             }
                                         ?>
                                         </div>

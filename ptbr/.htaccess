@@ -78,6 +78,16 @@ RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/etapa/([0-9]+)/?$ o
 RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/inscricoes/?$ organizacao/paineladmin/campeonatos/inscricoes.php?codigo=$1&torneio=$2 [NC,L]
 RewriteRule ^organizacao/([0-9]+)/painel/campeonato/([0-9]+)/inscricoes/([0-9]+)/([0-9]+)/?$ organizacao/paineladmin/campeonatos/inscricoes-acoes.php?codigo=$1&torneio=$2&jogador=$3&funcao=$4 [NC,L]
 
+RewriteRule ^organizacao/([0-9]+)/painel/ligas/?$ organizacao/paineladmin/ligas/painel.php?codigo=$1 [NC,L]
+RewriteRule ^organizacao/([0-9]+)/painel/ligas/nova-liga/?$ organizacao/paineladmin/ligas/nova-liga.php?codigo=$1 [NC,L]
+RewriteRule ^organizacao/([0-9]+)/painel/ligas/nova-liga/enviar/?$ organizacao/paineladmin/ligas/nova-liga-enviar.php?codigo=$1 [NC,L]
+
+RewriteRule ^organizacao/([0-9]+)/painel/liga/([0-9]+)/?$ organizacao/paineladmin/ligas/liga.php?codigo=$1&liga=$2 [NC,L]
+RewriteRule ^organizacao/([0-9]+)/painel/liga/([0-9]+)/divisoes/?$ organizacao/paineladmin/ligas/divisoes.php?codigo=$1&liga=$2 [NC,L]
+RewriteRule ^organizacao/([0-9]+)/painel/liga/([0-9]+)/divisao/([0-9]+)/?$ organizacao/paineladmin/ligas/divisao.php?codigo=$1&liga=$2&divisao=$3 [NC,L]
+RewriteRule ^organizacao/([0-9]+)/painel/liga/([0-9]+)/divisao/([0-9]+)/novo-torneio/?$ organizacao/paineladmin/ligas/novo-torneio.php?codigo=$1&liga=$2&divisao=$3 [NC,L]
+RewriteRule ^organizacao/([0-9]+)/painel/liga/([0-9]+)/divisao/([0-9]+)/novo-torneio/enviar/?$ organizacao/paineladmin/ligas/novo-torneio-enviar.php?codigo=$1&liga=$2&divisao=$3 [NC,L]
+
 #  CAMPEONATOS #
 RewriteRule ^campeonato/([0-9]+)/?$ campeonatos/campeonato.php?codigo=$1 [NC,L]
 RewriteRule ^campeonato/([0-9]+)/inscricao/?$ campeonatos/campeonato-inscricao.php?codigo=$1 [NC,L]

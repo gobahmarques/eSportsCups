@@ -62,6 +62,35 @@
 a:hover {
     text-decoration: none;
 }
+.modalNewsletter {
+    background: rgba(0,0,0,0.85);    
+}
+.modalNewsletter .modal-content {
+    overflow: hidden;
+    border-radius: 0px;
+}
+.modalNewsletter .conteudo {
+    width: 100%;
+    float: left;
+    font-weight: bold;
+}
+.modalNewsletter .conteudo .bg {
+    background: #000;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    float: left;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+.modalNewsletter .conteudo .bg img {
+    position: relative;
+    top: -100px;
+}
+.modalNewsletter .conteudo .formularioModal {
+    padding: 30px;
+}
+
 
 .newsletter {
 	width: 100%;
@@ -362,7 +391,7 @@ a:hover {
     color: #fff;
     list-style: none;
     position: relative;
-    z-index: 3;
+    z-index: 100;
 }
 .menuJogar li {
     display: inline-block;
@@ -979,7 +1008,10 @@ footer a:hover {
     margin-top: 40px;
 }
 .bgJogo .boxInscricao .barraAviso {
-    background: #f60;
+    background: #00a3b2;
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
 }
 .bgJogo .boxInscricao input[type=button] {
     width: 100%;
@@ -1112,6 +1144,7 @@ footer a:hover {
     border: solid 1px #ccc;
     padding: 5px;
     color: #000;
+    margin-bottom: 30px;
 }
 .partidaGrupo:hover {
     cursor: pointer;
@@ -1136,7 +1169,8 @@ footer a:hover {
     padding: 5px;
 }
 .passoInscricao .img img {
-    width: 100%;
+    width: 35px;
+    height: 35px;
 }
 .passoInscricao .conta {
     font-size: 30px;

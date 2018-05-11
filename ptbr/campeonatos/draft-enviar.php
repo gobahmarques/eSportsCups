@@ -17,45 +17,28 @@
 		case "Hearthstone":
 			switch($funcao){
 				case "inscricao":
+                    $heroi = $_POST['heroi'];					
+                    $aux = 0;					
+                    $listaHerois = "";
+                    while($aux < $campeonato['qtd_pick']){
+                        $listaHerois = $listaHerois.$heroi[$aux].";";
+                        $aux++;
+                    }
+
+                    $draft = mysqli_query($conexao, "INSERT INTO campeonato_draft VALUES (".$campeonato['codigo'].", ".$usuario['codigo'].", '$data', '$listaHerois')");
+                    mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$campeonato['codigo'].", ".$usuario['codigo'].", NULL, '$data', 0, '".$usuario['battletag']."', NULL, NULL)");	
 					if($campeonato['valor_escoin'] > 0){ // INSCRIÇÃO PAGA COM ESCOIN
 						if($usuario['pontos'] >= $camponato['valor_escoin']){
-							$heroi = $_POST['heroi'];					
-							$aux = 0;					
-							$listaHerois = "";
-							while($aux < $campeonato['qtd_pick']){
-								$listaHerois = $listaHerois.$heroi[$aux].";";
-								$aux++;
-							}
-							$draft = mysqli_query($conexao, "INSERT INTO campeonato_draft VALUES (".$campeonato['codigo'].", ".$usuario['codigo'].", '$data', '$listaHerois')");
-							mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$campeonato['codigo'].", ".$usuario['codigo'].", NULL, '$data', NULL, 0, '".$usuario['battletag']."')");
 							mysqli_query($conexao, "UPDATE jogador SET pontos = pontos - ".$campeonato['valor_escoin']." WHERE codigo = ".$usuario['codigo']."");
 							mysqli_query($conexao, "INSERT INTO log_coin VALUES (NULL, ".$usuario['codigo'].", ".$campeonato['valor_escoin'].", 'Inscrição campeonato: <strong>".$campeonato['nome']."</strong>', 0, '$data')");
+                            mysqli_query($conexao, "UPDATE campeonato_inscricao SET log_coin = ".mysqli_insert_id($conexao)." WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$usuario['codigo']."");
 						}
 					}elseif($campeonato['valor_real'] > 0){ // INSCRIÇÃO COM REAL
-						if($usuario['saldo'] >= $camponato['valor_real']){
-							$heroi = $_POST['heroi'];					
-							$aux = 0;					
-							$listaHerois = "";
-							while($aux < $campeonato['qtd_pick']){
-								$listaHerois = $listaHerois.$heroi[$aux].";";
-								$aux++;
-							}
-							$draft = mysqli_query($conexao, "INSERT INTO campeonato_draft VALUES (".$campeonato['codigo'].", ".$usuario['codigo'].", '$data', '$listaHerois')");
-							mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$campeonato['codigo'].", ".$usuario['codigo'].", NULL, '$data', NULL, 0, '".$usuario['battletag']."')");
+						if($usuario['saldo'] >= $camponato['valor_real']){                            
 							mysqli_query($conexao, "UPDATE jogador SET saldo = saldo - ".$campeonato['valor_real']." WHERE codigo = ".$usuario['codigo']."");
 							mysqli_query($conexao, "INSERT INTO log_real VALUES (NULL, ".$usuario['codigo'].", ".$campeonato['valor_real'].", 'Inscrição campeonato: <strong>".$campeonato['nome']."</strong>', 0, '$data')");
+                            mysqli_query($conexao, "UPDATE campeonato_inscricao SET log_real = ".mysqli_insert_id($conexao)." WHERE cod_campeonato = ".$campeonato['codigo']." AND cod_jogador = ".$usuario['codigo']."");
 						}					
-					}else{
-						$heroi = $_POST['heroi'];					
-						$aux = 0;					
-						$listaHerois = "";
-						while($aux < $campeonato['qtd_pick']){
-							$listaHerois = $listaHerois.$heroi[$aux].";";
-							$aux++;
-						}
-
-						$draft = mysqli_query($conexao, "INSERT INTO campeonato_draft VALUES (".$campeonato['codigo'].", ".$usuario['codigo'].", '$data', '$listaHerois')");
-						mysqli_query($conexao, "INSERT INTO campeonato_inscricao VALUES (".$campeonato['codigo'].", ".$usuario['codigo'].", NULL, '$data', NULL, 0, '".$usuario['battletag']."')");	
 					}
 					header("Location: ../campeonato/".$campeonato['codigo']."/inscricao/");
 					break;

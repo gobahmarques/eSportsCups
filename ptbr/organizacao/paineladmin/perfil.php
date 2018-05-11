@@ -9,7 +9,8 @@
     </div>                         
 </div>
 <ul class="menuPainelOrganizacao">
-    <li class="ativo">Campeonatos</li>
-    <li>Caixas</li>
-    <li>Produtos</li>
+    <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/"><li class="opcao1">Campeonatos</li></a>
+    <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/ligas/"><li class="opcao2">Ligas</li></a>
+    <li class="opcao3">Caixas</li>
+    <li class="opcao4">Produtos</li>
 </ul>
