@@ -86,6 +86,23 @@
                                             </div>
                                         </a>
                                     </div>
+                                    <?php
+                                        $pesqPremiacao = mysqli_query($conexao, "SELECT * FROM campeonato_premiacao WHERE cod_campeonato = ".$campeonato['codigo']." ");
+                                        if(mysqli_num_rows($pesqPremiacao) == 0){
+                                        ?>
+                                            <div class="col-6 col-md-4">
+                                                <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/campeonato/<?php echo $campeonato['codigo']; ?>/editar/">
+                                                    <div class="acao">
+                                                        <i class="fas fa-dollar-sign"></i>
+                                                        <h3>Premiação</h3>
+                                                        Configura a premiação automática
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        <?php
+                                        }
+                                    ?>
+                                    
                                     <div class="col-6 col-md-4">
                                         <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/campeonato/<?php echo $campeonato['codigo']; ?>/etapas/">				
                                             <div class="acao">

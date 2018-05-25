@@ -3,7 +3,6 @@
     include "../../../../session.php";
     $organizacao = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM organizacao WHERE codigo = ".$_GET['codigo'].""));
     $liga = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM liga WHERE codigo = ".$_GET['liga']." "));
-    $divisao = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM liga_divisao WHERE codigo = ".$_GET['divisao']." "));
 
 	$datahora = date("Y-m-d H:i:s");
 
@@ -45,31 +44,37 @@
                     <ul class="navegacaoPainel">
                         <li><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/"><?php echo $organizacao['nome']; ?></a></li>
                         <li><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/ligas/">Ligas</a></li>
-                        <li><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/liga/<?php echo $liga['codigo']; ?>/"><?php echo $liga['nome']; ?></a></li>    
-                        <li class="ativo"><?php echo $divisao['nome']; ?></li>    
+                        <li><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/liga/<?php echo $liga['codigo']; ?>/"><?php echo $liga['nome']; ?></a></li> 
+                        <li class="ativo">Circuitos</li> 
                     </ul>
                     <div class="row">
                         <div class="col">
                             <div class="acoesPainelOrg">
-                                <div class="row centralizar">  
+                                <div class="row centralizar">
                                     <div class="col-6 col-md-4">
-                                        <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/liga/<?php echo $liga['codigo']; ?>/divisao/<?php echo $divisao['codigo']; ?>/definicao-torneio/">
+                                        <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/liga/<?php echo $liga['codigo']; ?>/novo-circuito/">
                                             <div class="acao">
-                                                <i class="fas fa-cogs"></i>
-                                                <h3>Definições</h3>
-                                                Defina o padrão de campeonato
+                                                <img src="img/icones/+.png">
+                                                <h3>Novo Circuito</h3>
+                                                Crie uma sequência de competições
                                             </div>
                                         </a>                                        
                                     </div>
-                                    <div class="col-6 col-md-4">
-                                        <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/liga/<?php echo $liga['codigo']; ?>/divisao/<?php echo $divisao['codigo']; ?>/ranking/">
-                                            <div class="acao">
-                                                <i class="fas fa-users"></i>
-                                                <h3>Ranking (EM BREVE)</h3>
-                                                Posição de cada inscrição.
+                                    <?php
+                                        $circuitos = mysqli_query($conexao, "SELECT * FROM liga_circuito WHERE cod_liga = ".$liga['codigo']." ");
+                                        while($circuito = mysqli_fetch_array($circuitos)){
+                                        ?>
+                                            <div class="col-6 col-md-4">
+                                                <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/liga/<?php echo $liga['codigo']; ?>/circuito/<?php echo $circuito['codigo']; ?>/">
+                                                    <div class="acao">                                                        
+                                                        <h2>#<?php echo $circuito['codigo']; ?></h2>
+                                                        Data de início: <?php echo date("d/m/Y H:i", strtotime($circuito['data_inicio'])); ?>
+                                                    </div>
+                                                </a>
                                             </div>
-                                        </a>                                        
-                                    </div>
+                                        <?php
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -85,11 +90,7 @@
         <script src="<?php echo $js; ?>jquery.js"></script>
         <script src="<?php echo $js; ?>bootstrap.js"></script>
         <script>
-            function modalNovaDivisao(){
-                $(".modal-body").load("ptbr/organizacao/paineladmin/ligas/form-nova-divisao.php?organizacao=<?php echo $organizacao['codigo']; ?>&liga=<?php echo $liga['codigo']; ?>");
-                $(".modal-title").html("Criar nova Divisão");
-                $(".modal").modal();
-            }
+            function 
             jQuery(function($){
                 $(".menuPainelOrganizacao .opcao2").addClass("ativo");
             });

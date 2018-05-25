@@ -31,7 +31,21 @@
                     </div>
                     <div class="col-12 col-md-12">
                         <h1><?php echo $campeonato['nome']; ?></h1>
-                    </div>
+                    </div>                    
+                    <?php
+                        if($campeonato['cod_divisao'] != NULL){
+                            $liga = mysqli_fetch_array(mysqli_query($conexao, "
+                                SELECT * FROM liga_divisao
+                                RIGHT JOIN liga ON liga.codigo = liga_divisao.cod_liga
+                                WHERE liga_divisao.codigo = ".$campeonato['cod_divisao']."
+                            "));
+                            ?>
+                                <div class="col-12 col-md-12">
+                                    Liga eSports <strong><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/"><?php echo $liga['nome']; ?></a></strong>
+                                </div>
+                            <?php
+                        }
+                    ?>
                     <div class="col-12 col-md-12">
                         Por <strong><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/"><?php echo $organizacao['nome']; ?></strong></a>
                     </div>

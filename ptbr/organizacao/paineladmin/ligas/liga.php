@@ -60,7 +60,7 @@
                                     <div class="col-6 col-md-4">
                                         <a href="ptbr/liga/<?php echo $campeonato['codigo']; ?>/" target="_blank">
                                             <div class="acao">
-                                                <img src="img/icones/lupa.png">
+                                                <i class="fas fa-search"></i>
                                                 <h3>Visualizar</h3>
                                                 Como vêem sua Liga.
                                             </div>
@@ -69,7 +69,7 @@
                                     <div class="col-6 col-md-4">
                                         <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/liga/<?php echo $liga['codigo']; ?>/divisoes/">
                                             <div class="acao">
-                                                <img src="img/icones/configuracoes.png">
+                                                <i class="fas fa-cogs"></i>
                                                 <h3>Divisões</h3>
                                                 Edite seu torneio.
                                             </div>
@@ -78,18 +78,27 @@
                                     <div class="col-6 col-md-4">
                                         <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/ligas/<?php echo $liga['codigo']; ?>/inscricoes/">				
                                             <div class="acao">
-                                                <img src="img/icones/partidas.png" alt="Partida" title="Partidas">
-                                             <h2>Inscrições</h2>
+                                                <i class="fas fa-list-ul"></i>                                                
+                                                <h2>Inscrições</h2>
                                                 Gestione as inscrições.
                                             </div>
                                         </a>
                                     </div>  
                                     <div class="col-6 col-md-4">
                                         <div class="acao" onClick="gerarNotificacao(<?php echo $campeonato['codigo']; ?>)">
-                                            <img src="img/icones/artigos.png">
+                                            <i class="fas fa-flag"></i>
                                             <h3>Notificação</h3>
                                             Emita notificações para os inscritos.
                                         </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/liga/<?php echo $liga['codigo']; ?>/circuitos/">				
+                                            <div class="acao">
+                                                <i class="far fa-calendar-alt"></i>
+                                                <h2>Circuitos</h2>
+                                                Administre os circuitos da Liga
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

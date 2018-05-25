@@ -207,6 +207,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
+                                        <label for="dispInsc">Disponibilidade Inscrição</label><br>
+                                        <input type="radio" name="dispInsc" value="0"> Público 
+                                        <input type="radio" name="dispInsc" value="1"> Privado
+                                    </div>
+                                    <div class="form-group col-md-4">
                                         <label for="logoCamp">Logo do Torneio (500x500px)</label>
                                         <input type="file" name="logo" class="form-control">
                                     </div>

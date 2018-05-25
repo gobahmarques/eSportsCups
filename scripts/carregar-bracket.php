@@ -1057,7 +1057,7 @@
 															</text>
 														<?php
 													}else{ // BUSCAR E MOSTRAR EQUIPE
-														$equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$ladoUm['cod_equipe']." "));	
+														$equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$ladoDois['cod_equipe']." "));	
 														?>
 															<text y="<?php echo $yPartida+45; ?>" x="<?php echo $xPartida+5; ?>" data-position="top">
 															<?php
@@ -1283,7 +1283,7 @@
 																	</text>
 																<?php
 															}else{ // BUSCAR E MOSTRAR EQUIPE
-																$equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$ladoUm['cod_equipe']." "));	
+																$equipe = mysqli_fetch_array(mysqli_query($conexao, "SELECT * FROM equipe WHERE codigo = ".$ladoDois['cod_equipe']." "));		
 																?>
 																	<text y="<?php echo $yPartida+45; ?>" x="<?php echo $xPartida+5; ?>" data-position="top">
 																	<?php

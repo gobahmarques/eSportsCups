@@ -30,21 +30,51 @@
         <?php include "../header.php"; ?>
         <?php include "campeonato-perfil.php"; ?>
         <div class="container centralizar">
-        <?php	
-            switch($campeonato['cod_jogo']){
-                case 369: // HEARTHSTONE
-                    include "campeonato-inscricao-hearthstone.php";
-                    break;
-                case 123: // GWENT
-                    include "campeonato-inscricao-gwent.php";
-                    break;
-                case 357: // DOTA 2
-                    include "campeonato-inscricao-dota2.php";
-                    break;
-                default: // INSCRIÇÃO GERAL
-                    include "campeonato-inscricao-geral.php";
-                    break;
+        <?php
+            function mostrarPaginaInsc($codJogo){
+                global $usuario, $conexao, $campeonato, $datahora;
+                switch($codJogo){
+                    case 369: // HEARTHSTONE
+                        include "campeonato-inscricao-hearthstone.php";
+                        break;
+                    case 123: // GWENT
+                        include "campeonato-inscricao-gwent.php";
+                        break;
+                    case 357: // DOTA 2
+                        include "campeonato-inscricao-dota2.php";
+                        break;
+                    default: // INSCRIÇÃO GERAL
+                        include "campeonato-inscricao-geral.php";
+                        break;
+                }  
             }
+            if(isset($usuario['codigo'])){ // POSSUI USUÁRIO LOGADO
+                $pesquisaInscricao = mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM campeonato_inscricao WHERE cod_jogador = ".$usuario['codigo']." AND cod_campeonato = ".$campeonato['codigo']." "));
+                if($pesquisaInscricao > 0){ // JÁ POSSUI INSCRIÇÃO
+                    
+                }else{ // NÃO REALIZOU INSCRIÇÃO AINDA
+                    if($campeonato['cod_divisao'] != NULL){ // CAMPEONATO PERTENCE A ALGUMA DIVISÃO
+                        $pesquisaInscricao = mysqli_query($conexao, "SELECT * FROM liga_inscricao WHERE cod_jogador = ".$usuario['codigo']." AND cod_liga = ".$liga['codigo']." ");
+                        if(mysqli_num_rows($pesquisaInscricao) > 0){ // É INSCRITO DA LIGA
+                            $inscricaoLiga = mysqli_fetch_array($pesquisaInscricao);
+                            if($inscricaoLiga['cod_divisao'] == $campeonato['cod_divisao']){ // É INTEGRANTE DA DIVISÃO DO CAMPEONATO
+                                mostrarPaginaInsc($campeonato['cod_jogo']);
+                            }else{ // NÃO É INTEGRANTE DA DIVISÃO
+                                
+                            }
+                        }else{ // NÃO É INSCRITO NA LIGA
+                            echo "não inscrito";
+                            mostrarPaginaInsc($campeonato['cod_jogo']);
+                        }
+                    }else{ // CAMPEONATO INDIVIDUAL
+                        
+                    }                  
+                }
+            }else{ // MENSAGEM PARA REALIZAR LOGIN
+                
+            }
+            
+            
         ?>
         </div>
         

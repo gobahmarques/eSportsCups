@@ -121,6 +121,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 col-md-12">
+                            A <strong>eSCoin</strong> é uma moeda de recompensa da plataforma e a única forma de adquiri-la é utilizando as diversas funções e serviços que disponibilizamos por aqui.<br>
+                            Alguns deles são: login diário; apostas em <a href="ptbr/jogar/lobbys/">Lobbys</a>; receber premiação em <a href="ptbr/jogar/campeonatos/">campeonatos</a> que oferecem premiação em e$; abertura de <a href="ptbr/caixas/">Caixas</a> de eSports;
+                        </div>
                     </div>
                 </div>
                 </div>

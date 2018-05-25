@@ -1547,7 +1547,7 @@ footer a:hover {
 }
 .amigo .acoes .acao {
     float: left;
-    margin: 0px 10px;
+    margin: 0px 10px;    
 }
 .amigo .acoes .acao:hover {
     cursor: pointer;
@@ -1811,6 +1811,11 @@ footer a:hover {
     border: solid 1px #ccc;
     margin-bottom: 20px;
     color: #000;
+}
+.acoesPainelOrg .acao i {
+    font-size: 60px;
+    color: #666;
+    margin: 20px;
 }
 .acoesPainelOrg .acao:hover {
     cursor: pointer;
@@ -2489,6 +2494,23 @@ footer a:hover {
 .areaVotacao .totalVotacao img {
 	height: 20px;
 	margin-left: 20px;
+}
+
+/* PAINEL ADMIN - LIGAS */
+
+.novoCircuito .faixaEtapa {
+    border: solid 1px #ccc;
+    width: 100%;
+    padding: 10px;
+    background: #f2f2f2;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-align: center;
+}
+.novoCircuito .faixaEtapa img {
+    width: 100%;
+    height: auto;
 }
 
 

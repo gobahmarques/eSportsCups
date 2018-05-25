@@ -57,7 +57,8 @@
                     <ul class="navegacaoPainel">
                         <li><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/"><?php echo $organizacao['nome']; ?></a></li>
                         <li><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/">Campeonatos</a></li>
-                        <li class="ativo">Novo Torneios</li>
+                        <li><a href="ptbr/organizacao/<?php echo $organizacao['codigo']; ?>/painel/campeonato/<?php echo $campeonato['codigo']; ?>/"><?php echo $campeonato['nome']; ?></a></li>
+                        <li class="ativo">Editar</li>
                     </ul>
                     <h1>BEM-VINDO À CRIAÇÃO DE TORNEIOS</h1>
                     Estamos felizes em poder te ajudar, de alguma forma, a contribuir com o crescimento do cenário competitivo do eSports. <br>
